@@ -1,0 +1,16 @@
+[
+    {
+      "modid": "oretweaker",
+      "name": "Ore Tweaker",
+      "description": "Allows you to tweak vanilla ore generation",
+      "version": "${version}",
+      "mcversion": "${mcversion}",
+      "url": "",
+      "updateUrl": "",
+      "authorList": ["EwyBoy"],
+      "credits": "",
+      "logoFile": "",
+      "screenshots": [],
+      "dependencies": []
+    }
+]
