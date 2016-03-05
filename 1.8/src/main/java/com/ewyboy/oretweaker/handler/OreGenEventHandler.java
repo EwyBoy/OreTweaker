@@ -10,6 +10,7 @@ public class OreGenEventHandler {
 
     @SubscribeEvent
     public void onOreGenMinable(OreGenEvent.GenerateMinable event) {
+
         switch (event.type) {
             case COAL:
                 if (disableOres[0]) event.setResult(Event.Result.DENY);
@@ -29,7 +30,7 @@ public class OreGenEventHandler {
             case LAPIS:
                 if (disableOres[5]) event.setResult(Event.Result.DENY);
                 break;
-            case QUARTZ:
+             case EMERALD:
                 if (disableOres[6]) event.setResult(Event.Result.DENY);
                 break;
             case DIRT:
@@ -37,6 +38,15 @@ public class OreGenEventHandler {
                 break;
             case GRAVEL:
                 if (disableOres[8]) event.setResult(Event.Result.DENY);
+                break;
+            case ANDESITE:
+                if (disableOres[9]) event.setResult(Event.Result.DENY);
+                break;
+            case GRANITE:
+                if (disableOres[10]) event.setResult(Event.Result.DENY);
+                break;
+            case DIORITE:
+                if (disableOres[11]) event.setResult(Event.Result.DENY);
                 break;
             default:
         }

@@ -22,13 +22,13 @@ public class WorldGenerator implements IWorldGenerator {
         }
     }
 
-    private Block[] blocks = {Blocks.coal_ore, Blocks.iron_ore, Blocks.gold_ore, Blocks.diamond_ore, Blocks.redstone_ore, Blocks.quartz_ore, Blocks.dirt, Blocks.gravel};
+    private Block[] blocks = {Blocks.coal_ore, Blocks.iron_ore, Blocks.gold_ore, Blocks.diamond_ore, Blocks.redstone_ore, Blocks.emerald_ore, Blocks.dirt, Blocks.gravel, Blocks.stone.getStateFromMeta(1).getBlock(), Blocks.stone.getStateFromMeta(3).getBlock(), Blocks.stone.getStateFromMeta(5).getBlock()};
 
     private void generateOres(World world, Random random, int x, int z) {
         for (int ore = 0; ore < Reference.OreNames.OreNames.length; ore++) {
             if (disableOres[ore] && enableCustomOreGeneration[ore]) {
                 for (int i = 0; i < spawnRates[ore]; i++) {
-                    int veinYLevel = (int) (Math.random() * (maxVeinYLevels[ore] - minVeinYLevels[ore])) + minVeinYLevels[ore];
+                    int veinYLevel = (int) (Math.random() * (maxVeinLevels[ore] - minVeinLevels[ore])) + minVeinLevels[ore];
                     int veinSize = (int) (Math.random() * (maxVeinSizes[ore] - minVeinSizes[ore]) + minVeinSizes[i]);
 
                     int xCoord = x + random.nextInt(16);

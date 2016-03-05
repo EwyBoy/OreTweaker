@@ -20,10 +20,13 @@ public class Reference {
                 diamond = "Diamond Ore",
                 redstone = "Redstone Ore",
                 lapis = "Lapis Ore",
-                quartz = "Quartz Ore",
+                emerald = "Emerald Ore",
                 dirt = "Dirt",
-                gravel = "Gravel";
-        public static final String[] OreNames = {coal, iron, gold, diamond, redstone, lapis, quartz, dirt, gravel};
+                gravel = "Gravel",
+                andesite = "Andesite",
+                granite = "Granite",
+                diorite = "Diorite";
+        public static final String[] OreNames = {coal, iron, gold, diamond, redstone, lapis, emerald, dirt, gravel, andesite, granite, diorite};
     }
 
 }

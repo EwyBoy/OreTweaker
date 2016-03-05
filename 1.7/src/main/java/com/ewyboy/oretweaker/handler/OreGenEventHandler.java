@@ -1,10 +1,8 @@
 package com.ewyboy.oretweaker.handler;
 
-
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.event.terraingen.OreGenEvent;
-
 import static com.ewyboy.oretweaker.loaders.ConfigLoader.*;
 
 public class OreGenEventHandler {
