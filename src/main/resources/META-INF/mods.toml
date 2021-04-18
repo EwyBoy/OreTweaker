@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[35,)"
+license="MIT License"
+issueTrackerURL="https://github.com/EwyBoy/OreTweaker/issues"
+
+[[mods]]
+modId="oretweaker"
+version="${file.jarVersion}"
+displayName="Ore Tweaker"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/clay-worldgen"
+credits=""
+authors="Ewy"
+description=""
+
+[[dependencies.oretweaker]]
+modId="forge"
+mandatory=true
+versionRange="[35,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.oretweaker]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.16.3, 1.17)"
+ordering="NONE"
+side="BOTH"
