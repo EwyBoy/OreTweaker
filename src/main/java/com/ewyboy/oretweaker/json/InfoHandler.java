@@ -18,7 +18,7 @@ public class InfoHandler {
     private static void createInfoFile() {
         try {
             if (InfoHandler.INFO_FILE.createNewFile()) {
-                ModLogger.info("Creating Seed Drop information file: " + InfoHandler.INFO_FILE.getName());
+                ModLogger.info("Creating Ore Tweaker information file: " + InfoHandler.INFO_FILE.getName());
                 writeInfoFile();
             }
         } catch (IOException e) {
@@ -30,12 +30,17 @@ public class InfoHandler {
     private static void writeInfoFile() {
         try {
             FileWriter writer = new FileWriter(INFO_FILE);
-
-            writer.write("Seed Drop - Information");
+            writer.write("##    Ore Tweaker - Information   ##");
             writer.write("\n");
-
-            writer.write("Edit the OreTweaker.json file to add or remove entries from the grass loot table.");
-        } catch(IOException e) {
+            writer.write("\nEdit the OreTweaker.json file generated on launch to tweak ore generation");
+            writer.write("\nBy default the file mimics vanilla world generation settings.");
+            writer.write("\nCheck out more info on the wiki at https://github.com/EwyBoy/OreTweaker/wiki");
+            writer.write("\n");
+            writer.write("\nBugs can be reported here at https://github.com/EwyBoy/OreTweaker/issues");
+            writer.write("\n");
+            writer.write("\n-Ewy");
+            writer.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

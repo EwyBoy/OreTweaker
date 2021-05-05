@@ -1,5 +1,7 @@
 package com.ewyboy.oretweaker.json.objects;
 
+import java.util.List;
+
 public class OreEntry {
 
     private String ore;
@@ -8,16 +10,31 @@ public class OreEntry {
     private int maxY;
     private int maxVeinSize;
     private int spawnRate;
+    private List<String> biomeBlacklist;
+    private List<String> biomeWhitelist;
 
-    public OreEntry(String oreName, String filler, Integer minY, Integer maxY, Integer maxVeinSize, Integer spawnRate) {}
+    public OreEntry(String oreName, String filler, Integer minY, Integer maxY, Integer maxVeinSize, Integer spawnRate, List<String> biomeBlacklist, List<String> biomeWhitelist) { }
 
-    public OreEntry(String ore, String filler, int minY, int maxY, int maxVeinSize, int spawnRate) {
+    public OreEntry(String ore) {
+        this.ore = ore;
+        this.filler = null;
+        this.minY = -1;
+        this.maxY = -1;
+        this.maxVeinSize = -1;
+        this.spawnRate = -1;
+        this.biomeBlacklist = null;
+        this.biomeWhitelist = null;
+    }
+
+    public OreEntry(String ore, String filler, int minY, int maxY, int maxVeinSize, int spawnRate, List<String> biomeBlacklist, List<String> biomeWhitelist) {
         this.ore = ore;
         this.filler = filler;
         this.minY = minY;
         this.maxY = maxY;
         this.maxVeinSize = maxVeinSize;
         this.spawnRate = spawnRate;
+        this.biomeBlacklist = biomeBlacklist;
+        this.biomeWhitelist = biomeWhitelist;
     }
 
     public String getOre() {
@@ -68,9 +85,33 @@ public class OreEntry {
         this.spawnRate = spawnRate;
     }
 
-    @Override
-    public String toString() {
-        return "OreEntry{" + "ore='" + ore + '\'' + ", filler='" + filler + '\'' + ", minY=" + minY + ", maxY=" + maxY + ", maxVeinSize=" + maxVeinSize + ", spawnRate=" + spawnRate + '}';
+    public List<String> getBiomeBlacklist() {
+        return biomeBlacklist;
     }
 
+    public void setBiomeBlacklist(List<String> biomeBlacklist) {
+        this.biomeBlacklist = biomeBlacklist;
+    }
+
+    public List<String> getBiomeWhitelist() {
+        return biomeWhitelist;
+    }
+
+    public void setBiomeWhitelist(List<String> biomeWhitelist) {
+        this.biomeWhitelist = biomeWhitelist;
+    }
+
+    @Override
+    public String toString() {
+        return "OreEntry{" +
+                "ore='" + ore + '\'' +
+                ", filler='" + filler + '\'' +
+                ", minY=" + minY +
+                ", maxY=" + maxY +
+                ", maxVeinSize=" + maxVeinSize +
+                ", spawnRate=" + spawnRate +
+                ", biomeBlacklist=" + biomeBlacklist +
+                ", biomeWhitelist=" + biomeWhitelist +
+                '}';
+    }
 }
