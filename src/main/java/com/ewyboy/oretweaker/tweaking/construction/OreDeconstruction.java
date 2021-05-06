@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 public class OreDeconstruction {
 
     public static void deconstruct(IEventBus forgeBus) {
-        forgeBus.addListener(EventPriority.LOWEST, OreDeconstruction::BiomeLoadingEvent);
+        forgeBus.addListener(EventPriority.LOWEST, OreDeconstruction :: BiomeLoadingEvent);
     }
 
     private static void deconstructFeatureToJSON() {
