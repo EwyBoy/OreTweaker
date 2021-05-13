@@ -13,8 +13,7 @@ import java.io.*;
 public class JSONHandler {
 
     private static final Gson gson = new Gson();
-    private static final File JSON_FILE = new File(FMLPaths.CONFIGDIR.get() + "/oretweaker/OreTweaker.json");
-
+    public static final File JSON_FILE = new File(FMLPaths.CONFIGDIR.get() + "/oretweaker/OreTweaker.json");
     public static OreConfig oreConfig = new OreConfig(Templates.GeneratedTemplates.DEFAULT_TEMPLATE.getTemplate());
 
     public static void setup() {
@@ -25,6 +24,11 @@ public class JSONHandler {
         ModLogger.info("Reading Ore Tweaker JSON file");
         readJson(JSON_FILE);
         ModLogger.info(oreConfig.toString());
+    }
+
+    public static void reload() {
+        writeJson(JSON_FILE, oreConfig);
+        readJson(JSON_FILE);
     }
 
     public static boolean containsEntry(OreEntry entry) {

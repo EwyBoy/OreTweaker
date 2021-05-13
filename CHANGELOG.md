@@ -1,3 +1,7 @@
+v1.16.5-2.0.2
+• Added commands
+• /oretweaker reload - reloads JSON file
+
 v1.16.5-2.0.1
 • Fixes [#10](https://github.com/EwyBoy/OreTweaker/issues/10) No sand, gravel, and clay in river - by frank89722
 
