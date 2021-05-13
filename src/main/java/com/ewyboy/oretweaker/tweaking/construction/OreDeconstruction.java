@@ -41,32 +41,33 @@ public class OreDeconstruction {
         }
     }
 
+    public static List<Supplier<ConfiguredFeature<?, ?>>> destroy = new LinkedList<>();
+
+    private static void incinerator(Block targetBlock, Supplier<ConfiguredFeature<?, ?>> targetFeature) {
+        if (targetBlock != null) {
+            ModLogger.debug("Deconstructed ore generation for " + targetBlock.getRegistryName());
+            OreEntry placeholderEntry = new OreEntry(Objects.requireNonNull(targetBlock.getRegistryName()).toString());
+            if (JSONHandler.containsEntry(placeholderEntry)) {
+                destroy.add(targetFeature);
+                ModLogger.debug(targetFeature.get().feature.getRegistryName() + " destroyed");
+            }
+        }
+    }
+
     private static List<Supplier<ConfiguredFeature<?, ?>>> filterFeatures(List<Supplier<ConfiguredFeature<?, ?>>> features) {
-        Block targetBlock = null;
-        List<Supplier<ConfiguredFeature<?, ?>>> destroy = new LinkedList<>();
-
         for (Supplier<ConfiguredFeature<?, ?>> feature : features) {
+            Block targetBlock = null;
             ConfiguredFeature<?, ?> targetFeature = FeatureUtils.getFeature(feature.get());
-
-            if (!(targetFeature.config instanceof SphereReplaceConfig)) {
-                if (targetFeature.feature instanceof OreFeature || targetFeature.feature instanceof NoExposedOreFeature) {
-                    OreFeatureConfig config = (OreFeatureConfig) targetFeature.config;
-                    targetBlock = config.state.getBlock();
-                    ModLogger.debug(Objects.requireNonNull(targetBlock.getRegistryName()).toString());
-                } else if (targetFeature.feature instanceof ReplaceBlockFeature) {
-                    ReplaceBlockConfig config = (ReplaceBlockConfig) targetFeature.config;
-                    targetBlock = config.state.getBlock();
-                    ModLogger.debug(Objects.requireNonNull(targetBlock.getRegistryName()).toString());
-                }
-
-                if (targetBlock != null) {
-                    ModLogger.debug("Deconstructed ore generation for " + targetBlock.getRegistryName());
-                    OreEntry placeholderEntry = new OreEntry(Objects.requireNonNull(targetBlock.getRegistryName()).toString());
-                    if (JSONHandler.containsEntry(placeholderEntry)) {
-                        destroy.add(feature);
-                        ModLogger.debug(feature.get().feature.getRegistryName() + " destroyed");
-                    }
-                }
+            if (targetFeature.feature instanceof OreFeature || targetFeature.feature instanceof NoExposedOreFeature) {
+                OreFeatureConfig config = (OreFeatureConfig) targetFeature.config;
+                targetBlock = config.state.getBlock();
+                ModLogger.debug(Objects.requireNonNull(targetBlock.getRegistryName()).toString());
+                incinerator(targetBlock, feature);
+            } else if (targetFeature.feature instanceof ReplaceBlockFeature) {
+                ReplaceBlockConfig config = (ReplaceBlockConfig) targetFeature.config;
+                targetBlock = config.state.getBlock();
+                ModLogger.debug(Objects.requireNonNull(targetBlock.getRegistryName()).toString());
+                incinerator(targetBlock, feature);
             }
         }
         return destroy;
