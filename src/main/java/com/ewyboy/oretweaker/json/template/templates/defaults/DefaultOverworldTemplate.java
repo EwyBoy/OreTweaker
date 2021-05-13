@@ -124,18 +124,18 @@ public class DefaultOverworldTemplate implements ITemplate {
                 emptyList,
                 emptyList
         ));
-        if (!ModList.get().isLoaded("create")) {
-            entries.add(new OreEntry(
-                    "minecraft:lapis_ore",
-                    "minecraft:stone",
-                    1,
-                    30,
-                    6,
-                    3,
-                    emptyList,
-                    emptyList
-            ));
-        }
+
+       entries.add(new OreEntry(
+               "minecraft:lapis_ore",
+               "minecraft:stone",
+               1,
+               30,
+               6,
+               3,
+               emptyList,
+               emptyList
+       ));
+
         entries.add(new OreEntry(
                 "minecraft:diamond_ore",
                 "minecraft:stone",
