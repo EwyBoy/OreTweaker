@@ -1,11 +1,17 @@
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
+}
+
+plugins {
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
 apply plugin: 'net.minecraftforge.gradle'
@@ -27,6 +33,9 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
+            //property 'mixin.env.remapRefMap', 'true'
+            //property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+            property 'fml.earlyprogresswindow', 'false'
             mods {
                 oretweaker {
                     source sourceSets.main
@@ -36,6 +45,8 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
+            //property 'mixin.env.remapRefMap', 'true'
+            //property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
             mods {
                 oretweaker {
                     source sourceSets.main
@@ -86,7 +97,6 @@ jar {
 }
 
 jar.finalizedBy('reobfJar')
-
 
 publishing {
     publications {

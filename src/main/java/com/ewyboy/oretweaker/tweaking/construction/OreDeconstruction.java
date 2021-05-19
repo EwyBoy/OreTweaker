@@ -23,10 +23,6 @@ public class OreDeconstruction {
         forgeBus.addListener(EventPriority.LOWEST, OreDeconstruction :: BiomeLoadingEvent);
     }
 
-    private static void deconstructFeatureToJSON() {
-        // WIP
-    }
-
     private static final List<GenerationStage.Decoration> decorations = new LinkedList<>();
 
     static {

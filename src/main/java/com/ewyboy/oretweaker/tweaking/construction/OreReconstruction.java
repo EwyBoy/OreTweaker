@@ -57,7 +57,7 @@ public class OreReconstruction {
         }
     }
 
-    private static ConfiguredFeature<?, ?> reconstructOre(Block ore, Block filler, int minY, int maxY, int spawnRate, int maxVeinSize) {
+    private static ConfiguredFeature<?, ?> reconstructOre(Block ore, Block filler, int minY, int maxY, float spawnRate, int maxVeinSize) {
         ModLogger.debug("Reconstructing ore: " + ore);
         return register(Objects.requireNonNull(ore.getRegistryName()).getPath(), reconstructFeature(
                 ore,
@@ -69,10 +69,16 @@ public class OreReconstruction {
         ));
     }
 
-    private static ConfiguredFeature<?, ?> reconstructFeature(Block ore, Block filler, int minY, int maxY, int spawnRate, int maxVeinSize) {
+    private static ConfiguredFeature<?, ?> reconstructFeature(Block ore, Block filler, int minY, int maxY, float spawnRate, int maxVeinSize) {
         ConfiguredFeature<?, ?> feature = Feature.ORE.configured(new OreFeatureConfig(new BlockMatchRuleTest(filler), ore.defaultBlockState(), maxVeinSize));
         feature = FeatureUtils.getVerticalRange(feature, minY, maxY).squared();
-        feature = feature.count(spawnRate);
+
+        if (spawnRate < 1 && spawnRate > 0) {
+            float chance = spawnRate * 100;
+            feature = feature.chance((int) chance);
+        } else {
+            feature = feature.count((int) spawnRate);
+        }
 
         return feature;
     }

@@ -9,11 +9,11 @@ public class OreEntry {
     private int minY;
     private int maxY;
     private int maxVeinSize;
-    private int spawnRate;
+    private float spawnRate;
     private List<String> biomeBlacklist;
     private List<String> biomeWhitelist;
 
-    public OreEntry(String oreName, String filler, Integer minY, Integer maxY, Integer maxVeinSize, Integer spawnRate, List<String> biomeBlacklist, List<String> biomeWhitelist) { }
+    public OreEntry(String oreName, String filler, Integer minY, Integer maxY, Integer maxVeinSize, Float spawnRate, List<String> biomeBlacklist, List<String> biomeWhitelist) { }
 
     public OreEntry(String ore) {
         this.ore = ore;
@@ -26,7 +26,7 @@ public class OreEntry {
         this.biomeWhitelist = null;
     }
 
-    public OreEntry(String ore, String filler, int minY, int maxY, int maxVeinSize, int spawnRate, List<String> biomeBlacklist, List<String> biomeWhitelist) {
+    public OreEntry(String ore, String filler, int minY, int maxY, int maxVeinSize, float spawnRate, List<String> biomeBlacklist, List<String> biomeWhitelist) {
         this.ore = ore;
         this.filler = filler;
         this.minY = minY;
@@ -77,8 +77,12 @@ public class OreEntry {
         this.maxVeinSize = maxVeinSize;
     }
 
-    public int getSpawnRate() {
+    public float getSpawnRate() {
         return spawnRate;
+    }
+
+    public void setSpawnRate(float spawnRate) {
+        this.spawnRate = spawnRate;
     }
 
     public void setSpawnRate(int spawnRate) {
