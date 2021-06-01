@@ -16,6 +16,8 @@
 	<br><br>
 </h1>
 
+<iframe src="https://github.com/sponsors/EwyBoy/card" title="Sponsor EwyBoy" height="225" width="600" style="border: 0;"></iframe>
+
 ## Supported Versions
 
 |    Version   |      Supported     |
