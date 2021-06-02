@@ -1,6 +1,6 @@
 # Ore-Tweaker #
 
-Ore-Tweaker is open-source distributed under the [MIT-Lisence](https://github.com/EwyBoy/OreTweaker/blob/master/LICENSE.txt).
+Ore-Tweaker is open-source distributed under the [MIT-Lisence](https://github.com/EwyBoy/OreTweaker/blob/master/LICENSE.md).
 
 I encurrage you to contribute your ideas, code and problems you may experience while using Ore-Tweaker.  
 There are several ways for you to contribute to the Ore-Tweaker project.  
