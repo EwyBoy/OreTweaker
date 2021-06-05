@@ -96,7 +96,9 @@ jar {
 }
 
 curseforge {
-    apiKey = property('CF_API_KEY')
+    if (project.hasProperty('CF_API_KEY')){
+        apiKey = project.getProperty('CF_API_KEY')
+    }
     project {
         id = "${PROJECT_ID}"
         changelogType = 'markdown'
