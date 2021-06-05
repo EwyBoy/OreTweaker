@@ -12,6 +12,8 @@ import net.minecraft.world.gen.feature.Feature;
 import java.util.BitSet;
 import java.util.Random;
 
+//TODO Custom ore feature
+
 public class OreTweakerFeature extends Feature<OreTweakerFeatureConfig> {
 
     public OreTweakerFeature(Codec<OreTweakerFeatureConfig> codec) {
@@ -65,6 +67,7 @@ public class OreTweakerFeature extends Feature<OreTweakerFeatureConfig> {
             double d4 = MathHelper.lerp((double) f, p_207803_8_, p_207803_10_);
             double d6 = random.nextDouble() * (double) j / 16.0D;
             double d7 = ((double) (MathHelper.sin((float) Math.PI * f) + 1.0F) * d6 + 1.0D) / 2.0D;
+            //TODO
             adouble[k * 4 + 0] = d0;
             adouble[k * 4 + 1] = d2;
             adouble[k * 4 + 2] = d4;

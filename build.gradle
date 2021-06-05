@@ -95,6 +95,23 @@ jar {
     }
 }
 
+curseforge {
+    apiKey = property('CF_API_KEY')
+    project {
+        id = "${PROJECT_ID}"
+        changelogType = 'markdown'
+        changelog = file('CHANGELOG.md')
+        releaseType = "${RELEASE_TYPE}"
+        addGameVersion 'Forge'
+        addGameVersion '1.16.5'
+        addGameVersion '1.16.4'
+        addGameVersion '1.16.3'
+        mainArtifact(jar) {
+            displayName = "${MODNAME}-${MC_VERSION}-${VERSION}.jar"
+        }
+    }
+}
+
 jar.finalizedBy('reobfJar')
 
 publishing {
