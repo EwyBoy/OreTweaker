@@ -1,3 +1,15 @@
+**v1.16.5 - 2.2.0**  
+• Added automated security scan of jar file and build scripts  
+• Added Ore Tweaker Wiki : https://github.com/EwyBoy/OreTweaker/wiki  
+• Updated GitHub page to my new standard  
+• Fixed [#20](https://github.com/EwyBoy/OreTweaker/issues/20) Emerald ores don't spawn.  
+• Fixed wrong emerald values in templates  
+• Bumped to the latest forge version  
+• Bumped to gradle 6.9  
+• Builds are now pushed using [CurseGradle](https://github.com/matthewprenger/CurseGradle)  
+• Minor changes under the hood  
+• Started working on a new system to do more advanced tweaks and make the mod less hacky  
+
 **v1.16.5 - 2.1.0**  
 • There was a bug in the code causing tons of world gen features to be deleted from the world.  
 • This is a huge fix for Ore Tweaker and will fix the ore generation incompatibility with both vanilla Minecraft and other mods world gen  
