@@ -152,7 +152,7 @@ public class DefaultOverworldTemplate implements ITemplate {
                 4,
                 32,
                 1,
-                30,
+                5,
                 emptyList,
                 INFESTED_AND_EMERALD_BIOMES
         ));

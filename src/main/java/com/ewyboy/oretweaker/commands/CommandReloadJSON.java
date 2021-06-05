@@ -12,8 +12,7 @@ public class CommandReloadJSON {
     public static ArgumentBuilder<CommandSource, ?> register() {
         return Commands.literal("reload").requires((commandSource) -> commandSource.hasPermission(2))
                 .executes((commandSource) -> reload(
-                        commandSource.getSource()
-                        )
+                        commandSource.getSource())
                 );
     }
 

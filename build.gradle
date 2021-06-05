@@ -56,7 +56,6 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
             mods {
                 oretweaker {
                     source sourceSets.main
@@ -79,7 +78,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${MC_VERSION}-${FORGE_VERSION}"
-    implementation fg.deobf("curse.maven:worldstripper-250603:3142092")
+    implementation fg.deobf("curse.maven:worldstripper-250603:${WORLD_STRIPPER}")
 }
 
 jar {

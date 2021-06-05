@@ -37,7 +37,14 @@ public class OreReconstruction {
         for (OreEntry ore : ores) {
             if (isReconstructableObject(ore)) {
                 try {
-                    ConfiguredFeature<?, ?> reconstructedOre = reconstructOre(
+                    ConfiguredFeature<?, ?> reconstructedOre = ore.getMaxVeinSize() == 1 ? reconstructOre(
+                            Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getOre()))),
+                            Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getFiller()))),
+                            ore.getMinY(),
+                            ore.getMaxY(),
+                            ore.getSpawnRate(),
+                            ore.getMaxVeinSize() + 2
+                    ) : reconstructOre(
                             Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getOre()))),
                             Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getFiller()))),
                             ore.getMinY(),
@@ -72,13 +79,7 @@ public class OreReconstruction {
     private static ConfiguredFeature<?, ?> reconstructFeature(Block ore, Block filler, int minY, int maxY, float spawnRate, int maxVeinSize) {
         ConfiguredFeature<?, ?> feature = Feature.ORE.configured(new OreFeatureConfig(new BlockMatchRuleTest(filler), ore.defaultBlockState(), maxVeinSize));
         feature = FeatureUtils.getVerticalRange(feature, minY, maxY).squared();
-
-        if (spawnRate < 1 && spawnRate > 0) {
-            float chance = spawnRate * 100;
-            feature = feature.chance((int) chance);
-        } else {
-            feature = feature.count((int) spawnRate);
-        }
+        feature = feature.count((int) spawnRate);
 
         return feature;
     }
