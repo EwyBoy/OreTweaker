@@ -1,7 +1,7 @@
 # Security Policy
 
 All Ore-Tweaker jars are scanned for security flaws and validated before publishing.
-Not that there are to many security risks with installing a Minecraft mod but just to be sure.
+Not that there are to many security risks with installing a Minecraft mod but just to show that my products can be trusted when downloaded from official vendors.
 
 ## Supported Versions
 
