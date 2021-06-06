@@ -33,8 +33,6 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
-            //property 'mixin.env.remapRefMap', 'true'
-            //property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
             property 'fml.earlyprogresswindow', 'false'
             mods {
                 oretweaker {
@@ -45,8 +43,6 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
-            //property 'mixin.env.remapRefMap', 'true'
-            //property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
             mods {
                 oretweaker {
                     source sourceSets.main
@@ -115,16 +111,3 @@ curseforge {
 }
 
 jar.finalizedBy('reobfJar')
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-        }
-    }
-    repositories {
-        maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
-        }
-    }
-}
