@@ -16,6 +16,8 @@
             <img src="https://cf.way2muchnoise.eu/full_242436_downloads.svg" alt="Curseforge Downloads"></a><br>
     <br>
 </h1>
+    <br>
+</h1>
 
 ### Add, remove, tweak and configure ore and underground generation features for Minecraft Forge 1.16.5
 
