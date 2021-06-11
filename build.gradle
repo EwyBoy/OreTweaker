@@ -91,6 +91,8 @@ jar {
     }
 }
 
+jar.finalizedBy('reobfJar')
+
 curseforge {
     if (project.hasProperty('CF_API_KEY')){
         apiKey = project.getProperty('CF_API_KEY')
@@ -109,5 +111,3 @@ curseforge {
         }
     }
 }
-
-jar.finalizedBy('reobfJar')
