@@ -15,7 +15,6 @@
 		<a href="https://www.curseforge.com/minecraft/mc-mods/ore-tweaker">
 		    <img src="https://cf.way2muchnoise.eu/full_242436_downloads.svg" alt="Curseforge Downloads">
 		</a>
-=======
         <a href="https://www.curseforge.com/minecraft/mc-mods/ore-tweaker/files">
             <img src="https://img.shields.io/badge/Supported%20Versions-MC%201.16-00c756?style=for-the-badge" alt="Available Versions"></a>
         <a href="https://www.curseforge.com/minecraft/mc-mods/ore-tweaker/files">
