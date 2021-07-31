@@ -28,7 +28,7 @@
 |    Version   |      Supported     |
 | ------------ | ------------------ |
 | 1.17.x-2.x.x | :heavy_check_mark: |
-| 1.16.5-2.x.x | :white_check_mark: |
+| 1.16.5-2.x.x | :heavy_check_mark: |
 | 1.12.x-1.x.x | :x:                |
 | 1.11.x-1.x.x | :x:                |
 | 1.10.x-1.x.x | :x:                |
