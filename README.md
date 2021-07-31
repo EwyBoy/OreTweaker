@@ -12,10 +12,11 @@
 		    <img src="https://img.shields.io/github/license/EwyBoy/OreTweaker?style=for-the-badge&color=900c3f" alt="License"></a>
 		<a href="https://discord.gg/eAsSV8dXX2">
 		    <img src="https://img.shields.io/discord/305535757441826817?color=5261f8&label=Discord&logoColor=1d3367&style=for-the-badge" alt="Discord"></a>
-		<a href="https://www.curseforge.com/minecraft/mc-mods/ore-tweaker">
-		    <img src="https://cf.way2muchnoise.eu/full_242436_downloads.svg" alt="Curseforge Downloads"></a>
     	<br>
 </h1>
+
+[![Curseforge](http://cf.way2muchnoise.eu/full_configured_downloads.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/ore-tweaker)
+
 
 ### Add, remove, tweak and configure ore and underground generation features for Minecraft Forge 1.16.5
 
@@ -26,7 +27,8 @@
 
 |    Version   |      Supported     |
 | ------------ | ------------------ |
-| 1.16.5-2.x.x | :white_check_mark: |
+| 1.17.x-2.x.x | :heavy_check_mark: |
+| 1.16.5-2.x.x | :heavy_check_mark: |
 | 1.12.x-1.x.x | :x:                |
 | 1.11.x-1.x.x | :x:                |
 | 1.10.x-1.x.x | :x:                |
