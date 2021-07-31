@@ -33,6 +33,12 @@ public class RemoveAllStones implements ITemplate {
                 "minecraft:andesite"
         ));
         entries.add(new OreEntry(
+                "minecraft:tuff"
+        ));
+        entries.add(new OreEntry(
+                "minecraft:deepslate"
+        ));
+        entries.add(new OreEntry(
                 "minecraft:infested_stone"
         ));
         entries.add(new OreEntry(

@@ -3,13 +3,13 @@ package com.ewyboy.oretweaker.commands;
 import com.ewyboy.oretweaker.OreTweaker;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.minecraft.command.CommandSource;
+import net.minecraft.commands.CommandSourceStack;
 
 public class CommandCenter {
 
-    public CommandCenter(CommandDispatcher<CommandSource> dispatcher) {
+    public CommandCenter(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
-                LiteralArgumentBuilder.<CommandSource> literal(OreTweaker.MOD_ID)
+                LiteralArgumentBuilder.<CommandSourceStack> literal(OreTweaker.MOD_ID)
                         .then(CommandReloadJSON.register())
                         .executes(ctx -> 0)
         );

@@ -1,12 +1,12 @@
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        //maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
-        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        //classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
 
@@ -22,7 +22,7 @@ version = "${MC_VERSION}-${VERSION}"
 group = "com.ewyboy.${MODID}"
 archivesBaseName = MODNAME
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+java.toolchain.languageVersion = JavaLanguageVersion.of(16)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 
@@ -75,6 +75,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 dependencies {
     minecraft "net.minecraftforge:forge:${MC_VERSION}-${FORGE_VERSION}"
     implementation fg.deobf("curse.maven:worldstripper-250603:${WORLD_STRIPPER}")
+    implementation fg.deobf("curse.maven:configured-457570:${CONFIGURED}")
 }
 
 jar {
@@ -103,9 +104,8 @@ curseforge {
         changelog = file('CHANGELOG.md')
         releaseType = "${RELEASE_TYPE}"
         addGameVersion 'Forge'
-        addGameVersion '1.16.5'
-        addGameVersion '1.16.4'
-        addGameVersion '1.16.3'
+        addGameVersion '1.17.1'
+        addGameVersion '1.17'
         mainArtifact(jar) {
             displayName = "${MODNAME}-${MC_VERSION}-${VERSION}.jar"
         }

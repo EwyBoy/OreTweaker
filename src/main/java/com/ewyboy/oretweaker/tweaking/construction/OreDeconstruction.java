@@ -4,9 +4,13 @@ import com.ewyboy.oretweaker.json.JSONHandler;
 import com.ewyboy.oretweaker.json.objects.OreEntry;
 import com.ewyboy.oretweaker.util.FeatureUtils;
 import com.ewyboy.oretweaker.util.ModLogger;
-import net.minecraft.block.Block;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.OreFeature;
+import net.minecraft.world.level.levelgen.feature.ReplaceBlockFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.ReplaceBlockConfiguration;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -23,16 +27,16 @@ public class OreDeconstruction {
         forgeBus.addListener(EventPriority.LOWEST, OreDeconstruction :: BiomeLoadingEvent);
     }
 
-    private static final List<GenerationStage.Decoration> decorations = new LinkedList<>();
+    private static final List<GenerationStep.Decoration> decorations = new LinkedList<>();
 
     static {
-        decorations.add(GenerationStage.Decoration.UNDERGROUND_ORES);
-        decorations.add(GenerationStage.Decoration.UNDERGROUND_DECORATION);
+        decorations.add(GenerationStep.Decoration.UNDERGROUND_ORES);
+        decorations.add(GenerationStep.Decoration.UNDERGROUND_DECORATION);
     }
 
     public static void BiomeLoadingEvent(BiomeLoadingEvent event) {
         BiomeGenerationSettingsBuilder generation = event.getGeneration();
-        for (GenerationStage.Decoration deco : decorations) {
+        for (GenerationStep.Decoration deco : decorations) {
             FeatureUtils.destroyFeature(generation.getFeatures(deco), filterFeatures(generation.getFeatures(deco)));
         }
     }
@@ -54,16 +58,20 @@ public class OreDeconstruction {
         for (Supplier<ConfiguredFeature<?, ?>> feature : features) {
             Block targetBlock = null;
             ConfiguredFeature<?, ?> targetFeature = FeatureUtils.getFeature(feature.get());
-            if (targetFeature.feature instanceof OreFeature || targetFeature.feature instanceof NoExposedOreFeature) {
-                OreFeatureConfig config = (OreFeatureConfig) targetFeature.config;
-                targetBlock = config.state.getBlock();
-                ModLogger.debug(Objects.requireNonNull(targetBlock.getRegistryName()).toString());
-                incinerator(targetBlock, feature);
+            if (targetFeature.feature instanceof OreFeature) {
+                OreConfiguration config = (OreConfiguration) targetFeature.config;
+                for (OreConfiguration.TargetBlockState state : config.targetStates) {
+                    targetBlock = state.state.getBlock();
+                    ModLogger.debug(Objects.requireNonNull(targetBlock.getRegistryName()).toString());
+                    incinerator(targetBlock, feature);
+                }
             } else if (targetFeature.feature instanceof ReplaceBlockFeature) {
-                ReplaceBlockConfig config = (ReplaceBlockConfig) targetFeature.config;
-                targetBlock = config.state.getBlock();
-                ModLogger.debug(Objects.requireNonNull(targetBlock.getRegistryName()).toString());
-                incinerator(targetBlock, feature);
+                ReplaceBlockConfiguration config = (ReplaceBlockConfiguration) targetFeature.config;
+                for (OreConfiguration.TargetBlockState state : config.targetStates) {
+                    targetBlock = state.state.getBlock();
+                    ModLogger.debug(Objects.requireNonNull(targetBlock.getRegistryName()).toString());
+                    incinerator(targetBlock, feature);
+                }
             }
         }
         return destroy;

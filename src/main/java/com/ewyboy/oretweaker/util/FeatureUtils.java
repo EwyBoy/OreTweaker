@@ -1,11 +1,13 @@
 package com.ewyboy.oretweaker.util;
 
-import net.minecraft.world.gen.IDecoratable;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.DecoratedFeature;
-import net.minecraft.world.gen.feature.DecoratedFeatureConfig;
-import net.minecraft.world.gen.placement.Placement;
-import net.minecraft.world.gen.placement.TopSolidRangeConfig;
+import net.minecraft.world.level.levelgen.Decoratable;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.DecoratedFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.DecoratedFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.RangeDecoratorConfiguration;
+import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
+import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -16,7 +18,7 @@ public class FeatureUtils {
         ConfiguredFeature<?, ?> currentFeature = feature;
         if (currentFeature.feature instanceof DecoratedFeature) {
             do {
-                currentFeature = ((DecoratedFeatureConfig) currentFeature.config()).feature.get();
+                currentFeature = ((DecoratedFeatureConfiguration) currentFeature.config()).feature.get();
             } while (currentFeature.feature instanceof DecoratedFeature);
         }
         return currentFeature;
@@ -28,8 +30,8 @@ public class FeatureUtils {
         }
     }
 
-    public static IDecoratable<ConfiguredFeature<?, ?>> getVerticalRange(IDecoratable<ConfiguredFeature<?, ?>> feature, int minY, int maxY) {
-        return feature.decorated(Placement.RANGE.configured(new TopSolidRangeConfig(minY, minY, maxY)));
+    public static Decoratable<ConfiguredFeature<?, ?>> getVerticalRange(Decoratable<ConfiguredFeature<?, ?>> feature, int minY, int maxY) {
+        return feature.decorated(FeatureDecorator.RANGE.configured(new RangeDecoratorConfiguration(UniformHeight.of(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)))));
     }
 
 }

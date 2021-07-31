@@ -24,6 +24,9 @@ public class RemoveAllOresOverworld implements ITemplate {
                 "minecraft:iron_ore"
         ));
         entries.add(new OreEntry(
+                "minecraft:copper_ore"
+        ));
+        entries.add(new OreEntry(
                 "minecraft:gold_ore"
         ));
         entries.add(new OreEntry(

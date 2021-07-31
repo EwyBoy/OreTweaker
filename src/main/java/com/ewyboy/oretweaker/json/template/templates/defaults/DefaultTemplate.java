@@ -74,6 +74,26 @@ public class DefaultTemplate implements ITemplate {
                 emptyList
         ));
         entries.add(new OreEntry(
+                "minecraft:tuff",
+                "minecraft:stone",
+                1,
+                16,
+                32,
+                1,
+                emptyList,
+                emptyList
+        ));
+        entries.add(new OreEntry(
+                "minecraft:deepslate",
+                "minecraft:stone",
+                1,
+                16,
+                64,
+                2,
+                emptyList,
+                emptyList
+        ));
+        entries.add(new OreEntry(
                 "minecraft:infested_stone",
                 "minecraft:stone",
                 1,
@@ -100,6 +120,16 @@ public class DefaultTemplate implements ITemplate {
                 64,
                 8,
                 20,
+                emptyList,
+                emptyList
+        ));
+        entries.add(new OreEntry(
+                "minecraft:copper_ore",
+                "minecraft:stone",
+                1,
+                96,
+                9,
+                6,
                 emptyList,
                 emptyList
         ));

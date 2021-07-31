@@ -26,6 +26,9 @@ public class RemoveIgneousRocks implements ITemplate {
         entries.add(new OreEntry(
                 "minecraft:andesite"
         ));
+        entries.add(new OreEntry(
+                "minecraft:tuff"
+        ));
     }
 
     @Override

@@ -1,13 +1,14 @@
 package com.ewyboy.oretweaker.world;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
 import java.util.BitSet;
 import java.util.Random;
@@ -22,30 +23,30 @@ public class OreTweakerFeature extends Feature<OreTweakerFeatureConfig> {
     }
 
     @Override
-    public boolean place(ISeedReader reader, ChunkGenerator generator, Random random, BlockPos blockPos, OreTweakerFeatureConfig featureConfig) {
-        float radius = random.nextFloat() * (float) Math.PI;
-        float size = (float) featureConfig.size / 8.0F;
+    public boolean place(FeaturePlaceContext<OreTweakerFeatureConfig> ctx) {
+        float radius = ctx.random().nextFloat() * (float) Math.PI;
+        float size = (float) ctx.config().size / 8.0F;
 
-        int maxSize = MathHelper.ceil(((float) featureConfig.size / 16.0F * 2.0F + 1.0F) / 2.0F);
+        int maxSize = Mth.ceil(((float) ctx.config().size / 16.0F * 2.0F + 1.0F) / 2.0F);
 
-        double maxX = (double) blockPos.getX() + Math.sin(radius) * (double) size;
-        double minX = (double) blockPos.getX() - Math.sin(radius) * (double) size;
-        double maxZ = (double) blockPos.getZ() + Math.cos(radius) * (double) size;
-        double minZ = (double) blockPos.getZ() - Math.cos(radius) * (double) size;
+        double maxX = (double) ctx.origin().getX() + Math.sin(radius) * (double) size;
+        double minX = (double) ctx.origin().getX() - Math.sin(radius) * (double) size;
+        double maxZ = (double) ctx.origin().getZ() + Math.cos(radius) * (double) size;
+        double minZ = (double) ctx.origin().getZ() - Math.cos(radius) * (double) size;
 
-        double randomY1 = blockPos.getY() + random.nextInt(3) - 2;
-        double randomY2 = blockPos.getY() + random.nextInt(3) - 2;
+        double randomY1 = ctx.origin().getY() + ctx.random().nextInt(3) - 2;
+        double randomY2 = ctx.origin().getY() + ctx.random().nextInt(3) - 2;
 
-        int k = blockPos.getX() - MathHelper.ceil(size) - maxSize;
-        int l = blockPos.getY() - 2 - maxSize;
-        int i1 = blockPos.getZ() - MathHelper.ceil(size) - maxSize;
-        int j1 = 2 * (MathHelper.ceil(size) + maxSize);
+        int k = ctx.origin().getX() - Mth.ceil(size) - maxSize;
+        int l = ctx.origin().getY() - 2 - maxSize;
+        int i1 = ctx.origin().getZ() - Mth.ceil(size) - maxSize;
+        int j1 = 2 * (Mth.ceil(size) + maxSize);
         int k1 = 2 * (2 + maxSize);
 
         for (int l1 = k; l1 <= k + j1; ++l1) {
             for (int i2 = i1; i2 <= i1 + j1; ++i2) {
-                if (l <= reader.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, l1, i2)) {
-                    return this.doPlace(reader, random, featureConfig, maxX, minX, maxZ, minZ, randomY1, randomY2, k, l, i1, j1, k1);
+                if (l <= ctx.level().getHeight(Heightmap.Types.OCEAN_FLOOR_WG, l1, i2)) {
+                    return this.doPlace(ctx.level(), ctx.random(), ctx.config(), maxX, minX, maxZ, minZ, randomY1, randomY2, k, l, i1, j1, k1);
                 }
             }
         }
@@ -53,20 +54,20 @@ public class OreTweakerFeature extends Feature<OreTweakerFeatureConfig> {
         return false;
     }
 
-    protected boolean doPlace(IWorld world, Random random, OreTweakerFeatureConfig featureConfig, double p_207803_4_, double p_207803_6_, double p_207803_8_, double p_207803_10_, double p_207803_12_, double p_207803_14_, int p_207803_16_, int p_207803_17_, int p_207803_18_, int p_207803_19_, int p_207803_20_) {
+    protected boolean doPlace(LevelAccessor world, Random random, OreTweakerFeatureConfig featureConfig, double p_207803_4_, double p_207803_6_, double p_207803_8_, double p_207803_10_, double p_207803_12_, double p_207803_14_, int p_207803_16_, int p_207803_17_, int p_207803_18_, int p_207803_19_, int p_207803_20_) {
         int i = 0;
         BitSet bitset = new BitSet(p_207803_19_ * p_207803_20_ * p_207803_19_);
-        BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
+        BlockPos.MutableBlockPos blockpos$mutable = new BlockPos.MutableBlockPos();
         int j = featureConfig.size;
         double[] adouble = new double[j * 4];
 
         for (int k = 0; k < j; ++k) {
             float f = (float) k / (float) j;
-            double d0 = MathHelper.lerp((double) f, p_207803_4_, p_207803_6_);
-            double d2 = MathHelper.lerp((double) f, p_207803_12_, p_207803_14_);
-            double d4 = MathHelper.lerp((double) f, p_207803_8_, p_207803_10_);
+            double d0 = Mth.lerp((double) f, p_207803_4_, p_207803_6_);
+            double d2 = Mth.lerp((double) f, p_207803_12_, p_207803_14_);
+            double d4 = Mth.lerp((double) f, p_207803_8_, p_207803_10_);
             double d6 = random.nextDouble() * (double) j / 16.0D;
-            double d7 = ((double) (MathHelper.sin((float) Math.PI * f) + 1.0F) * d6 + 1.0D) / 2.0D;
+            double d7 = ((double) (Mth.sin((float) Math.PI * f) + 1.0F) * d6 + 1.0D) / 2.0D;
             //TODO
             adouble[k * 4 + 0] = d0;
             adouble[k * 4 + 1] = d2;
@@ -100,12 +101,12 @@ public class OreTweakerFeature extends Feature<OreTweakerFeatureConfig> {
                 double d1 = adouble[j3 * 4 + 0];
                 double d3 = adouble[j3 * 4 + 1];
                 double d5 = adouble[j3 * 4 + 2];
-                int l = Math.max(MathHelper.floor(d1 - d11), p_207803_16_);
-                int l3 = Math.max(MathHelper.floor(d3 - d11), p_207803_17_);
-                int i1 = Math.max(MathHelper.floor(d5 - d11), p_207803_18_);
-                int j1 = Math.max(MathHelper.floor(d1 + d11), l);
-                int k1 = Math.max(MathHelper.floor(d3 + d11), l3);
-                int l1 = Math.max(MathHelper.floor(d5 + d11), i1);
+                int l = Math.max(Mth.floor(d1 - d11), p_207803_16_);
+                int l3 = Math.max(Mth.floor(d3 - d11), p_207803_17_);
+                int i1 = Math.max(Mth.floor(d5 - d11), p_207803_18_);
+                int j1 = Math.max(Mth.floor(d1 + d11), l);
+                int k1 = Math.max(Mth.floor(d3 + d11), l3);
+                int l1 = Math.max(Mth.floor(d5 + d11), i1);
 
                 for (int i2 = l; i2 <= j1; ++i2) {
                     double d8 = ((double) i2 + 0.5D - d1) / d11;

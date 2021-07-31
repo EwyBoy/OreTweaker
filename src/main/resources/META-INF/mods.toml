@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[35,)"
+loaderVersion="[37,)"
 license="MIT License"
 issueTrackerURL="https://github.com/EwyBoy/OreTweaker/issues"
 
@@ -10,18 +10,18 @@ issueTrackerURL="https://github.com/EwyBoy/OreTweaker/issues"
     displayURL="https://www.curseforge.com/minecraft/mc-mods/Ore-Tweaker"
     credits=""
     authors="Ewy"
-    description=""
+    description="Disable, tweak and add your own ore generation features for Minecraft Forge."
 
 [[dependencies.oretweaker]]
     modId="forge"
     mandatory=true
-    versionRange="[35,)"
+    versionRange="[37,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.oretweaker]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.3, 1.17)"
+    versionRange="[1.17, 1.18)"
     ordering="NONE"
     side="BOTH"
