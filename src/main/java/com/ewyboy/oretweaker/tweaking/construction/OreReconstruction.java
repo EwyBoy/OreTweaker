@@ -123,20 +123,20 @@ public class OreReconstruction {
         biomeBlackListMap.put(reconstructedDeepslateOre, ore.getBiomeBlacklist());
         biomeWhiteListMap.put(reconstructedDeepslateOre, ore.getBiomeWhitelist());
         reconstructedOres.add(reconstructedDeepslateOre);
-
     }
 
     private static ConfiguredFeature<?, ?> reconstructFeature(Block ore, Block filler, int minY, int maxY, float spawnRate, int maxVeinSize) {
         ConfiguredFeature<?, ?> feature = Feature.ORE.configured(new OreConfiguration(new BlockMatchTest(filler), ore.defaultBlockState(), maxVeinSize));
         feature = FeatureUtils.getVerticalRange(feature, minY, maxY).squared();
-        feature = feature.count((int) spawnRate);
+
+        feature = spawnRate < 1 ? feature.rarity((int) (1 / spawnRate)) : feature.count((int) spawnRate);
 
         Block deepslate_ore = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("deepslate_" + Objects.requireNonNull(ore.getRegistryName())));
 
         if (deepslate_ore == null) {
             ConfiguredFeature<?, ?> deepslate_feature = Feature.ORE.configured(new OreConfiguration(new BlockMatchTest(Blocks.DEEPSLATE), deepslate_ore.defaultBlockState(), maxVeinSize));
             deepslate_feature = FeatureUtils.getVerticalRange(deepslate_feature, minY, maxY).squared();
-            deepslate_feature = deepslate_feature.count((int) spawnRate);
+            deepslate_feature = spawnRate < 1 ? feature.rarity((int) (1 / spawnRate)) : feature.count((int) spawnRate);
         }
 
         return feature;
