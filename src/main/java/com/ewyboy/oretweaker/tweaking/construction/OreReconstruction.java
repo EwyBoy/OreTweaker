@@ -79,7 +79,7 @@ public class OreReconstruction {
     private static ConfiguredFeature<?, ?> reconstructFeature(Block ore, Block filler, int minY, int maxY, float spawnRate, int maxVeinSize) {
         ConfiguredFeature<?, ?> feature = Feature.ORE.configured(new OreFeatureConfig(new BlockMatchRuleTest(filler), ore.defaultBlockState(), maxVeinSize));
         feature = FeatureUtils.getVerticalRange(feature, minY, maxY).squared();
-        feature = feature.count((int) spawnRate);
+        feature = spawnRate < 1 ? feature.chance((int) (1 / spawnRate)) : feature.count((int) spawnRate);
 
         return feature;
     }
