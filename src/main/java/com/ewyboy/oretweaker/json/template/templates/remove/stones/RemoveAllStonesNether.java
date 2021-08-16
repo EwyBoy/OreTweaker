@@ -2,7 +2,9 @@ package com.ewyboy.oretweaker.json.template.templates.remove.stones;
 
 import com.ewyboy.oretweaker.json.objects.OreEntry;
 import com.ewyboy.oretweaker.json.template.ITemplate;
+import com.ewyboy.oretweaker.json.template.Templates;
 
+import java.nio.file.Path;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,6 +15,11 @@ public class RemoveAllStonesNether implements ITemplate {
     @Override
     public String templateName() {
         return "remove_stones_nether";
+    }
+
+    @Override
+    public Path templateDirectory() {
+        return Templates.Directories.REMOVE_PATH;
     }
 
     @Override

@@ -32,11 +32,13 @@ public class InfoHandler {
             FileWriter writer = new FileWriter(INFO_FILE);
             writer.write("##    Ore Tweaker - Information   ##");
             writer.write("\n");
-            writer.write("\nEdit the OreTweaker.json file generated on launch to tweak ore generation");
-            writer.write("\nBy default the file mimics vanilla world generation settings.");
+            writer.write("\nAdd Ore Configs to the data folder to tweak the world generation");
+            writer.write("\nBy default the mod and its files mimics vanilla world generation settings.");
             writer.write("\nCheck out more info on the wiki at https://github.com/EwyBoy/OreTweaker/wiki");
             writer.write("\n");
             writer.write("\nBugs can be reported here at https://github.com/EwyBoy/OreTweaker/issues");
+            writer.write("\n");
+            writer.write("\nEnjoy and have fun!");
             writer.write("\n");
             writer.write("\n-Ewy");
             writer.close();

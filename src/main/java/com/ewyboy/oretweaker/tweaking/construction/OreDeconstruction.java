@@ -46,8 +46,8 @@ public class OreDeconstruction {
     private static void incinerator(Block targetBlock, Supplier<ConfiguredFeature<?, ?>> targetFeature) {
         if (targetBlock != null) {
             ModLogger.debug("Deconstructed ore generation for " + targetBlock.getRegistryName());
-            OreEntry placeholderEntry = new OreEntry(Objects.requireNonNull(targetBlock.getRegistryName()).toString());
-            if (JSONHandler.containsEntry(placeholderEntry)) {
+            OreEntry oreEntry = new OreEntry(Objects.requireNonNull(targetBlock.getRegistryName()).toString());
+            if (JSONHandler.containsEntry(oreEntry)) {
                 destroy.add(targetFeature);
                 ModLogger.debug(targetFeature.get().feature.getRegistryName() + " destroyed");
             }

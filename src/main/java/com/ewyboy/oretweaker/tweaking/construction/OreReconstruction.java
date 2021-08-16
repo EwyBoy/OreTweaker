@@ -105,6 +105,7 @@ public class OreReconstruction {
 
     private static void reconstructDeepslateOre(OreEntry ore) {
         Block deepslate_ore = hasDeepslateVariant(ore);
+
         ConfiguredFeature<?, ?> reconstructedDeepslateOre = ore.getMaxVeinSize() == 1 ? reconstructOre(
                 Objects.requireNonNull(deepslate_ore),
                 Objects.requireNonNull(Blocks.DEEPSLATE),
@@ -120,8 +121,10 @@ public class OreReconstruction {
                 ore.getSpawnRate(),
                 ore.getMaxVeinSize() + 1
         );
+
         biomeBlackListMap.put(reconstructedDeepslateOre, ore.getBiomeBlacklist());
         biomeWhiteListMap.put(reconstructedDeepslateOre, ore.getBiomeWhitelist());
+
         reconstructedOres.add(reconstructedDeepslateOre);
     }
 
@@ -133,7 +136,7 @@ public class OreReconstruction {
 
         Block deepslate_ore = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("deepslate_" + Objects.requireNonNull(ore.getRegistryName())));
 
-        if (deepslate_ore == null) {
+        if (deepslate_ore != null) {
             ConfiguredFeature<?, ?> deepslate_feature = Feature.ORE.configured(new OreConfiguration(new BlockMatchTest(Blocks.DEEPSLATE), deepslate_ore.defaultBlockState(), maxVeinSize));
             deepslate_feature = FeatureUtils.getVerticalRange(deepslate_feature, minY, maxY).squared();
             deepslate_feature = spawnRate < 1 ? feature.rarity((int) (1 / spawnRate)) : feature.count((int) spawnRate);
@@ -169,15 +172,14 @@ public class OreReconstruction {
         BiomeGenerationSettingsBuilder generation = event.getGeneration();
 
         for (ConfiguredFeature<?, ?> reconstructedOre : reconstructedOres) {
-            String currentBiome = Objects.requireNonNull(event.getName()).getPath().toLowerCase(Locale.ROOT);
+            ResourceLocation currentBiome = Objects.requireNonNull(event.getName());
             List<String> currentBiomeFilter = setBiomeFilteringOption(biomeBlackListMap.get(reconstructedOre), biomeWhiteListMap.get(reconstructedOre));
             BiomeFiltering currentBiomeFilteringOption = getBiomeFilteringOption(biomeBlackListMap.get(reconstructedOre), biomeWhiteListMap.get(reconstructedOre));
-
             filterGeneration(currentBiome, currentBiomeFilter, currentBiomeFilteringOption, generation, reconstructedOre);
         }
     }
 
-    private static void filterGeneration(String currentBiome, List<String> biomeFilter, BiomeFiltering filteringOption, BiomeGenerationSettingsBuilder generation, ConfiguredFeature<?, ?> reconstructedOre) {
+    private static void filterGeneration(ResourceLocation currentBiome, List<String> biomeFilter, BiomeFiltering filteringOption, BiomeGenerationSettingsBuilder generation, ConfiguredFeature<?, ?> reconstructedOre) {
         switch (filteringOption) {
             case WHITELIST:
                 if (biomeFilter.contains(currentBiome))

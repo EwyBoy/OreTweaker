@@ -107,15 +107,15 @@ public class OreEntry {
 
     @Override
     public String toString() {
-        return "OreEntry{" +
-                "ore='" + ore + '\'' +
-                ", filler='" + filler + '\'' +
-                ", minY=" + minY +
-                ", maxY=" + maxY +
-                ", maxVeinSize=" + maxVeinSize +
-                ", spawnRate=" + spawnRate +
-                ", biomeBlacklist=" + biomeBlacklist +
-                ", biomeWhitelist=" + biomeWhitelist +
+        return "\n" + "OreEntry {" + "\n" +
+                "\t" + "ore='" + ore + '\'' + "\n" +
+                "\t" + "filler='" + filler + '\'' + "\n" +
+                "\t" + "minY=" + minY + "\n" +
+                "\t" + "maxY=" + maxY + "\n" +
+                "\t" + "maxVeinSize=" + maxVeinSize + "\n" +
+                "\t" + "spawnRate=" + spawnRate + "\n" +
+                "\t" + "biomeBlacklist=" + biomeBlacklist + "\n" +
+                "\t" + "biomeWhitelist=" + biomeWhitelist + "\n" +
                 '}';
     }
 }

@@ -20,7 +20,9 @@ public class OreConfig {
 
     @Override
     public String toString() {
-        return "OreConfig{" + "oreConfig=" + oreConfig + '}';
+        return "OreConfig {" +
+                "\n" + "\t" +  "oreConfig=" + oreConfig + "\n" +
+                '}' + "\n";
     }
 
 }
