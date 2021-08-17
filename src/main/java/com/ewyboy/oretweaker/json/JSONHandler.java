@@ -21,13 +21,17 @@ import java.util.stream.Stream;
 
 public class JSONHandler {
 
+    public static boolean isAutoUpdating = false;
+
     private static final Gson gson = new Gson();
     public static final File OLD_JSON = new File(FMLPaths.CONFIGDIR.get() + "/oretweaker/OreTweaker.json");
 
     public static OreConfig oreConfig = new OreConfig(new ArrayList<>());
 
     public static void loadComplete() {
-        if (Settings.SETTINGS.regenerateDefaultSettings.get()) Templates.regenerateDefaultSettingsFromTemplate();
+        if (Settings.SETTINGS.regenerateDefaultSettings.get() && !isAutoUpdating) {
+            Templates.regenerateDefaultSettingsFromTemplate();
+        }
 
         Settings.ServerConfig.flipBoolean(Settings.SETTINGS.regenerateTemplates);
         Settings.ServerConfig.flipBoolean(Settings.SETTINGS.regenerateDefaultSettings);
@@ -49,6 +53,7 @@ public class JSONHandler {
 
     private static void autoUpdater() {
         if (OLD_JSON.exists()) {
+            isAutoUpdating = true;
             try (Reader reader = new FileReader(OLD_JSON)) {
                 OreConfig oldConfig = gson.fromJson(reader, OreConfig.class);
                 oldConfig.getOreConfig().forEach(JSONHandler :: generateJSON);

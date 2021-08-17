@@ -1,6 +1,5 @@
 package com.ewyboy.oretweaker.config;
 
-import com.ewyboy.oretweaker.util.ModLogger;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
