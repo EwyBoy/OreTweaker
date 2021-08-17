@@ -9,6 +9,8 @@ import com.ewyboy.oretweaker.tweaking.OreManager;
 import net.minecraftforge.fml.IExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import static com.ewyboy.oretweaker.OreTweaker.MOD_ID;
 
@@ -25,6 +27,11 @@ public class OreTweaker {
         JSONHandler.setup();
         InfoHandler.setup();
         OreManager.setup();
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this :: loadComplete);
+    }
+
+    private void loadComplete(final FMLLoadCompleteEvent event) {
+        JSONHandler.loadComplete();
     }
 
     // Make sure the mod being absent on the other network side does not cause the client to display the server as incompatible

@@ -1,6 +1,7 @@
 package com.ewyboy.oretweaker.json.template;
 
 import com.ewyboy.oretweaker.OreTweaker;
+import com.ewyboy.oretweaker.config.Settings;
 import com.ewyboy.oretweaker.json.DirectoryHandler;
 import com.ewyboy.oretweaker.json.JSONHandler;
 import com.ewyboy.oretweaker.json.objects.OreConfig;
@@ -56,7 +57,9 @@ public class Templates {
 
         public static final RemoveIgneousRocks REMOVE_IGNEOUS_ROCKS = new RemoveIgneousRocks();
         public static final FuckSilverfishTemplate FUCK_SILVERFISH_TEMPLATE = new FuckSilverfishTemplate();
+    }
 
+    public static final class DefaultTemplates {
         public static final CoalOreTweak COAL_ORE_TWEAK = new CoalOreTweak();
         public static final CopperOreTweak COPPER_ORE_TWEAK = new CopperOreTweak();
         public static final DiamondOreTweak DIAMOND_ORE_TWEAK = new DiamondOreTweak();
@@ -105,13 +108,36 @@ public class Templates {
         registerTemplates();
     }
 
+    public static void regenerateDefaultSettingsFromTemplate() {
+        if (Settings.SETTINGS.regenerateDefaultSettings.get()) {
+            try {
+                for (Field field : DefaultTemplates.class.getDeclaredFields()) {
+                    Object object = field.get(null);
+                    if (object instanceof ITemplate template) {
+                        File templateFile = new File(DirectoryHandler.DATA_PATH + "/" +  template.templateName() + ".json");
+                        generateTemplate(templateFile, template);
+                    }
+                }
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     private static void registerTemplates() {
         try {
-            for (Field field : Templates.GeneratedTemplates.class.getDeclaredFields()) {
+            for (Field field : DefaultTemplates.class.getDeclaredFields()) {
                 Object object = field.get(null);
-                if (object instanceof ITemplate) {
-                    ITemplate template = (ITemplate) object;
-                    generateTemplate(template);
+                if (object instanceof ITemplate template) {
+                    File templateFile = new File(template.templateDirectory() + "/" +  template.templateName() + ".json");
+                    generateTemplate(templateFile, template);
+                }
+            }
+            for (Field field : GeneratedTemplates.class.getDeclaredFields()) {
+                Object object = field.get(null);
+                if (object instanceof ITemplate template) {
+                    File templateFile = new File(template.templateDirectory() + "/" +  template.templateName() + ".json");
+                    generateTemplate(templateFile, template);
                 }
             }
         } catch (IllegalAccessException e) {
@@ -119,8 +145,7 @@ public class Templates {
         }
     }
 
-    public static void generateTemplate(ITemplate template) {
-        File templateFile = new File(template.templateDirectory() + "/" +  template.templateName() + ".json");
+    public static void generateTemplate(File templateFile, ITemplate template) {
         if (!templateFile.exists()) {
             template.buildTemplateEntries();
             ModLogger.info("Creating Ore Tweaker Template file: " + template.templateName());

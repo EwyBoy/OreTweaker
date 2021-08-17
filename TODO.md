@@ -6,6 +6,8 @@
     [ ] - Clean up output log / Debugging
     [ ] - Make sure auto deepslating works
     [ ] - Auto populate data folder with default settings
+    [ ] - Fix requiring biome black/white lists
+    [ ] - Config to not disable ore
 
     [ ] - Test auto updater outside dev enviroment
     [ ] - Test auto updater on server

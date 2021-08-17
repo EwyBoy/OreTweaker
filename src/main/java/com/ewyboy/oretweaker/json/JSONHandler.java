@@ -1,7 +1,9 @@
 package com.ewyboy.oretweaker.json;
 
+import com.ewyboy.oretweaker.config.Settings;
 import com.ewyboy.oretweaker.json.objects.OreConfig;
 import com.ewyboy.oretweaker.json.objects.OreEntry;
+import com.ewyboy.oretweaker.json.template.Templates;
 import com.ewyboy.oretweaker.util.ModLogger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -24,7 +26,16 @@ public class JSONHandler {
 
     public static OreConfig oreConfig = new OreConfig(new ArrayList<>());
 
-    private static void readAllFiles() {
+    public static void loadComplete() {
+        if (Settings.SETTINGS.regenerateDefaultSettings.get()) Templates.regenerateDefaultSettingsFromTemplate();
+
+        Settings.ServerConfig.flipBoolean(Settings.SETTINGS.regenerateTemplates);
+        Settings.ServerConfig.flipBoolean(Settings.SETTINGS.regenerateDefaultSettings);
+
+        JSONHandler.readAllFiles();
+    }
+
+    public static void readAllFiles() {
         try (Stream<Path> paths = Files.walk(Paths.get(FMLPaths.CONFIGDIR.get() + "/oretweaker/data"))) {
             paths.filter(Files :: isRegularFile).forEach(path -> {
                 ModLogger.info("Reading data: " + path.getFileName());
@@ -33,6 +44,7 @@ public class JSONHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ModLogger.info(oreConfig.toString());
     }
 
     private static void autoUpdater() {
@@ -70,12 +82,6 @@ public class JSONHandler {
     public static void setup() {
         ModLogger.info("Reading Ore Tweaker JSON file");
         autoUpdater();
-        readAllFiles();
-        ModLogger.info(oreConfig.toString());
-    }
-
-    public static void reload() {
-        setup();
     }
 
     public static boolean containsEntry(OreEntry entry) {
