@@ -66,14 +66,28 @@ public class OreReconstruction {
 
     private static ConfiguredFeature<?, ?> reconstructOre(Block ore, Block filler, int minY, int maxY, float spawnRate, int maxVeinSize) {
         ModLogger.debug("Reconstructing ore: " + ore);
-        return register(Objects.requireNonNull(ore.getRegistryName()).getPath(), reconstructFeature(
-                ore,
-                filler,
-                minY,
-                maxY,
-                spawnRate,
-                maxVeinSize
-        ));
+        // original method
+        // String registryName = Objects.requireNonNull(ore.getRegistryName()).getPath();
+        // new method, allowing for multiple entries for the same ore e.g. gravel ore to replace filler of both stone and netherrack
+        String registryName = String.format("%s_%s_%d_%d_%f_%d",
+                Objects.requireNonNull(ore.getRegistryName()).getPath(),
+                Objects.requireNonNull(filler.getRegistryName()).getPath(),
+                minY, maxY, spawnRate, maxVeinSize
+        );
+        return register(
+                // original method
+                // Objects.requireNonNull(ore.getRegistryName()).getPath()
+                // new method, allowing for multiple entries for the same ore e.g. gravel ore to replace filler of both stone and netherrack
+                registryName
+                , reconstructFeature(
+                        ore,
+                        filler,
+                        minY,
+                        maxY,
+                        spawnRate,
+                        maxVeinSize
+                )
+        );
     }
 
     private static ConfiguredFeature<?, ?> reconstructFeature(Block ore, Block filler, int minY, int maxY, float spawnRate, int maxVeinSize) {
