@@ -12,12 +12,15 @@ import java.nio.file.Paths;
 
 public class DirectoryHandler {
 
-    private static final Path ORE_TWEAKER_PATH = Paths.get(FMLPaths.CONFIGDIR.get().toAbsolutePath().toString(), OreTweaker.MOD_ID);
-    private static final Path TEMPLATE_PATH = Paths.get(FMLPaths.CONFIGDIR.get().toAbsolutePath() + "/" + OreTweaker.MOD_ID, "templates");
+    public static final Path ORE_TWEAKER_PATH = Paths.get(FMLPaths.CONFIGDIR.get().toAbsolutePath().toString(), OreTweaker.MOD_ID);
+    public static final Path TEMPLATE_PATH = Paths.get(FMLPaths.CONFIGDIR.get().toAbsolutePath() + "/" + OreTweaker.MOD_ID, "templates");
+    public static final Path DATA_PATH = Paths.get(FMLPaths.CONFIGDIR.get().toAbsolutePath() + "/" + OreTweaker.MOD_ID, "data");
+    public static final Path BACKUP_PATH = Paths.get(FMLPaths.CONFIGDIR.get().toAbsolutePath() + "/" + OreTweaker.MOD_ID, "backup");
 
     public static void setup() {
         createDirectories(ORE_TWEAKER_PATH);
         createDirectories(TEMPLATE_PATH);
+        createDirectories(DATA_PATH);
     }
 
     public static void createDirectories(Path directoryPath) {

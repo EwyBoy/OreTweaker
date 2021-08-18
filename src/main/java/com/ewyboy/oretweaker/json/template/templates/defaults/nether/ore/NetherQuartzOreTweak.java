@@ -1,4 +1,4 @@
-package com.ewyboy.oretweaker.json.template.templates.remove.other;
+package com.ewyboy.oretweaker.json.template.templates.defaults.nether.ore;
 
 import com.ewyboy.oretweaker.json.objects.OreEntry;
 import com.ewyboy.oretweaker.json.template.ITemplate;
@@ -8,30 +8,41 @@ import java.nio.file.Path;
 import java.util.LinkedList;
 import java.util.List;
 
-public class RemoveIgneousRocks implements ITemplate {
+public class NetherQuartzOreTweak implements ITemplate {
 
     private final List<OreEntry> entries = new LinkedList<>();
 
     @Override
     public String templateName() {
-        return "remove_igneous_rocks";
+        return "nether_quartz_ore";
     }
 
     @Override
     public Path templateDirectory() {
-        return Templates.Directories.REMOVE_PATH;
+        return Templates.Directories.DEFAULTS_PATH;
     }
 
     @Override
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
-                "minecraft:granite"
+                "minecraft:nether_quartz_ore",
+                "minecraft:netherrack",
+                10,
+                246,
+                14,
+                10,
+                emptyList,
+                emptyList
         ));
         entries.add(new OreEntry(
-                "minecraft:diorite"
-        ));
-        entries.add(new OreEntry(
-                "minecraft:andesite"
+                "minecraft:nether_quartz_ore",
+                "minecraft:netherrack",
+                10,
+                246,
+                14,
+                32,
+                emptyList,
+                emptyList
         ));
     }
 
@@ -39,5 +50,4 @@ public class RemoveIgneousRocks implements ITemplate {
     public List<OreEntry> getTemplate() {
         return entries;
     }
-
 }

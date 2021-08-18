@@ -1,19 +1,21 @@
 package com.ewyboy.oretweaker;
 
-import com.ewyboy.oretweaker.commands.CommandCenter;
 import com.ewyboy.oretweaker.config.Settings;
 import com.ewyboy.oretweaker.json.DirectoryHandler;
 import com.ewyboy.oretweaker.json.InfoHandler;
 import com.ewyboy.oretweaker.json.JSONHandler;
 import com.ewyboy.oretweaker.json.template.Templates;
 import com.ewyboy.oretweaker.tweaking.OreManager;
-import net.minecraftforge.common.MinecraftForge;
+import com.ewyboy.oretweaker.util.ModLogger;
 import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.FMLNetworkConstants;
 import org.apache.commons.lang3.tuple.Pair;
+
+import java.nio.file.Files;
 
 import static com.ewyboy.oretweaker.OreTweaker.MOD_ID;
 
@@ -22,7 +24,10 @@ public class OreTweaker {
 
     public static final String MOD_ID = "oretweaker";
 
+    public static boolean initSetup = false;
+
     public OreTweaker() {
+        isFirstTimeSetup();
         ignoreServerOnly();
         DirectoryHandler.setup();
         Templates.setup();
@@ -30,7 +35,18 @@ public class OreTweaker {
         InfoHandler.setup();
         Settings.setup();
         OreManager.setup();
-        MinecraftForge.EVENT_BUS.addListener(this :: onServerStart);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this :: loadComplete);
+    }
+
+    private static void isFirstTimeSetup() {
+        if (!Files.exists(DirectoryHandler.ORE_TWEAKER_PATH)) {
+            initSetup = true;
+            ModLogger.info("Ore Tweaker detected time setup!");
+        }
+    }
+
+    private void loadComplete(final FMLLoadCompleteEvent event) {
+        JSONHandler.loadComplete();
     }
 
     // Make sure the mod being absent on the other network side does not cause the client to display the server as incompatible
@@ -39,10 +55,6 @@ public class OreTweaker {
                 () -> FMLNetworkConstants.IGNORESERVERONLY,
                 (YouCanWriteWhatEverTheFuckYouWantHere, ICreatedSlimeBlocks2YearsBeforeMojangDid) -> true)
         );
-    }
-
-    public void onServerStart(FMLServerStartingEvent event) {
-        new CommandCenter(event.getServer().getCommands().getDispatcher());
     }
 
 }

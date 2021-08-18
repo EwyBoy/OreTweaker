@@ -66,20 +66,13 @@ public class OreReconstruction {
 
     private static ConfiguredFeature<?, ?> reconstructOre(Block ore, Block filler, int minY, int maxY, float spawnRate, int maxVeinSize) {
         ModLogger.debug("Reconstructing ore: " + ore);
-        // original method
-        // String registryName = Objects.requireNonNull(ore.getRegistryName()).getPath();
-        // new method, allowing for multiple entries for the same ore e.g. gravel ore to replace filler of both stone and netherrack
         String registryName = String.format("%s_%s_%d_%d_%f_%d",
                 Objects.requireNonNull(ore.getRegistryName()).getPath(),
                 Objects.requireNonNull(filler.getRegistryName()).getPath(),
                 minY, maxY, spawnRate, maxVeinSize
         );
         return register(
-                // original method
-                // Objects.requireNonNull(ore.getRegistryName()).getPath()
-                // new method, allowing for multiple entries for the same ore e.g. gravel ore to replace filler of both stone and netherrack
-                registryName
-                , reconstructFeature(
+                registryName, reconstructFeature(
                         ore,
                         filler,
                         minY,
@@ -125,15 +118,14 @@ public class OreReconstruction {
         BiomeGenerationSettingsBuilder generation = event.getGeneration();
 
         for (ConfiguredFeature<?, ?> reconstructedOre : reconstructedOres) {
-            String currentBiome = Objects.requireNonNull(event.getName()).getPath().toLowerCase(Locale.ROOT);
+            ResourceLocation currentBiome = Objects.requireNonNull(event.getName());
             List<String> currentBiomeFilter = setBiomeFilteringOption(biomeBlackListMap.get(reconstructedOre), biomeWhiteListMap.get(reconstructedOre));
             BiomeFiltering currentBiomeFilteringOption = getBiomeFilteringOption(biomeBlackListMap.get(reconstructedOre), biomeWhiteListMap.get(reconstructedOre));
-
             filterGeneration(currentBiome, currentBiomeFilter, currentBiomeFilteringOption, generation, reconstructedOre);
         }
     }
 
-    private static void filterGeneration(String currentBiome, List<String> biomeFilter, BiomeFiltering filteringOption, BiomeGenerationSettingsBuilder generation, ConfiguredFeature<?, ?> reconstructedOre) {
+    private static void filterGeneration(ResourceLocation currentBiome, List<String> biomeFilter, BiomeFiltering filteringOption, BiomeGenerationSettingsBuilder generation, ConfiguredFeature<?, ?> reconstructedOre) {
         switch (filteringOption) {
             case WHITELIST:
                 if (biomeFilter.contains(currentBiome))
