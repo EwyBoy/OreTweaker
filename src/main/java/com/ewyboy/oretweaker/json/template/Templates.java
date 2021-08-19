@@ -57,9 +57,36 @@ public class Templates {
 
         public static final RemoveIgneousRocks REMOVE_IGNEOUS_ROCKS = new RemoveIgneousRocks();
         public static final FuckSilverfishTemplate FUCK_SILVERFISH_TEMPLATE = new FuckSilverfishTemplate();
+
+        public static final CoalOreTweak COAL_ORE_TWEAK = new CoalOreTweak();
+        public static final CopperOreTweak COPPER_ORE_TWEAK = new CopperOreTweak();
+        public static final DiamondOreTweak DIAMOND_ORE_TWEAK = new DiamondOreTweak();
+        public static final EmeraldOreTweak EMERALD_ORE_TWEAK = new EmeraldOreTweak();
+        public static final GoldOreTweak GOLD_ORE_TWEAK = new GoldOreTweak();
+        public static final IronOreTweak IRON_ORE_TWEAK = new IronOreTweak();
+        public static final LapisOreTweak LAPIS_ORE_TWEAK = new LapisOreTweak();
+        public static final RedstoneOreTweak REDSTONE_ORE_TWEAK = new RedstoneOreTweak();
+
+        public static final AndesiteTweak ANDESITE_TWEAK = new AndesiteTweak();
+        public static final DeepslateTweak DEEPSLATE_TWEAK = new DeepslateTweak();
+        public static final DioriteTweak DIORITE_TWEAK = new DioriteTweak();
+        public static final DirtTweak DIRT_TWEAK = new DirtTweak();
+        public static final GraniteTweak GRANITE_TWEAK = new GraniteTweak();
+        public static final InfestedStoneTweak INFESTED_STONE_TWEAK = new InfestedStoneTweak();
+        public static final TuffTweak TUFF_TWEAK = new TuffTweak();
+
+        public static final AncientDebrisTweak ANCIENT_DEBRIS_TWEAK = new AncientDebrisTweak();
+        public static final NetherGoldOreTweak NETHER_GOLD_ORE_TWEAK = new NetherGoldOreTweak();
+        public static final NetherQuartzOreTweak NETHER_QUARTZ_ORE_TWEAK = new NetherQuartzOreTweak();
+
+        public static final BlackstoneTweak BLACKSTONE_TWEAK = new BlackstoneTweak();
+        public static final MagmaBlockTweak MAGMA_BLOCK_TWEAK = new MagmaBlockTweak();
+        public static final SoulSandTweak SOUL_SAND_TWEAK = new SoulSandTweak();
+
+        public static final GravelTweak GRAVEL_TWEAK = new GravelTweak();
     }
 
-    public static final class DefaultTemplates {
+    public static final class DefaultData {
         public static final CoalOreTweak COAL_ORE_TWEAK = new CoalOreTweak();
         public static final CopperOreTweak COPPER_ORE_TWEAK = new CopperOreTweak();
         public static final DiamondOreTweak DIAMOND_ORE_TWEAK = new DiamondOreTweak();
@@ -108,10 +135,10 @@ public class Templates {
         registerTemplates();
     }
 
-    public static void regenerateDefaultSettingsFromTemplate() {
+    public static void regenerateDefaultDataFromTemplate() {
         if (Settings.SETTINGS.regenerateDefaultSettings.get()) {
             try {
-                for (Field field : DefaultTemplates.class.getDeclaredFields()) {
+                for (Field field : DefaultData.class.getDeclaredFields()) {
                     Object object = field.get(null);
                     if (object instanceof ITemplate template) {
                         File templateFile = new File(DirectoryHandler.DATA_PATH + "/" +  template.templateName() + ".json");
@@ -126,13 +153,6 @@ public class Templates {
 
     private static void registerTemplates() {
         try {
-            for (Field field : DefaultTemplates.class.getDeclaredFields()) {
-                Object object = field.get(null);
-                if (object instanceof ITemplate template) {
-                    File templateFile = new File(template.templateDirectory() + "/" +  template.templateName() + ".json");
-                    generateTemplate(templateFile, template);
-                }
-            }
             for (Field field : GeneratedTemplates.class.getDeclaredFields()) {
                 Object object = field.get(null);
                 if (object instanceof ITemplate template) {

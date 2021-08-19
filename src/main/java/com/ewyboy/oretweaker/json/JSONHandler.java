@@ -30,11 +30,11 @@ public class JSONHandler {
 
     public static void loadComplete() {
         if (Settings.SETTINGS.regenerateDefaultSettings.get() && !isAutoUpdating) {
-            Templates.regenerateDefaultSettingsFromTemplate();
+            Templates.regenerateDefaultDataFromTemplate();
         }
 
-        Settings.ServerConfig.flipBoolean(Settings.SETTINGS.regenerateTemplates);
-        Settings.ServerConfig.flipBoolean(Settings.SETTINGS.regenerateDefaultSettings);
+        Settings.ServerConfig.setFalse(Settings.SETTINGS.regenerateTemplates);
+        Settings.ServerConfig.setFalse(Settings.SETTINGS.regenerateDefaultSettings);
 
         JSONHandler.readAllFiles();
     }
@@ -54,14 +54,15 @@ public class JSONHandler {
     private static void autoUpdater() {
         if (OLD_JSON.exists()) {
             isAutoUpdating = true;
+            ModLogger.info("Auto updating OreTweaker to v2 data structure!");
             try (Reader reader = new FileReader(OLD_JSON)) {
                 OreConfig oldConfig = gson.fromJson(reader, OreConfig.class);
                 oldConfig.getOreConfig().forEach(JSONHandler :: generateJSON);
-                // TODO See if we can delete right here
-                OLD_JSON.deleteOnExit();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            DirectoryHandler.createDirectories(DirectoryHandler.BACKUP_PATH);
+            OLD_JSON.renameTo(new File(FMLPaths.CONFIGDIR.get() + "/oretweaker/backup/OreTweaker.json"));
         }
     }
 
@@ -79,13 +80,12 @@ public class JSONHandler {
             }
         }
 
-        ModLogger.info("Creating Ore Tweaker Template file: " + fileName);
+        ModLogger.info("Creating Ore Tweaker Data File: " + fileName);
         oreList.add(entry);
         JSONHandler.writeJson(file, new OreConfig(oreList));
     }
 
     public static void setup() {
-        ModLogger.info("Reading Ore Tweaker JSON file");
         autoUpdater();
     }
 

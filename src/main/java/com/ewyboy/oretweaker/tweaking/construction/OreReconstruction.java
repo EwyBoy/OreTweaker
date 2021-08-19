@@ -75,14 +75,21 @@ public class OreReconstruction {
 
     private static ConfiguredFeature<?, ?> reconstructOre(Block ore, Block filler, int minY, int maxY, float spawnRate, int maxVeinSize) {
         ModLogger.debug("Reconstructing ore: " + ore);
-        return register(Objects.requireNonNull(ore.getRegistryName()).getPath(), reconstructFeature(
-                ore,
-                filler,
-                minY,
-                maxY,
-                spawnRate,
-                maxVeinSize
-        ));
+        String registryName = String.format("%s_%s_%d_%d_%f_%d",
+                Objects.requireNonNull(ore.getRegistryName()).getPath(),
+                Objects.requireNonNull(filler.getRegistryName()).getPath(),
+                minY, maxY, spawnRate, maxVeinSize
+        );
+        return register(
+                registryName, reconstructFeature(
+                        ore,
+                        filler,
+                        minY,
+                        maxY,
+                        spawnRate,
+                        maxVeinSize
+                )
+        );
     }
 
     private static ResourceLocation formatDeepslate(OreEntry ore) {
@@ -131,7 +138,6 @@ public class OreReconstruction {
     private static ConfiguredFeature<?, ?> reconstructFeature(Block ore, Block filler, int minY, int maxY, float spawnRate, int maxVeinSize) {
         ConfiguredFeature<?, ?> feature = Feature.ORE.configured(new OreConfiguration(new BlockMatchTest(filler), ore.defaultBlockState(), maxVeinSize));
         feature = FeatureUtils.getVerticalRange(feature, minY, maxY).squared();
-
         feature = spawnRate < 1 ? feature.rarity((int) (1 / spawnRate)) : feature.count((int) spawnRate);
 
         Block deepslate_ore = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("deepslate_" + Objects.requireNonNull(ore.getRegistryName())));
@@ -140,6 +146,7 @@ public class OreReconstruction {
             ConfiguredFeature<?, ?> deepslate_feature = Feature.ORE.configured(new OreConfiguration(new BlockMatchTest(Blocks.DEEPSLATE), deepslate_ore.defaultBlockState(), maxVeinSize));
             deepslate_feature = FeatureUtils.getVerticalRange(deepslate_feature, minY, maxY).squared();
             deepslate_feature = spawnRate < 1 ? feature.rarity((int) (1 / spawnRate)) : feature.count((int) spawnRate);
+            return deepslate_feature;
         }
 
         return feature;

@@ -21,7 +21,7 @@ Backup your OreTweaker `config` folder just in case.
 
 
 **v1.17.1 - 2.3.1**
-* Implemented spawnRate below 1 (Example: 0.2, 0.75, etc)  
+* Implemented spawnRate below 1 (Example: 0.2, 0.75, etc.)  
 
 **v1.17.1 - 2.3.0**  
 * Ported to run on 1.17.+  
