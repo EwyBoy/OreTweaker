@@ -14,11 +14,12 @@ Backup your OreTweaker `config` folder just in case.
 * Moved over to new data structure (v2) for ore tweaking  
 * Improved console outputs and debugging
 * Added config options to auto generate deepslate variants  
-* Added config options to regenerate template files  
+* Added new config options to regenerate default data / templates  
 * Revamped template system to work with the new v2 data structure  
 * Removed reload command due to CODEC requiring a full restart  
-* Tons of backend changes
-
+* Fixed bug where duplicated names for features - Thanks to lynnpye  
+* Tons of backend changes  
+  
 
 **v1.17.1 - 2.3.1**
 * Implemented spawnRate below 1 (Example: 0.2, 0.75, etc.)  
