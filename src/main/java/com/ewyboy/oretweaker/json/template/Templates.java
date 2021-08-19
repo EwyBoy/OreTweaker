@@ -83,7 +83,7 @@ public class Templates {
         public static final GravelTweak GRAVEL_TWEAK = new GravelTweak();
     }
 
-    public static final class DefaultTemplates {
+    public static final class DefaultData {
         public static final CoalOreTweak COAL_ORE_TWEAK = new CoalOreTweak();
         public static final DiamondOreTweak DIAMOND_ORE_TWEAK = new DiamondOreTweak();
         public static final EmeraldOreTweak EMERALD_ORE_TWEAK = new EmeraldOreTweak();
@@ -132,7 +132,7 @@ public class Templates {
     public static void regenerateDefaultDataFromTemplate() {
         if (Settings.SETTINGS.regenerateDefaultSettings.get()) {
             try {
-                for (Field field : DefaultTemplates.class.getDeclaredFields()) {
+                for (Field field : DefaultData.class.getDeclaredFields()) {
                     Object object = field.get(null);
                     if (object instanceof ITemplate) {
                         ITemplate template = (ITemplate) object;

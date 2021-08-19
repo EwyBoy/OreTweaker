@@ -23,7 +23,6 @@ import static com.ewyboy.oretweaker.OreTweaker.MOD_ID;
 public class OreTweaker {
 
     public static final String MOD_ID = "oretweaker";
-
     public static boolean initSetup = false;
 
     public OreTweaker() {
