@@ -21,7 +21,7 @@
 | `biomeWhitelist` | List of allowed biome names where the ore can generate **[Prioritized above blacklist]**                               |
 
 
-### Example of how the `oretweaker.json` file can look like.
+### Example of how the `coal_ore.json` file can look like.
 ```json
 {
   "oreConfig": [
@@ -33,19 +33,6 @@
       "maxVeinSize": 22,
       "spawnRate": 16,
       "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:iron_ore",
-      "filler": "minecraft:stone",
-      "minY": 52,
-      "maxY": 128,
-      "maxVeinSize": 12,
-      "spawnRate": 14,
-      "biomeBlacklist": [
-        "swamp",
-        "jungle"
-      ],
       "biomeWhitelist": []
     }
   ]

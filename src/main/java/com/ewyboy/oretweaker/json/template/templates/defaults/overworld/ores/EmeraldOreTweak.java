@@ -5,18 +5,13 @@ import com.ewyboy.oretweaker.json.template.ITemplate;
 import com.ewyboy.oretweaker.json.template.Templates;
 
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 public class EmeraldOreTweak implements ITemplate {
 
     private final List<OreEntry> entries = new LinkedList<>();
-
-    private static final List<String> INFESTED_AND_EMERALD_BIOMES = new LinkedList<>(); static {
-        INFESTED_AND_EMERALD_BIOMES.add("minecraft:mountains");
-        INFESTED_AND_EMERALD_BIOMES.add("minecraft:wooded_mountains");
-        INFESTED_AND_EMERALD_BIOMES.add("minecraft:gravelly_mountains");
-    }
 
     @Override
     public String templateName() {
@@ -38,7 +33,7 @@ public class EmeraldOreTweak implements ITemplate {
                 1,
                 5,
                 emptyList,
-                INFESTED_AND_EMERALD_BIOMES
+                Collections.singletonList("MOUNTAIN")
         ));
     }
 

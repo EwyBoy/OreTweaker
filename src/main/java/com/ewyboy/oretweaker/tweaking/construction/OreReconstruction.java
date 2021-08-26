@@ -7,12 +7,16 @@ import com.ewyboy.oretweaker.json.objects.OreEntry;
 import com.ewyboy.oretweaker.util.FeatureUtils;
 import com.ewyboy.oretweaker.util.ModLogger;
 import net.minecraft.block.Block;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.datafix.fixes.BiomeName;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.template.BlockMatchRuleTest;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -107,25 +111,49 @@ public class OreReconstruction {
         return whiteList.isEmpty() ? blackList.isEmpty() ? BiomeFiltering.NONE : BiomeFiltering.BLACKLIST : BiomeFiltering.WHITELIST;
     }
 
+    private static List<String> applyBiomeDictionaryFiltering(List<String> biomeEntries) {
+        List<String> biomeDictionaryFilter = new ArrayList<>();
+        for (String biomeEntry : biomeEntries) {
+            if (biomeEntry.contains(":")) {
+                biomeDictionaryFilter.add(biomeEntry);
+            } else {
+                BiomeDictionary.Type type = BiomeDictionary.Type.getType(biomeEntry);
+
+                Set<RegistryKey<Biome>> biomes = BiomeDictionary.getBiomes(type);
+                biomes.forEach(biome -> {
+                    ModLogger.debug(biome.location().toString());
+                    biomeDictionaryFilter.add(biome.location().toString());
+                });
+            }
+        }
+        return biomeDictionaryFilter;
+    }
+
     private static Boolean reconstructed = false;
 
+    // TODO Cash all stuff here to reduce stress on loading
     public static void BiomeLoadingEvent(final BiomeLoadingEvent event) {
+        BiomeGenerationSettingsBuilder generation = event.getGeneration();
+
         if (!reconstructed) {
             reconstructFeatureFromJSON();
             reconstructed = true;
         }
 
-        BiomeGenerationSettingsBuilder generation = event.getGeneration();
-
         for (ConfiguredFeature<?, ?> reconstructedOre : reconstructedOres) {
-            ResourceLocation currentBiome = Objects.requireNonNull(event.getName());
+            String currentBiome = Objects.requireNonNull(event.getName()).toString();
             List<String> currentBiomeFilter = setBiomeFilteringOption(biomeBlackListMap.get(reconstructedOre), biomeWhiteListMap.get(reconstructedOre));
             BiomeFiltering currentBiomeFilteringOption = getBiomeFilteringOption(biomeBlackListMap.get(reconstructedOre), biomeWhiteListMap.get(reconstructedOre));
+
+            ModLogger.debug("Pre biome filter: " + currentBiomeFilter);
+            currentBiomeFilter = applyBiomeDictionaryFiltering(currentBiomeFilter);
+            ModLogger.debug("Post biome filter: " + currentBiomeFilter);
+
             filterGeneration(currentBiome, currentBiomeFilter, currentBiomeFilteringOption, generation, reconstructedOre);
         }
     }
 
-    private static void filterGeneration(ResourceLocation currentBiome, List<String> biomeFilter, BiomeFiltering filteringOption, BiomeGenerationSettingsBuilder generation, ConfiguredFeature<?, ?> reconstructedOre) {
+    private static void filterGeneration(String currentBiome, List<String> biomeFilter, BiomeFiltering filteringOption, BiomeGenerationSettingsBuilder generation, ConfiguredFeature<?, ?> reconstructedOre) {
         switch (filteringOption) {
             case WHITELIST:
                 if (biomeFilter.contains(currentBiome))
