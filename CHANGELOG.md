@@ -1,3 +1,9 @@
+**v1.17.1 - 2.5.1**  
+* Changed template to use new BiomeDictionary Type `MOUNTAIN` for Emerald Ore and Infested Stone.  
+* Started working on enhancing performance when generating new chunks and biomes.  
+* Ore reconstruction from JSON now cashes a lot of stuff to reduce stress on biome loading.  
+* More performance enhancements coming soon.  
+
 **v1.17.1 - 2.5.0**  
 * Added support for the Forge BiomeDictionary to be used in (black/white)lists.  
 

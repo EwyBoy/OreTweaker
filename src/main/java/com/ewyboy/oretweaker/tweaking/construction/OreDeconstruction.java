@@ -35,9 +35,9 @@ public class OreDeconstruction {
     }
 
     public static void BiomeLoadingEvent(BiomeLoadingEvent event) {
-        BiomeGenerationSettingsBuilder generation = event.getGeneration();
+        BiomeGenerationSettingsBuilder biomeBuilder = event.getGeneration();
         for (GenerationStep.Decoration deco : decorations) {
-            FeatureUtils.destroyFeature(generation.getFeatures(deco), filterFeatures(generation.getFeatures(deco)));
+            FeatureUtils.destroyFeature(biomeBuilder.getFeatures(deco), filterFeatures(biomeBuilder.getFeatures(deco)));
         }
     }
 

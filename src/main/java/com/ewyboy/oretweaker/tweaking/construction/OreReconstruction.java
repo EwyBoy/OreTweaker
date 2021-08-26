@@ -169,7 +169,7 @@ public class OreReconstruction {
         return entry.getFiller() != null && entry.getMinY() != -1 && entry.getMaxY() != -1 && entry.getSpawnRate() != -1 && entry.getMaxVeinSize() != -1 && entry.getBiomeBlacklist() != null && entry.getBiomeWhitelist() != null;
     }
 
-    private static List<String> setBiomeFilteringOption(List<String> blackList, List<String> whiteList) {
+    private static List<String> setBiomeFiltering(List<String> blackList, List<String> whiteList) {
         return whiteList.isEmpty() ? blackList.isEmpty() ? Collections.emptyList() : blackList : whiteList;
     }
 
@@ -178,44 +178,56 @@ public class OreReconstruction {
     }
 
     private static List<String> applyBiomeDictionaryFiltering(List<String> biomeEntries) {
-        List<String> biomeDictionaryFilter = new ArrayList<>();
+        List<String> biomeFilter = new ArrayList<>();
         for (String biomeEntry : biomeEntries) {
             if (biomeEntry.contains(":")) {
-                biomeDictionaryFilter.add(biomeEntry);
+                biomeFilter.add(biomeEntry);
             } else {
                 BiomeDictionary.Type type = BiomeDictionary.Type.getType(biomeEntry);
                 Set<ResourceKey<Biome>> biomes = BiomeDictionary.getBiomes(type);
-                biomes.forEach(biome -> {
-                    ModLogger.debug(biome.location().toString());
-                    biomeDictionaryFilter.add(biome.location().toString());
-                });
+                biomes.forEach(biome -> biomeFilter.add(biome.location().toString()));
             }
         }
-        return biomeDictionaryFilter;
+        return biomeFilter;
+    }
+
+    private static final Map<ConfiguredFeature<?, ?>, List<String>> biomeFilteringMap = new HashMap<>();
+    private static final Map<ConfiguredFeature<?, ?>, BiomeFiltering> biomeFilteringOptionMap = new HashMap<>();
+
+    private static void filterBiomes() {
+        for (ConfiguredFeature<?, ?> reconstructedOre : reconstructedOres) {
+            biomeFilteringMap.put(reconstructedOre, applyBiomeDictionaryFiltering(setBiomeFiltering(biomeBlackListMap.get(reconstructedOre), biomeWhiteListMap.get(reconstructedOre))));
+            biomeFilteringOptionMap.put(reconstructedOre, getBiomeFilteringOption(biomeBlackListMap.get(reconstructedOre), biomeWhiteListMap.get(reconstructedOre)));
+        }
+    }
+
+    private static void buildBiomes(String biomeName, BiomeGenerationSettingsBuilder biomeBuilder) {
+        for (ConfiguredFeature<?, ?> reconstructedOre : reconstructedOres) {
+            filterGeneration(
+                    biomeName,
+                    biomeFilteringMap.get(reconstructedOre),
+                    biomeFilteringOptionMap.get(reconstructedOre),
+                    biomeBuilder,
+                    reconstructedOre
+            );
+        }
     }
 
     private static Boolean reconstructed = false;
+    private static Boolean filteredBiomes = false;
 
-    // TODO Cash all stuff here to reduce stress on loading
     public static void BiomeLoadingEvent(final BiomeLoadingEvent event) {
-        BiomeGenerationSettingsBuilder generation = event.getGeneration();
-
         if (!reconstructed) {
             reconstructFeatureFromJSON();
             reconstructed = true;
         }
 
-        for (ConfiguredFeature<?, ?> reconstructedOre : reconstructedOres) {
-            String currentBiome = Objects.requireNonNull(event.getName()).toString();
-            List<String> currentBiomeFilter = setBiomeFilteringOption(biomeBlackListMap.get(reconstructedOre), biomeWhiteListMap.get(reconstructedOre));
-            BiomeFiltering currentBiomeFilteringOption = getBiomeFilteringOption(biomeBlackListMap.get(reconstructedOre), biomeWhiteListMap.get(reconstructedOre));
-
-            ModLogger.debug("Pre biome filter: " + currentBiomeFilter);
-            currentBiomeFilter = applyBiomeDictionaryFiltering(currentBiomeFilter);
-            ModLogger.debug("Post biome filter: " + currentBiomeFilter);
-
-            filterGeneration(currentBiome, currentBiomeFilter, currentBiomeFilteringOption, generation, reconstructedOre);
+        if(!filteredBiomes) {
+            filterBiomes();
+            filteredBiomes = true;
         }
+
+        buildBiomes(Objects.requireNonNull(event.getName()).toString(), event.getGeneration());
     }
 
     private static void filterGeneration(String currentBiome, List<String> biomeFilter, BiomeFiltering filteringOption, BiomeGenerationSettingsBuilder generation, ConfiguredFeature<?, ?> reconstructedOre) {
