@@ -3,7 +3,7 @@
 <h1 align="center">Ore Tweaker
 	<br>
 		<a href="https://www.curseforge.com/minecraft/mc-mods/ore-tweaker/files">
-		    <img src="https://img.shields.io/badge/Supported%20Versions-MC%201.16-00c756?style=for-the-badge" alt="Available Versions"></a>
+		    <img src="https://img.shields.io/badge/Supported%20Versions-MC%201.16%201.17-00c756?style=for-the-badge" alt="Available Versions"></a>
 		<a href="https://www.curseforge.com/minecraft/mc-mods/ore-tweaker/files">
 		    <img src="https://img.shields.io/badge/Available%20for-MC%201.7,%201.8,%201.9,%201.10,%201.11,%201.12,%201.16-c70039?style=for-the-badge" alt="Available Versions"></a>
 		<a href="https://www.curseforge.com/minecraft/mc-mods/ore-tweaker/files">
