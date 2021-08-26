@@ -1,5 +1,21 @@
-**v1.17.1 - 2.4.0**  
+**v1.17.1 - 2.5.0**  
+* Added support for the Forge BiomeDictionary to be used in (black/white)lists.  
 
+You can now do:  
+```
+"biomeWhitelist": ["MOUNTAIN", "WET", "HOT", "OCEAN", "minecraft:plains"]
+```
+this will now whitelist any biome from vanilla or modded that is tagged with these biome types.  
+
+You can read more about this at: https://github.com/EwyBoy/OreTweaker/wiki/Biome-Filtering  
+
+* Cleaned up parts of the backend  
+* Cleaned up console spam  
+
+**v1.17.1 - 2.4.1**  
+* Fixed a bug where the white/black lists where not working properly
+
+**v1.17.1 - 2.4.0**
 ###### Important information
 Ore Tweaker 2.4.x and forward now uses the new data structure (**v2**) for ore tweaking. 
 The new data structure allows multiple ore tweaking files and will make it easier to edit, download, share and use templates.
