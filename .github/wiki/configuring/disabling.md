@@ -17,7 +17,7 @@ do it there than using Ore-Tweaker.
 
 ### Disabling Ore-Generation
 
-Disabling ore-generation is fairly easy and can be done with 1 line of data in the `oretweaker.json` file.
+Disabling ore-generation is fairly easy and can be done by setting the values to `-1` in the ores json file you wish to disable.
 
 #### Example:
 The example below will completely remove all iron and coal ores from spawning.
@@ -25,19 +25,18 @@ The example below will completely remove all iron and coal ores from spawning.
 {
   "oreConfig": [
     {
-      "ore": "minecraft:coal_ore"
-    },
-    {
       "ore": "minecraft:iron_ore",
       "minY": -1,
       "maxY": -1,
       "maxVeinSize": -1,
-      "spawnRate": -1
+      "spawnRate": -1,
+      "biomeBlacklist": [],
+      "biomeWhitelist": []
     }
   ]
 }
 ```
-__Both examples above will work the same. Choose the one you like.__
 
 ## Disable everything
-To disable everything check out the `remove_everything.json` [template](https://github.com/EwyBoy/OreTweaker/wiki/Templates).
+
+if you wish to disable all vanilla ores you can simply delete all the files inside the `../config/oretweaker/data/` folder and move the `remove_everything.json` from the template folder to the data folder.

@@ -1,12 +1,12 @@
-# Custom Ore Generation using Ore-Tweaker
+**# Custom Ore Generation using Ore-Tweaker
 
 ## Intro
 
 Ore Tweaker has the option to let you add your own custom ores spawn in the world. This allows you to make any block generate in veins underground.
 
-### Tweaking Ore-Generation
-
-Tweaking ore-generation is fairly easy and can be done by adding entries in the `oretweaker.json` file.
+### Customizing Ore-Generation
+Customizing ore-generation is fairly easy and can be done by adding new files to the `../config/oretweaker/data/` folder.  
+These files can be named pretty much anything as long as they have the `.json` name extension.
 
 #### Example:
 
@@ -41,7 +41,7 @@ The example below will add huge lava pools to the surface of desert biomes.
       "maxVeinSize": 64,
       "spawnRate": 10.0,
       "biomeBlacklist": [],
-      "biomeWhitelist": ["desert"]
+      "biomeWhitelist": ["DESERT"]
     }
   ]
 }
@@ -87,8 +87,9 @@ The example below will add emerald blocks generating in **The End**. Since there
 ![img](https://i.imgur.com/gSVrmpi.png)
 
 
-The example below will add multiple ore blocks generating around the **The End** platform. Uses a biome filter cause air blocks are found everywhere.
+The example below will add multiple ore blocks generating around the **The End** platform. Uses a biome filter cause air blocks are found everywhere.  
 
+_You can have several different types of ores in the same file, so you don't need to create new file per ore you want to tweak. You can organize it however you like_ 
 ```json
 {
   "oreConfig": [
@@ -100,7 +101,7 @@ The example below will add multiple ore blocks generating around the **The End**
       "maxVeinSize": 64,
       "spawnRate": 5.0,
       "biomeBlacklist": [],
-      "biomeWhitelist": ["the_end"]
+      "biomeWhitelist": ["END"]
     },
     {
       "ore": "minecraft:coal_ore",
@@ -110,7 +111,7 @@ The example below will add multiple ore blocks generating around the **The End**
       "maxVeinSize": 32,
       "spawnRate": 5.0,
       "biomeBlacklist": [],
-      "biomeWhitelist": ["the_end"]
+      "biomeWhitelist": ["END"]
     },
     {
       "ore": "minecraft:gold_ore",
@@ -120,7 +121,7 @@ The example below will add multiple ore blocks generating around the **The End**
       "maxVeinSize": 24,
       "spawnRate": 5.0,
       "biomeBlacklist": [],
-      "biomeWhitelist": ["the_end"]
+      "biomeWhitelist": ["END"]
     },
     {
       "ore": "minecraft:diamond_ore",
@@ -130,9 +131,9 @@ The example below will add multiple ore blocks generating around the **The End**
       "maxVeinSize": 16,
       "spawnRate": 5.0,
       "biomeBlacklist": [],
-      "biomeWhitelist": ["the_end"]
+      "biomeWhitelist": ["END"]
     }
   ]
 }
 ```
-![img](https://i.imgur.com/MLNLUK8.png)
+![img](https://i.imgur.com/MLNLUK8.png)**

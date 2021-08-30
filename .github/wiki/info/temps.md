@@ -3,19 +3,45 @@
 #### Path: `../config/oretweaker/templates`
 
 ## About:
-The first time you launch Ore-Tweaker it will generate a few templates in the `../config/oretweaker/templates` folder. These templates contain preconfigured settings that can be copy-pasted and combined into creating the perfect Ore-Tweaking experience for you. You can replace the `oretweaker.json` with any of these files but remember to **rename** it to `oretweaker.json` cause that is the only file the mod will read the world generation from.
+The first time you launch Ore-Tweaker it will generate a few templates in the `../config/oretweaker/templates` folder. These templates contain preconfigured settings that can be copy-pasted and combined into creating the perfect Ore-Tweaking experience for you.
 
 The templates are simply templates to act as a guide and show examples of how the mod can be used to configure the world in different ways. They can also save you a lot of time if you are borrowing from several templates to create the ultimate ore tweaking file for your modpack.
 Make sure to read the section about [how to validate your json file](https://github.com/EwyBoy/OreTweaker/wiki/Validating-JSON-File).
 
 ### Summary
-Mix, combine, use as reference just make sure you don't mess up the syntax and name the file:`oretweaker.json`.
+The templates serve as a backup and templates to use to easily set up your dream ore generation.
 
 ## Templates:
-* [default.json](https://github.com/EwyBoy/OreTweaker/wiki/Default-Values#default-file)
+### Generated Defaults:
+* ancient_debris.json
+* andesite.json
+* blackstone.json
+* coal_ore.json
+* copper_ore.json
+* deepslate.json
+* diamond_ore.json
+* diorite.json
+* dirt.json
+* emerald_ore.json
+* gold_ore.json
+* granite.json
+* gravel.json
+* infested_stone.json
+* iron_ore.json
+* lapis_ore.json
+* magma_block.json
+* nether_gold_ore.json
+* nether_quartz_ore.json
+* redstone_ore.json
+* soul_sand.json
+* tuff.json
+
+### Collectives
+* default.json
 * default_nether.json
 * default_overworld.json
-* fuck_silverfish.json
+  
+### Remove
 * remove_everything.json
 * remove_everything_nether.json
 * remove_everything_overworld.json
@@ -26,3 +52,6 @@ Mix, combine, use as reference just make sure you don't mess up the syntax and n
 * remove_stones.json
 * remove_stones_nether.json
 * remove_stones_overworld.json
+  
+# Other
+* fuck_silverfish.json

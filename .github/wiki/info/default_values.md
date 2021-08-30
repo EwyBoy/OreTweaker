@@ -9,30 +9,33 @@ The values for some ores are interpolated approximations of the math equations b
 The values are not perfect, but the world gen produced by these values are as close to vanilla ore generation as possible.
 
 Blocks marked with a `*` at the end like: `minecraft:lapis_ore`* are using interpolated approximations.
-This is due to the blocks using custom placement configs and distribution settings witch I did not bother coding in special cases for.
+This is due to the blocks using custom placement configs and distribution settings that are hard to replicate 100%.
 
 ### Stones:
 #### These are the values used for all the stones generating naturally underground in the overworld
-| ore                        | minY | maxY | vein size | rate | filler            | blacklist | whitelist                                         |
-|----------------------------|------|------|-----------|------|-------------------|---------- |---------------------------------------------------|
-| `minecraft:dirt`           | 1    | 256  | 32        | 10   | `minecraft:stone` | :x:       | :x:                                               |
-| `minecraft:gravel`         | 1    | 256  |  8        |  8   | `minecraft:stone` | :x:       | :x:                                               |
-| `minecraft:granite`        | 1    |  80  | 32        | 10   | `minecraft:stone` | :x:       | :x:                                               |
-| `minecraft:diorite`        | 1    |  80  | 32        | 10   | `minecraft:stone` | :x:       | :x:                                               |
-| `minecraft:andesite`       | 1    |  80  | 32        | 10   | `minecraft:stone` | :x:       | :x:                                               |
-| `minecraft:infested_stone` | 1    |  64  |  8        |  7   | `minecraft:stone` | :x:       |```mountains wooded_mountains gravelly_mountains```|
+| ore                        | minY | maxY | vein size | rate | filler            | blacklist | whitelist |
+|----------------------------|------|------|-----------|------|-------------------|---------- |-----------|
+| `minecraft:dirt`           | 1    | 256  | 32        | 10   | `minecraft:stone` | :x:       | :x:       |
+| `minecraft:gravel`         | 1    | 256  |  8        |  8   | `minecraft:stone` | :x:       | :x:       |
+| `minecraft:granite`        | 1    |  80  | 32        | 10   | `minecraft:stone` | :x:       | :x:       |
+| `minecraft:diorite`        | 1    |  80  | 32        | 10   | `minecraft:stone` | :x:       | :x:       |
+| `minecraft:andesite`       | 1    |  80  | 32        | 10   | `minecraft:stone` | :x:       | :x:       |
+| `minecraft:infested_stone` | 1    |  64  |  8        |  7   | `minecraft:stone` | :x:       |`MOUNTAIN` |
+| `minecraft:tuff`           | 1    |  16  | 32        |  1   | `minecraft:stone` | :x:       | :x:       |
+| `minecraft:deepslate`      | 1    |  16  | 64        |  2   | `minecraft:stone` | :x:       | :x:       |
 
 ### Ores:
 #### These are the values used for all the ores generating naturally underground in the overworld
-| ore                      | minY | maxY | vein size | rate | filler            | blacklist | whitelist                                         |
-|------------------------- |------|------|-----------|------|-------------------|---------- |---------------------------------------------------|
-| `minecraft:coal_ore`     | 1    | 128  | 16        | 20   | `minecraft:stone` | :x:       | :x:                                               |
-| `minecraft:iron_ore`     | 1    |  64  |  8        | 20   | `minecraft:stone` | :x:       | :x:                                               |
-| `minecraft:gold_ore`     | 1    |  32  |  8        |  2   | `minecraft:stone` | :x:       | :x:                                               |
-| `minecraft:redstone_ore` | 1    |  16  |  7        |  8   | `minecraft:stone` | :x:       | :x:                                               |
-| `minecraft:lapis_ore`*   | 1    |  30  |  6        |  3   | `minecraft:stone` | :x:       | :x:                                               |
-| `minecraft:diamond_ore`  | 1    |  16  |  7        |  1   | `minecraft:stone` | :x:       | :x:                                               |
-| `minecraft:emerald_ore`* | 4    |  32  |  1        |  5   | `minecraft:stone` | :x:       |```mountains wooded_mountains gravelly_mountains```|
+| ore                      | minY | maxY | vein size | rate | filler            | blacklist | whitelist |
+|------------------------- |------|------|-----------|------|-------------------|---------- |-----------|
+| `minecraft:coal_ore`     | 1    | 128  | 16        | 20   | `minecraft:stone` | :x:       | :x:       |
+| `minecraft:iron_ore`     | 1    |  64  |  8        | 20   | `minecraft:stone` | :x:       | :x:       |
+| `minecraft:copper_ore`   | 1    |  96  |  9        |  6   | `minecraft:stone` | :x:       | :x:       |
+| `minecraft:gold_ore`     | 1    |  32  |  8        |  2   | `minecraft:stone` | :x:       | :x:       |
+| `minecraft:redstone_ore` | 1    |  16  |  7        |  8   | `minecraft:stone` | :x:       | :x:       |
+| `minecraft:lapis_ore`*   | 1    |  30  |  6        |  3   | `minecraft:stone` | :x:       | :x:       |
+| `minecraft:diamond_ore`  | 1    |  16  |  7        |  1   | `minecraft:stone` | :x:       | :x:       |
+| `minecraft:emerald_ore`* | 4    |  32  |  1        |  5   | `minecraft:stone` | :x:       |`MOUNTAIN` |
 
 ### Nether:
 #### These are the values used for all the stuff generating naturally in the nether
@@ -53,251 +56,24 @@ Don't ask me why minecraft chose to add inn two different ways of spawning in ne
 That's why there are multiple entries with almost the same values. They are **not** duplicates.
 
 
-## Default File
+## Default Files
 
-### Path: `../config/oretweaker/oretweaker.json`
+### Path: `../config/oretweaker/data/`
 
-This is the default file generated by the mod on launch if there is not already a file there named `oretweaker.json`. The file **must** be named `oretweaker.json` for the mod to find and read the file on launch and this is the only file that will be utilized by the mod for tweaking ore-generation.
-The mod will also generate a backup of this file inside the [template folder](https://github.com/EwyBoy/OreTweaker/wiki/Templates) simply named `default.json`.
+This is where the default files are generated by the mod on launch if there is not already any files there under the same name. The files can be named pretty much anything, but must end with a `.json` extension. For the mod to find and read the file on launch, the file must be placed inside the `../config/oretweaker/data` folder.  
 
-This file allows you to tweak all the vanilla world generation features out of the box without having to add any entries yourself. 
+The mod will also generate backups of these file inside the [template folder](https://github.com/EwyBoy/OreTweaker/wiki/Templates), so if you mess up you can look at these files to find your way back to the default values for each ore.
+
+The example below shows the `diamond_ore.json` file.
 ```json
 {
   "oreConfig": [
-    {
-      "ore": "minecraft:dirt",
-      "filler": "minecraft:stone",
-      "minY": 1,
-      "maxY": 256,
-      "maxVeinSize": 32,
-      "spawnRate": 10.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:gravel",
-      "filler": "minecraft:stone",
-      "minY": 1,
-      "maxY": 256,
-      "maxVeinSize": 32,
-      "spawnRate": 8.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:granite",
-      "filler": "minecraft:stone",
-      "minY": 1,
-      "maxY": 80,
-      "maxVeinSize": 32,
-      "spawnRate": 10.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:diorite",
-      "filler": "minecraft:stone",
-      "minY": 1,
-      "maxY": 80,
-      "maxVeinSize": 32,
-      "spawnRate": 10.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:andesite",
-      "filler": "minecraft:stone",
-      "minY": 1,
-      "maxY": 80,
-      "maxVeinSize": 32,
-      "spawnRate": 10.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:infested_stone",
-      "filler": "minecraft:stone",
-      "minY": 1,
-      "maxY": 64,
-      "maxVeinSize": 8,
-      "spawnRate": 7.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": [
-        "mountains",
-        "wooded_mountains",
-        "gravelly_mountains"
-      ]
-    },
-    {
-      "ore": "minecraft:coal_ore",
-      "filler": "minecraft:stone",
-      "minY": 1,
-      "maxY": 128,
-      "maxVeinSize": 16,
-      "spawnRate": 20.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:iron_ore",
-      "filler": "minecraft:stone",
-      "minY": 1,
-      "maxY": 64,
-      "maxVeinSize": 8,
-      "spawnRate": 20.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:gold_ore",
-      "filler": "minecraft:stone",
-      "minY": 1,
-      "maxY": 32,
-      "maxVeinSize": 8,
-      "spawnRate": 2.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:redstone_ore",
-      "filler": "minecraft:stone",
-      "minY": 1,
-      "maxY": 16,
-      "maxVeinSize": 7,
-      "spawnRate": 8.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:lapis_ore",
-      "filler": "minecraft:stone",
-      "minY": 1,
-      "maxY": 30,
-      "maxVeinSize": 6,
-      "spawnRate": 3.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
     {
       "ore": "minecraft:diamond_ore",
       "filler": "minecraft:stone",
       "minY": 1,
       "maxY": 16,
       "maxVeinSize": 7,
-      "spawnRate": 1.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:emerald_ore",
-      "filler": "minecraft:stone",
-      "minY": 4,
-      "maxY": 32,
-      "maxVeinSize": 1,
-      "spawnRate": 30.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": [
-        "mountains",
-        "wooded_mountains",
-        "gravelly_mountains"
-      ]
-    },
-    {
-      "ore": "minecraft:soul_sand",
-      "filler": "minecraft:netherrack",
-      "minY": 1,
-      "maxY": 32,
-      "maxVeinSize": 12,
-      "spawnRate": 12.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:gravel",
-      "filler": "minecraft:netherrack",
-      "minY": 5,
-      "maxY": 37,
-      "maxVeinSize": 32,
-      "spawnRate": 2.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:nether_quartz_ore",
-      "filler": "minecraft:netherrack",
-      "minY": 10,
-      "maxY": 246,
-      "maxVeinSize": 14,
-      "spawnRate": 10.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:nether_quartz_ore",
-      "filler": "minecraft:netherrack",
-      "minY": 10,
-      "maxY": 246,
-      "maxVeinSize": 14,
-      "spawnRate": 32.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:nether_gold_ore",
-      "filler": "minecraft:netherrack",
-      "minY": 10,
-      "maxY": 118,
-      "maxVeinSize": 10,
-      "spawnRate": 10.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:nether_gold_ore",
-      "filler": "minecraft:netherrack",
-      "minY": 10,
-      "maxY": 118,
-      "maxVeinSize": 10,
-      "spawnRate": 20.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:blackstone",
-      "filler": "minecraft:netherrack",
-      "minY": 5,
-      "maxY": 31,
-      "maxVeinSize": 10,
-      "spawnRate": 2.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:magma_block",
-      "filler": "minecraft:netherrack",
-      "minY": 26,
-      "maxY": 36,
-      "maxVeinSize": 10,
-      "spawnRate": 15.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:ancient_debris",
-      "filler": "minecraft:netherrack",
-      "minY": 8,
-      "maxY": 120,
-      "maxVeinSize": 1,
-      "spawnRate": 1.0,
-      "biomeBlacklist": [],
-      "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:ancient_debris",
-      "filler": "minecraft:netherrack",
-      "minY": 8,
-      "maxY": 24,
-      "maxVeinSize": 2,
       "spawnRate": 1.0,
       "biomeBlacklist": [],
       "biomeWhitelist": []

@@ -13,6 +13,7 @@
 
 * [Templates](https://github.com/EwyBoy/OreTweaker/wiki/Templates)
 * [Default Values](https://github.com/EwyBoy/OreTweaker/wiki/Default-Values)
+* [Biome Filtering](https://github.com/EwyBoy/OreTweaker/wiki/Biome-Filtering)
 
 --------------------------------------------------------------------------------------------------------
 
@@ -35,6 +36,7 @@
 
 |    Version   |      Supported     |
 | ------------ | ------------------ |
+| 1.17.x-2.x.x | :heavy_check_mark: |
 | 1.16.5-2.x.x | :heavy_check_mark: |
 | 1.12.x-1.x.x | :x:                |
 | 1.11.x-1.x.x | :x:                |

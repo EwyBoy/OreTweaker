@@ -16,10 +16,10 @@ get the problem fixed as fast as possible.
 
 ### Solutions:
 
-1. You most likely have a syntax error in you're `oretweaker.json` file. Check out how you can fix this by clicking
+1. You most likely have a syntax error in you're `.json` file. Check out how you can fix this by clicking
    [here](https://github.com/EwyBoy/OreTweaker/wiki/Validating-JSON-File).
 
-2. One or more of your entries in the `oretweaker.json` file is has an error or typo. Check out how to fix it by
+2. One or more of your entries in the `.json` file is has an error or typo. Check out how to fix it by
    clicking [here](https://github.com/EwyBoy/OreTweaker/wiki/Validating-JSON-File).
 
 3. There is something terrible wrong. Create an issue report by clicking [here](https://github.com/EwyBoy/OreTweaker/issues/new?assignees=EwyBoy&labels=bug&template=bug_report.md&title=%5BBug%5D+Relevant+title+here).

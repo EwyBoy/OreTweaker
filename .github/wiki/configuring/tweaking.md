@@ -16,10 +16,11 @@ Most mods allow you to disable their world-gen in their own config files so if y
 
 ### Tweaking Ore-Generation
 
-Tweaking ore-generation is fairly easy and can be done by adding entries in the `oretweaker.json` file.
+Tweaking ore-generation is fairly easy and can be done by editing the files inside `../config/oretweaker/data/`.
 
 #### Example:
-The example below will first disable both coal and iron ores normal world-generation and then replace it with our own custom generation as defined below.
+The example below will first disable both coal and iron ores normal world-generation and then replace it with our own custom generation as defined below.  
+`coal_ore.json`
 ```json
 {
   "oreConfig": [
@@ -32,26 +33,11 @@ The example below will first disable both coal and iron ores normal world-genera
       "spawnRate": 16,
       "biomeBlacklist": [],
       "biomeWhitelist": []
-    },
-    {
-      "ore": "minecraft:iron_ore",
-      "filler": "minecraft:stone",
-      "minY": 52,
-      "maxY": 74,
-      "maxVeinSize": 12,
-      "spawnRate": 14,
-      "biomeBlacklist": [
-        "swamp",
-        "jungle"
-      ],
-      "biomeWhitelist": []
     }
   ]
 }
 ```
 * Coal ores will now only spawn between y-32 and y-96 in veins up to 22 block large. The world-generator will attempt to spawn these veins 16 times per chunk.
-* Iron ores will now only spawn between y-52 and y-74 in veins up to 12 block large. The world-generator will attempt to spawn these veins 14 times per chunk. Iron will no longer generate in Swamps or Jungles.
-
 
 ## Multiple spawns for same ore
 You can add multiple spawns for the same ore. In this case iron will spawn in huge veins in mountains, small veins inside desert sandstone and fairly normally in the rest of the world.
@@ -66,11 +52,7 @@ You can add multiple spawns for the same ore. In this case iron will spawn in hu
       "maxVeinSize": 32,
       "spawnRate": 5.0,
       "biomeBlacklist": [],
-      "biomeWhitelist": [
-        "mountains",
-        "wooded_mountains",
-        "gravelly_mountains"
-      ]
+      "biomeWhitelist": ["MOUNTAIN"]
     },
     {
       "ore": "minecraft:iron_ore",
@@ -79,7 +61,12 @@ You can add multiple spawns for the same ore. In this case iron will spawn in hu
       "maxY": 64,
       "maxVeinSize": 8,
       "spawnRate": 20.0,
-      "biomeBlacklist": [],
+      "biomeBlacklist": [
+        "MOUNTAIN",
+        "minecraft:desert",
+        "minecraft:desert_hill",
+        "minecraft:beach"
+      ],
       "biomeWhitelist": []
     },
     {
@@ -90,7 +77,11 @@ You can add multiple spawns for the same ore. In this case iron will spawn in hu
       "maxVeinSize": 4,
       "spawnRate": 30.0,
       "biomeBlacklist": [],
-      "biomeWhitelist": ["desert"]
+      "biomeWhitelist": [
+        "minecraft:desert",
+        "minecraft:desert_hill",
+        "minecraft:beach"
+      ]
     }
   ]
 }
