@@ -4,7 +4,7 @@
 		<a href="https://www.curseforge.com/minecraft/mc-mods/ore-tweaker/files">
 		    <img src="https://img.shields.io/badge/Supported%20Versions-MC%201.16%201.17-00c756?style=for-the-badge" alt="Available Versions"></a>
 		<a href="https://www.curseforge.com/minecraft/mc-mods/ore-tweaker/files">
-		    <img src="https://img.shields.io/badge/Available%20for-MC%201.7,%201.8,%201.9,%201.10,%201.11,%201.12,%201.16-c70039?style=for-the-badge" alt="Available Versions"></a>
+		    <img src="https://img.shields.io/badge/Available%20for-MC%201.7,%201.8,%201.9,%201.10,%201.11,%201.12,%201.16,%201.17-c70039?style=for-the-badge" alt="Available Versions"></a>
 		<a href="https://www.curseforge.com/minecraft/mc-mods/ore-tweaker/files">
 		    <img src="https://img.shields.io/badge/Available%20for-FORGE-0669ba?style=for-the-badge" alt="Modloader Versions"></a>
 		<a href="https://github.com/EwyBoy/OreTweaker/blob/master/LICENSE.txt">
@@ -16,7 +16,7 @@
 
 [![Curseforge](http://cf.way2muchnoise.eu/full_242436_downloads.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/ore-tweaker)
 
-### Add, remove, tweak and configure ore and underground generation features for Minecraft Forge 1.16.5
+### Add, remove, tweak and configure ore and underground generation features for Minecraft Forge 1.16.5 and 1.17+
 
 ## Learn how to use at the wiki:
 ### https://github.com/EwyBoy/Quick-Harvest/wiki
@@ -38,4 +38,4 @@
 ## Reporting an issue at https://github.com/EwyBoy/OreTweaker/issues
 
 
-### Ewy 
+### Ewy
