@@ -58,8 +58,8 @@ public class OreReconstruction {
                             ore.getMinY(),
                             ore.getMaxY(),
                             ore.getSpawnRate(),
-                            ore.getMaxVeinSize() + 1
-                            ,false
+                            ore.getMaxVeinSize() + 1,
+                            false
                     );
 
                     biomeBlackListMap.put(reconstructedOre, ore.getBiomeBlacklist());
