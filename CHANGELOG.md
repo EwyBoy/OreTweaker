@@ -1,3 +1,6 @@
+**v1.17.1 - 2.6.0**  
+* Bump, patch and fixes  
+  
 **v1.17.1 - 2.5.1**  
 * Changed template to use new BiomeDictionary Type `MOUNTAIN` for Emerald Ore and Infested Stone.  
 * Started working on enhancing performance when generating new chunks and biomes.  
