@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[37,)"
+loaderVersion="[38,)"
 license="MIT License"
 issueTrackerURL="https://github.com/EwyBoy/OreTweaker/issues"
 
@@ -15,13 +15,13 @@ issueTrackerURL="https://github.com/EwyBoy/OreTweaker/issues"
 [[dependencies.oretweaker]]
     modId="forge"
     mandatory=true
-    versionRange="[37,)"
+    versionRange="[38,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.oretweaker]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.17, 1.18)"
+    versionRange="[1.18, 1.19)"
     ordering="NONE"
     side="BOTH"

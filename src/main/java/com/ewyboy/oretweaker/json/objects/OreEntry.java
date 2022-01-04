@@ -1,13 +1,12 @@
 package com.ewyboy.oretweaker.json.objects;
 
-import com.ewyboy.oretweaker.config.Settings;
-
+import java.util.Collections;
 import java.util.List;
 
 public class OreEntry {
 
     private String ore;
-    private String filler;
+    private String replace;
     private int minY;
     private int maxY;
     private int maxVeinSize;
@@ -15,22 +14,22 @@ public class OreEntry {
     private List<String> biomeBlacklist;
     private List<String> biomeWhitelist;
 
-    public OreEntry(String oreName, String filler, Integer minY, Integer maxY, Integer maxVeinSize, Float spawnRate, List<String> biomeBlacklist, List<String> biomeWhitelist) { }
+    public OreEntry() {}
 
     public OreEntry(String ore) {
         this.ore = ore;
-        this.filler = null;
+        this.replace = null;
         this.minY = -1;
         this.maxY = -1;
         this.maxVeinSize = -1;
         this.spawnRate = -1;
-        this.biomeBlacklist = null;
-        this.biomeWhitelist = null;
+        this.biomeBlacklist = Collections.emptyList();
+        this.biomeWhitelist = Collections.emptyList();
     }
 
-    public OreEntry(String ore, String filler, int minY, int maxY, int maxVeinSize, float spawnRate, List<String> biomeBlacklist, List<String> biomeWhitelist) {
+    public OreEntry(String ore, String replace, int minY, int maxY, int maxVeinSize, float spawnRate, List<String> biomeBlacklist, List<String> biomeWhitelist) {
         this.ore = ore;
-        this.filler = filler;
+        this.replace = replace;
         this.minY = minY;
         this.maxY = maxY;
         this.maxVeinSize = maxVeinSize;
@@ -38,6 +37,7 @@ public class OreEntry {
         this.biomeBlacklist = biomeBlacklist;
         this.biomeWhitelist = biomeWhitelist;
     }
+
 
     public String getOre() {
         return ore;
@@ -47,12 +47,13 @@ public class OreEntry {
         this.ore = ore;
     }
 
-    public String getFiller() {
-        return filler;
+
+    public String getReplace() {
+        return replace;
     }
 
-    public void setFiller(String filler) {
-        this.filler = filler;
+    public void setReplace(String replace) {
+        this.replace = replace;
     }
 
     public int getMinY() {
@@ -87,10 +88,6 @@ public class OreEntry {
         this.spawnRate = spawnRate;
     }
 
-    public void setSpawnRate(int spawnRate) {
-        this.spawnRate = spawnRate;
-    }
-
     public List<String> getBiomeBlacklist() {
         return biomeBlacklist;
     }
@@ -105,32 +102,5 @@ public class OreEntry {
 
     public void setBiomeWhitelist(List<String> biomeWhitelist) {
         this.biomeWhitelist = biomeWhitelist;
-    }
-
-    @Override
-    public String toString() {
-        if (Settings.SETTINGS.debugMode.get()) {
-            return "\n" + "OreEntry {" + "\n" +
-                    "\t" + "ore='" + ore + '\'' + "\n" +
-                    "\t" + "filler='" + filler + '\'' + "\n" +
-                    "\t" + "minY=" + minY + "\n" +
-                    "\t" + "maxY=" + maxY + "\n" +
-                    "\t" + "maxVeinSize=" + maxVeinSize + "\n" +
-                    "\t" + "spawnRate=" + spawnRate + "\n" +
-                    "\t" + "biomeBlacklist=" + biomeBlacklist + "\n" +
-                    "\t" + "biomeWhitelist=" + biomeWhitelist + "\n" +
-                    '}';
-        } else {
-            return "OreEntry{" +
-                    "ore='" + ore + '\'' +
-                    ", filler='" + filler + '\'' +
-                    ", minY=" + minY +
-                    ", maxY=" + maxY +
-                    ", maxVeinSize=" + maxVeinSize +
-                    ", spawnRate=" + spawnRate +
-                    ", biomeBlacklist=" + biomeBlacklist +
-                    ", biomeWhitelist=" + biomeWhitelist +
-                    '}';
-        }
     }
 }

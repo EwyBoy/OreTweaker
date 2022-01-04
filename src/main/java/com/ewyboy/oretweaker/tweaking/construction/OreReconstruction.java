@@ -4,7 +4,6 @@ import com.ewyboy.oretweaker.OreTweaker;
 import com.ewyboy.oretweaker.json.JSONHandler;
 import com.ewyboy.oretweaker.json.objects.BiomeFiltering;
 import com.ewyboy.oretweaker.json.objects.OreEntry;
-import com.ewyboy.oretweaker.util.FeatureUtils;
 import com.ewyboy.oretweaker.util.ModLogger;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
@@ -14,10 +13,12 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
@@ -30,7 +31,7 @@ import java.util.*;
 
 public class OreReconstruction {
 
-    public static final List<ConfiguredFeature<?, ?>> reconstructedOres = new LinkedList<>();
+    public static final List<PlacedFeature> reconstructedOres = new LinkedList<>();
 
     public static void reconstruct(IEventBus forgeBus) {
         forgeBus.addListener(EventPriority.LOWEST, OreReconstruction::BiomeLoadingEvent);
@@ -46,7 +47,7 @@ public class OreReconstruction {
                 try {
                     ConfiguredFeature<?, ?> reconstructedOre = ore.getMaxVeinSize() == 1 ? reconstructOre(
                             Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getOre()))),
-                            Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getFiller()))),
+                            Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getReplace()))),
                             ore.getMinY(),
                             ore.getMaxY(),
                             ore.getSpawnRate(),
@@ -54,7 +55,7 @@ public class OreReconstruction {
                             false
                     ) : reconstructOre(
                             Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getOre()))),
-                            Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getFiller()))),
+                            Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getReplace()))),
                             ore.getMinY(),
                             ore.getMaxY(),
                             ore.getSpawnRate(),
@@ -62,11 +63,14 @@ public class OreReconstruction {
                             false
                     );
 
+                    PlacedFeature placedFeature = reconstructPlacedFeature(reconstructedOre, ore.getSpawnRate(), ore.getMinY(), ore.getMaxY());
+                    register(placedFeature.toString(), placedFeature);
+
                     biomeBlackListMap.put(reconstructedOre, ore.getBiomeBlacklist());
                     biomeWhiteListMap.put(reconstructedOre, ore.getBiomeWhitelist());
-                    reconstructedOres.add(reconstructedOre);
+                    reconstructedOres.add(placedFeature);
 
-                    reconstructDeepslateOre(ore);
+                    //reconstructDeepslateOre(ore);
 
                 } catch (Exception ignored) {
                     ModLogger.error(ore.getOre() + " can't be reconstructed from JSON..");
@@ -92,12 +96,9 @@ public class OreReconstruction {
 
         ModLogger.debug("Registry Name: " + registryName);
 
-        return register(registryName, reconstructFeature(
+        return register(registryName, reconstructConfiguredFeature(
                 ore,
                 filler,
-                minY,
-                maxY,
-                spawnRate,
                 maxVeinSize
         ));
     }
@@ -120,7 +121,7 @@ public class OreReconstruction {
         return deepslate_ore;
     }
 
-    private static void reconstructDeepslateOre(OreEntry ore) {
+   /* private static void reconstructDeepslateOre(OreEntry ore) {
         Block deepslate_ore = hasDeepslateVariant(ore);
         ConfiguredFeature<?, ?> reconstructedDeepslateOre = ore.getMaxVeinSize() == 1 ? reconstructOre(
                 Objects.requireNonNull(deepslate_ore),
@@ -142,31 +143,33 @@ public class OreReconstruction {
         biomeBlackListMap.put(reconstructedDeepslateOre, ore.getBiomeBlacklist());
         biomeWhiteListMap.put(reconstructedDeepslateOre, ore.getBiomeWhitelist());
         reconstructedOres.add(reconstructedDeepslateOre);
+    }*/
+
+    private static List<PlacementModifier> orePlacement(PlacementModifier placementModifier, PlacementModifier placementModifiers) {
+        return List.of(placementModifier, InSquarePlacement.spread(), placementModifiers, BiomeFilter.biome());
     }
 
-    private static ConfiguredFeature<?, ?> reconstructFeature(Block ore, Block filler, int minY, int maxY, float spawnRate, int maxVeinSize) {
-        ConfiguredFeature<?, ?> feature = Feature.ORE.configured(new OreConfiguration(new BlockMatchTest(filler), ore.defaultBlockState(), maxVeinSize));
-        feature = FeatureUtils.getVerticalRange(feature, minY, maxY).squared();
+    private static List<PlacementModifier> rareOrePlacement(int rarity, PlacementModifier placementModifier) {
+        return orePlacement(RarityFilter.onAverageOnceEvery(rarity), placementModifier);
+    }
 
-        feature = spawnRate < 1 ? feature.rarity((int) (1 / spawnRate)) : feature.count((int) spawnRate);
+    private static ConfiguredFeature<?, ?> reconstructConfiguredFeature(Block ore, Block filler, int maxVeinSize) {
+        return Feature.ORE.configured(new OreConfiguration(new BlockMatchTest(filler), ore.defaultBlockState(), maxVeinSize));
+    }
 
-        Block deepslate_ore = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("deepslate_" + Objects.requireNonNull(ore.getRegistryName())));
-
-        if (deepslate_ore == null) {
-            ConfiguredFeature<?, ?> deepslate_feature = Feature.ORE.configured(new OreConfiguration(new BlockMatchTest(Blocks.DEEPSLATE), deepslate_ore.defaultBlockState(), maxVeinSize));
-            deepslate_feature = FeatureUtils.getVerticalRange(deepslate_feature, minY, maxY).squared();
-            deepslate_feature = spawnRate < 1 ? feature.rarity((int) (1 / spawnRate)) : feature.count((int) spawnRate);
-        }
-
-        return feature;
+    private static PlacedFeature reconstructPlacedFeature(ConfiguredFeature<?, ?> configuredFeature, float spawnRate, int minY, int maxY) {
+        return configuredFeature.placed(rareOrePlacement((int) spawnRate, HeightRangePlacement.uniform(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY))));
     }
 
     private static <FeatureConfig extends FeatureConfiguration> ConfiguredFeature<FeatureConfig, ?> register(String name, ConfiguredFeature<FeatureConfig, ?> configuredFeature) {
         return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation(OreTweaker.MOD_ID, name), configuredFeature);
     }
+    private static PlacedFeature register(String name, PlacedFeature placedFeature) {
+        return Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(OreTweaker.MOD_ID, name), placedFeature);
+    }
 
     private static boolean isReconstructableObject(OreEntry entry) {
-        return entry.getFiller() != null && entry.getMinY() != -1 && entry.getMaxY() != -1 && entry.getSpawnRate() != -1 && entry.getMaxVeinSize() != -1 && entry.getBiomeBlacklist() != null && entry.getBiomeWhitelist() != null;
+        return entry.getReplace() != null && entry.getMinY() != -1 && entry.getMaxY() != -1 && entry.getSpawnRate() != -1 && entry.getMaxVeinSize() != -1 && entry.getBiomeBlacklist() != null && entry.getBiomeWhitelist() != null;
     }
 
     private static List<String> setBiomeFiltering(List<String> blackList, List<String> whiteList) {
@@ -191,18 +194,18 @@ public class OreReconstruction {
         return biomeFilter;
     }
 
-    private static final Map<ConfiguredFeature<?, ?>, List<String>> biomeFilteringMap = new HashMap<>();
-    private static final Map<ConfiguredFeature<?, ?>, BiomeFiltering> biomeFilteringOptionMap = new HashMap<>();
+    private static final Map<PlacedFeature, List<String>> biomeFilteringMap = new HashMap<>();
+    private static final Map<PlacedFeature, BiomeFiltering> biomeFilteringOptionMap = new HashMap<>();
 
     private static void filterBiomes() {
-        for (ConfiguredFeature<?, ?> reconstructedOre : reconstructedOres) {
+        for (PlacedFeature reconstructedOre : reconstructedOres) {
             biomeFilteringMap.put(reconstructedOre, applyBiomeDictionaryFiltering(setBiomeFiltering(biomeBlackListMap.get(reconstructedOre), biomeWhiteListMap.get(reconstructedOre))));
             biomeFilteringOptionMap.put(reconstructedOre, getBiomeFilteringOption(biomeBlackListMap.get(reconstructedOre), biomeWhiteListMap.get(reconstructedOre)));
         }
     }
 
     private static void buildBiomes(String biomeName, BiomeGenerationSettingsBuilder biomeBuilder) {
-        for (ConfiguredFeature<?, ?> reconstructedOre : reconstructedOres) {
+        for (PlacedFeature reconstructedOre : reconstructedOres) {
             filterGeneration(
                     biomeName,
                     biomeFilteringMap.get(reconstructedOre),
@@ -230,7 +233,7 @@ public class OreReconstruction {
         buildBiomes(Objects.requireNonNull(event.getName()).toString(), event.getGeneration());
     }
 
-    private static void filterGeneration(String currentBiome, List<String> biomeFilter, BiomeFiltering filteringOption, BiomeGenerationSettingsBuilder generation, ConfiguredFeature<?, ?> reconstructedOre) {
+    private static void filterGeneration(String currentBiome, List<String> biomeFilter, BiomeFiltering filteringOption, BiomeGenerationSettingsBuilder generation, PlacedFeature reconstructedOre) {
         switch (filteringOption) {
             case WHITELIST:
                 if (biomeFilter.contains(currentBiome))

@@ -7,6 +7,7 @@ import com.ewyboy.oretweaker.json.template.Templates;
 import com.ewyboy.oretweaker.util.ModLogger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mojang.authlib.minecraft.client.ObjectMapper;
 import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.*;
