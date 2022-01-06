@@ -23,8 +23,8 @@ public class OreEntry {
         this.maxY = -1;
         this.maxVeinSize = -1;
         this.spawnRate = -1;
-        this.biomeBlacklist = Collections.emptyList();
-        this.biomeWhitelist = Collections.emptyList();
+        this.biomeBlacklist = null;
+        this.biomeWhitelist = null;
     }
 
     public OreEntry(String ore, String replace, int minY, int maxY, int maxVeinSize, float spawnRate, List<String> biomeBlacklist, List<String> biomeWhitelist) {

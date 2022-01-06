@@ -12,15 +12,15 @@ public class PlacementUtils {
      * View all {@link PlacementModifierType}'s here.
      **/
 
-    private static List<PlacementModifier> orePlacement(PlacementModifier rarity, PlacementModifier heightRange) {
+    public static List<PlacementModifier> orePlacement(PlacementModifier rarity, PlacementModifier heightRange) {
         return List.of(rarity, InSquarePlacement.spread(), heightRange, BiomeFilter.biome());
     }
 
-    private static List<PlacementModifier> commonOrePlacement(int rarity, PlacementModifier placementModifier) {
+    public static List<PlacementModifier> commonOrePlacement(int rarity, PlacementModifier placementModifier) {
         return orePlacement(CountPlacement.of(rarity), placementModifier);
     }
 
-    private static List<PlacementModifier> rareOrePlacement(int rarity, PlacementModifier placementModifier) {
+    public static List<PlacementModifier> rareOrePlacement(int rarity, PlacementModifier placementModifier) {
         return orePlacement(RarityFilter.onAverageOnceEvery(rarity), placementModifier);
     }
 

@@ -17,7 +17,7 @@ public class OreManager {
     public static void setup() {
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
         OreDeconstruction.deconstruct(forgeBus);
-        //OreReconstruction.reconstruct(forgeBus);
+        OreReconstruction.reconstruct(forgeBus);
     }
 
 }

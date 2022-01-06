@@ -5,13 +5,13 @@ import com.ewyboy.oretweaker.json.JSONHandler;
 import com.ewyboy.oretweaker.json.objects.BiomeFiltering;
 import com.ewyboy.oretweaker.json.objects.OreEntry;
 import com.ewyboy.oretweaker.util.ModLogger;
+import com.ewyboy.oretweaker.util.PlacementUtils;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -37,15 +37,15 @@ public class OreReconstruction {
         forgeBus.addListener(EventPriority.LOWEST, OreReconstruction::BiomeLoadingEvent);
     }
 
-    private static final Map<ConfiguredFeature<?, ?>, List<String>> biomeBlackListMap = new HashMap<>();
-    private static final Map<ConfiguredFeature<?, ?>, List<String>> biomeWhiteListMap = new HashMap<>();
+    private static final Map<PlacedFeature, List<String>> biomeBlackListMap = new HashMap<>();
+    private static final Map<PlacedFeature, List<String>> biomeWhiteListMap = new HashMap<>();
 
     private static void reconstructFeatureFromJSON() {
         List<OreEntry> ores = JSONHandler.oreConfig.getOreConfig();
         for (OreEntry ore : ores) {
             if (isReconstructableObject(ore)) {
                 try {
-                    ConfiguredFeature<?, ?> reconstructedOre = ore.getMaxVeinSize() == 1 ? reconstructOre(
+                    ConfiguredFeature<?, ?> reconstructedOre = reconstructFeature(
                             Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getOre()))),
                             Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getReplace()))),
                             ore.getMinY(),
@@ -53,24 +53,20 @@ public class OreReconstruction {
                             ore.getSpawnRate(),
                             ore.getMaxVeinSize() + 2,
                             false
-                    ) : reconstructOre(
-                            Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getOre()))),
+                    );
+
+                    PlacedFeature placedFeature = reconstructPlaced(reconstructedOre, Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getOre()))),
                             Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getReplace()))),
                             ore.getMinY(),
                             ore.getMaxY(),
                             ore.getSpawnRate(),
-                            ore.getMaxVeinSize() + 1,
+                            ore.getMaxVeinSize() + 2,
                             false
                     );
 
-                    PlacedFeature placedFeature = reconstructPlacedFeature(reconstructedOre, ore.getSpawnRate(), ore.getMinY(), ore.getMaxY());
-                    register(placedFeature.toString(), placedFeature);
-
-                    biomeBlackListMap.put(reconstructedOre, ore.getBiomeBlacklist());
-                    biomeWhiteListMap.put(reconstructedOre, ore.getBiomeWhitelist());
+                    biomeBlackListMap.put(placedFeature, ore.getBiomeBlacklist());
+                    biomeWhiteListMap.put(placedFeature, ore.getBiomeWhitelist());
                     reconstructedOres.add(placedFeature);
-
-                    //reconstructDeepslateOre(ore);
 
                 } catch (Exception ignored) {
                     ModLogger.error(ore.getOre() + " can't be reconstructed from JSON..");
@@ -81,9 +77,9 @@ public class OreReconstruction {
         }
     }
 
-    private static ConfiguredFeature<?, ?> reconstructOre(Block ore, Block filler, int minY, int maxY, float spawnRate, int maxVeinSize, boolean isDeepslate) {
+    private static ConfiguredFeature<?, ?> reconstructFeature(Block ore, Block filler, int minY, int maxY, float spawnRate, int maxVeinSize, boolean isDeepslate) {
         ModLogger.debug("Reconstructing ore: " + ore);
-        String registryName = String.format("%s_%s_%s_%s_%s_%s",
+        String registryName = String.format("%s_%s_%s_%s_%s_%s_feature",
                 Objects.requireNonNull(ore.getRegistryName()).getPath(),
                 Objects.requireNonNull(filler.getRegistryName()).getPath(),
                 minY,
@@ -91,8 +87,6 @@ public class OreReconstruction {
                 spawnRate,
                 maxVeinSize
         );
-
-        if (isDeepslate) registryName = "deepslate_" + registryName;
 
         ModLogger.debug("Registry Name: " + registryName);
 
@@ -103,54 +97,24 @@ public class OreReconstruction {
         ));
     }
 
-    private static ResourceLocation formatDeepslate(OreEntry ore) {
-        String[] ore_split = ore.getOre().split(":");
-        String domain = ore_split[0];
-        String name = ore_split[1];
-        name = "deepslate_" + name;
-        String newResourceLocation = domain + ":" + name;
-        ModLogger.debug("Deepslate test: " + newResourceLocation);
-
-        return new ResourceLocation(newResourceLocation);
-    }
-
-    private static Block hasDeepslateVariant(OreEntry ore) {
-        Block deepslate_ore = ForgeRegistries.BLOCKS.getValue(formatDeepslate(ore));
-        ModLogger.debug("Deepslate Ore: " + Objects.requireNonNull(deepslate_ore).getRegistryName() + " : " + deepslate_ore.getName());
-
-        return deepslate_ore;
-    }
-
-   /* private static void reconstructDeepslateOre(OreEntry ore) {
-        Block deepslate_ore = hasDeepslateVariant(ore);
-        ConfiguredFeature<?, ?> reconstructedDeepslateOre = ore.getMaxVeinSize() == 1 ? reconstructOre(
-                Objects.requireNonNull(deepslate_ore),
-                Objects.requireNonNull(Blocks.DEEPSLATE),
-                ore.getMinY(),
-                ore.getMaxY(),
-                ore.getSpawnRate(),
-                ore.getMaxVeinSize() + 2,
-                true
-        ) : reconstructOre(
-                Objects.requireNonNull(deepslate_ore),
-                Objects.requireNonNull(Blocks.DEEPSLATE),
-                ore.getMinY(),
-                ore.getMaxY(),
-                ore.getSpawnRate(),
-                ore.getMaxVeinSize() + 1,
-                true
+    private static PlacedFeature reconstructPlaced(ConfiguredFeature<?,?> feature, Block ore, Block filler, int minY, int maxY, float spawnRate, int maxVeinSize, boolean isDeepslate) {
+        ModLogger.debug("Reconstructing ore: " + ore);
+        String registryName = String.format("%s_%s_%s_%s_%s_%s_placed",
+                Objects.requireNonNull(ore.getRegistryName()).getPath(),
+                Objects.requireNonNull(filler.getRegistryName()).getPath(),
+                minY,
+                maxY,
+                spawnRate,
+                maxVeinSize
         );
-        biomeBlackListMap.put(reconstructedDeepslateOre, ore.getBiomeBlacklist());
-        biomeWhiteListMap.put(reconstructedDeepslateOre, ore.getBiomeWhitelist());
-        reconstructedOres.add(reconstructedDeepslateOre);
-    }*/
 
-    private static List<PlacementModifier> orePlacement(PlacementModifier placementModifier, PlacementModifier placementModifiers) {
-        return List.of(placementModifier, InSquarePlacement.spread(), placementModifiers, BiomeFilter.biome());
-    }
+        ModLogger.debug("Registry Name: " + registryName);
 
-    private static List<PlacementModifier> rareOrePlacement(int rarity, PlacementModifier placementModifier) {
-        return orePlacement(RarityFilter.onAverageOnceEvery(rarity), placementModifier);
+        return register(registryName, reconstructPlacedFeature(
+                feature,
+                spawnRate,
+                minY, maxY
+        ));
     }
 
     private static ConfiguredFeature<?, ?> reconstructConfiguredFeature(Block ore, Block filler, int maxVeinSize) {
@@ -158,7 +122,7 @@ public class OreReconstruction {
     }
 
     private static PlacedFeature reconstructPlacedFeature(ConfiguredFeature<?, ?> configuredFeature, float spawnRate, int minY, int maxY) {
-        return configuredFeature.placed(rareOrePlacement((int) spawnRate, HeightRangePlacement.uniform(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY))));
+        return configuredFeature.placed(PlacementUtils.commonOrePlacement((int) spawnRate, HeightRangePlacement.uniform(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY))));
     }
 
     private static <FeatureConfig extends FeatureConfiguration> ConfiguredFeature<FeatureConfig, ?> register(String name, ConfiguredFeature<FeatureConfig, ?> configuredFeature) {
