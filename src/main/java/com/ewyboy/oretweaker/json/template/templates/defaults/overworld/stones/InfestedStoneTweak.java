@@ -1,6 +1,9 @@
 package com.ewyboy.oretweaker.json.template.templates.defaults.overworld.stones;
 
 import com.ewyboy.oretweaker.json.objects.OreEntry;
+import com.ewyboy.oretweaker.json.objects.spawn.BiomeFilter;
+import com.ewyboy.oretweaker.json.objects.spawn.DimensionFilter;
+import com.ewyboy.oretweaker.json.objects.spawn.SpawnFilter;
 import com.ewyboy.oretweaker.json.template.ITemplate;
 import com.ewyboy.oretweaker.json.template.Templates;
 
@@ -27,13 +30,16 @@ public class InfestedStoneTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:infested_stone",
-                "minecraft:stone",
+                Collections.singletonList("minecraft:stone"),
                 1,
                 64,
                 8,
                 7,
-                emptyList,
-                Collections.singletonList("MOUNTAIN")
+                new SpawnFilter(
+                        new BiomeFilter(emptyList, Collections.singletonList("MOUNTAIN")),
+                        new DimensionFilter(emptyList, emptyList)
+                ),
+                true
         ));
     }
 

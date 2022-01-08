@@ -1,6 +1,7 @@
 package com.ewyboy.oretweaker.json.template.templates.collectives;
 
 import com.ewyboy.oretweaker.json.objects.OreEntry;
+import com.ewyboy.oretweaker.json.objects.spawn.SpawnFilter;
 import com.ewyboy.oretweaker.json.template.ITemplate;
 import com.ewyboy.oretweaker.json.template.Templates;
 
@@ -24,15 +25,14 @@ public class DefaultNetherTemplate implements ITemplate {
 
     @Override
     public void buildTemplateEntries() {
-        entries.add(new OreEntry(
+        /*entries.add(new OreEntry(
                 "minecraft:soul_sand",
                 "minecraft:netherrack",
                 1,
                 32,
                 12,
                 12,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
         entries.add(new OreEntry(
                 "minecraft:gravel",
@@ -41,8 +41,7 @@ public class DefaultNetherTemplate implements ITemplate {
                 37,
                 32,
                 2,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
         entries.add(new OreEntry(
                 "minecraft:nether_quartz_ore",
@@ -51,8 +50,7 @@ public class DefaultNetherTemplate implements ITemplate {
                 246,
                 14,
                 10,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
 
         entries.add(new OreEntry(
@@ -62,8 +60,7 @@ public class DefaultNetherTemplate implements ITemplate {
                 246,
                 14,
                 32,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
 
         entries.add(new OreEntry(
@@ -73,8 +70,7 @@ public class DefaultNetherTemplate implements ITemplate {
                 118,
                 10,
                 10,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
 
         entries.add(new OreEntry(
@@ -84,8 +80,7 @@ public class DefaultNetherTemplate implements ITemplate {
                 118,
                 10,
                 20,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
 
         entries.add(new OreEntry(
@@ -95,8 +90,7 @@ public class DefaultNetherTemplate implements ITemplate {
                 31,
                 10,
                 2,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
 
         entries.add(new OreEntry(
@@ -106,8 +100,7 @@ public class DefaultNetherTemplate implements ITemplate {
                 36,
                 10,
                 15,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
 
         entries.add(new OreEntry(
@@ -117,8 +110,7 @@ public class DefaultNetherTemplate implements ITemplate {
                 120,
                 1,
                 1,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
 
         entries.add(new OreEntry(
@@ -128,9 +120,8 @@ public class DefaultNetherTemplate implements ITemplate {
                 24,
                 2,
                 1,
-                emptyList,
-                emptyList
-        ));
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
+        ));*/
     }
 
     @Override

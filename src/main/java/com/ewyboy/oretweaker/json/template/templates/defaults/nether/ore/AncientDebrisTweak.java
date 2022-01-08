@@ -1,10 +1,14 @@
 package com.ewyboy.oretweaker.json.template.templates.defaults.nether.ore;
 
 import com.ewyboy.oretweaker.json.objects.OreEntry;
+import com.ewyboy.oretweaker.json.objects.spawn.BiomeFilter;
+import com.ewyboy.oretweaker.json.objects.spawn.DimensionFilter;
+import com.ewyboy.oretweaker.json.objects.spawn.SpawnFilter;
 import com.ewyboy.oretweaker.json.template.ITemplate;
 import com.ewyboy.oretweaker.json.template.Templates;
 
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,23 +30,29 @@ public class AncientDebrisTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:ancient_debris",
-                "minecraft:netherrack",
+                Collections.singletonList("minecraft:netherrack"),
                 8,
                 120,
                 1,
                 1,
-                emptyList,
-                emptyList
+                new SpawnFilter(
+                        new BiomeFilter(emptyList, emptyList),
+                        new DimensionFilter(emptyList, emptyList)
+                ),
+                true
         ));
         entries.add(new OreEntry(
                 "minecraft:ancient_debris",
-                "minecraft:netherrack",
+                Collections.singletonList("minecraft:netherrack"),
                 8,
                 24,
                 2,
                 1,
-                emptyList,
-                emptyList
+                new SpawnFilter(
+                        new BiomeFilter(emptyList, emptyList),
+                        new DimensionFilter(emptyList, emptyList)
+                ),
+                true
         ));
     }
 

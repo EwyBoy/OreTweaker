@@ -1,6 +1,7 @@
 package com.ewyboy.oretweaker.json.template.templates.collectives;
 
 import com.ewyboy.oretweaker.json.objects.OreEntry;
+import com.ewyboy.oretweaker.json.objects.spawn.SpawnFilter;
 import com.ewyboy.oretweaker.json.template.ITemplate;
 import com.ewyboy.oretweaker.json.template.Templates;
 
@@ -25,15 +26,14 @@ public class DefaultOverworldTemplate implements ITemplate {
 
     @Override
     public void buildTemplateEntries() {
-        entries.add(new OreEntry(
+        /*entries.add(new OreEntry(
                 "minecraft:dirt",
                 "minecraft:stone",
                 1,
                 256,
                 32,
                 10,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
         entries.add(new OreEntry(
                 "minecraft:gravel",
@@ -42,8 +42,7 @@ public class DefaultOverworldTemplate implements ITemplate {
                 256,
                 32,
                 8,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
         entries.add(new OreEntry(
                 "minecraft:granite",
@@ -52,8 +51,7 @@ public class DefaultOverworldTemplate implements ITemplate {
                 80,
                 32,
                 10,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
         entries.add(new OreEntry(
                 "minecraft:diorite",
@@ -62,8 +60,7 @@ public class DefaultOverworldTemplate implements ITemplate {
                 80,
                 32,
                 10,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
         entries.add(new OreEntry(
                 "minecraft:andesite",
@@ -72,8 +69,7 @@ public class DefaultOverworldTemplate implements ITemplate {
                 80,
                 32,
                 10,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
         entries.add(new OreEntry(
                 "minecraft:tuff",
@@ -82,8 +78,7 @@ public class DefaultOverworldTemplate implements ITemplate {
                 16,
                 32,
                 1,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
         entries.add(new OreEntry(
                 "minecraft:deepslate",
@@ -92,8 +87,7 @@ public class DefaultOverworldTemplate implements ITemplate {
                 16,
                 64,
                 2,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
         entries.add(new OreEntry(
                 "minecraft:infested_stone",
@@ -102,8 +96,7 @@ public class DefaultOverworldTemplate implements ITemplate {
                 64,
                 8,
                 7,
-                emptyList,
-                Collections.singletonList("MOUNTAIN")
+                new SpawnFilter(emptyList, Collections.singletonList("MOUNTAIN"), emptyList, emptyList)
         ));
         entries.add(new OreEntry(
                 "minecraft:coal_ore",
@@ -112,8 +105,7 @@ public class DefaultOverworldTemplate implements ITemplate {
                 128,
                 16,
                 20,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
         entries.add(new OreEntry(
                 "minecraft:iron_ore",
@@ -122,8 +114,7 @@ public class DefaultOverworldTemplate implements ITemplate {
                 64,
                 8,
                 20,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
         entries.add(new OreEntry(
                 "minecraft:copper_ore",
@@ -132,8 +123,7 @@ public class DefaultOverworldTemplate implements ITemplate {
                 96,
                 9,
                 6,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
         entries.add(new OreEntry(
                 "minecraft:gold_ore",
@@ -142,8 +132,7 @@ public class DefaultOverworldTemplate implements ITemplate {
                 32,
                 8,
                 2,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
         entries.add(new OreEntry(
                 "minecraft:redstone_ore",
@@ -152,8 +141,7 @@ public class DefaultOverworldTemplate implements ITemplate {
                 16,
                 7,
                 8,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
 
        entries.add(new OreEntry(
@@ -163,8 +151,7 @@ public class DefaultOverworldTemplate implements ITemplate {
                30,
                6,
                3,
-               emptyList,
-               emptyList
+               new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
        ));
 
         entries.add(new OreEntry(
@@ -174,8 +161,7 @@ public class DefaultOverworldTemplate implements ITemplate {
                 16,
                 7,
                 1,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
         entries.add(new OreEntry(
                 "minecraft:emerald_ore",
@@ -184,9 +170,8 @@ public class DefaultOverworldTemplate implements ITemplate {
                 32,
                 1,
                 5,
-                emptyList,
-                Collections.singletonList("MOUNTAIN")
-        ));
+                new SpawnFilter(emptyList, Collections.singletonList("MOUNTAIN"), emptyList, emptyList)
+        ));*/
     }
 
     @Override

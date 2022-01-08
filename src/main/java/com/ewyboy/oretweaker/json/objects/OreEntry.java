@@ -1,43 +1,44 @@
 package com.ewyboy.oretweaker.json.objects;
 
+import com.ewyboy.oretweaker.json.objects.spawn.SpawnFilter;
+
 import java.util.Collections;
 import java.util.List;
 
 public class OreEntry {
 
     private String ore;
-    private String replace;
+    private List<String> fillers;
     private int minY;
     private int maxY;
     private int maxVeinSize;
     private float spawnRate;
-    private List<String> biomeBlacklist;
-    private List<String> biomeWhitelist;
+    private SpawnFilter spawnFilter;
+    private boolean replace;
 
     public OreEntry() {}
 
     public OreEntry(String ore) {
         this.ore = ore;
-        this.replace = null;
+        this.fillers = Collections.emptyList();
         this.minY = -1;
         this.maxY = -1;
         this.maxVeinSize = -1;
         this.spawnRate = -1;
-        this.biomeBlacklist = null;
-        this.biomeWhitelist = null;
+        this.spawnFilter = null;
+        this.replace = true;
     }
 
-    public OreEntry(String ore, String replace, int minY, int maxY, int maxVeinSize, float spawnRate, List<String> biomeBlacklist, List<String> biomeWhitelist) {
+    public OreEntry(String ore, List<String> fillers, int minY, int maxY, int maxVeinSize, float spawnRate, SpawnFilter spawnFilter, boolean replace) {
         this.ore = ore;
-        this.replace = replace;
+        this.fillers = fillers;
         this.minY = minY;
         this.maxY = maxY;
         this.maxVeinSize = maxVeinSize;
         this.spawnRate = spawnRate;
-        this.biomeBlacklist = biomeBlacklist;
-        this.biomeWhitelist = biomeWhitelist;
+        this.spawnFilter = spawnFilter;
+        this.replace = replace;
     }
-
 
     public String getOre() {
         return ore;
@@ -47,13 +48,12 @@ public class OreEntry {
         this.ore = ore;
     }
 
-
-    public String getReplace() {
-        return replace;
+    public List<String> getFillers() {
+        return fillers;
     }
 
-    public void setReplace(String replace) {
-        this.replace = replace;
+    public void setFillers(List<String> fillers) {
+        this.fillers = fillers;
     }
 
     public int getMinY() {
@@ -88,19 +88,19 @@ public class OreEntry {
         this.spawnRate = spawnRate;
     }
 
-    public List<String> getBiomeBlacklist() {
-        return biomeBlacklist;
+    public void setSpawnFilter(SpawnFilter spawnFilter) {
+        this.spawnFilter = spawnFilter;
     }
 
-    public void setBiomeBlacklist(List<String> biomeBlacklist) {
-        this.biomeBlacklist = biomeBlacklist;
+    public SpawnFilter getSpawnFilter() {
+        return spawnFilter;
     }
 
-    public List<String> getBiomeWhitelist() {
-        return biomeWhitelist;
+    public boolean isReplace() {
+        return replace;
     }
 
-    public void setBiomeWhitelist(List<String> biomeWhitelist) {
-        this.biomeWhitelist = biomeWhitelist;
+    public void setReplace(boolean replace) {
+        this.replace = replace;
     }
 }

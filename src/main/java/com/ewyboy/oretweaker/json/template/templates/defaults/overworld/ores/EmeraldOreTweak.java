@@ -1,6 +1,9 @@
 package com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores;
 
 import com.ewyboy.oretweaker.json.objects.OreEntry;
+import com.ewyboy.oretweaker.json.objects.spawn.BiomeFilter;
+import com.ewyboy.oretweaker.json.objects.spawn.DimensionFilter;
+import com.ewyboy.oretweaker.json.objects.spawn.SpawnFilter;
 import com.ewyboy.oretweaker.json.template.ITemplate;
 import com.ewyboy.oretweaker.json.template.Templates;
 
@@ -27,13 +30,16 @@ public class EmeraldOreTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:emerald_ore",
-                "minecraft:stone",
+                Collections.singletonList("minecraft:stone"),
                 4,
                 32,
                 1,
                 5,
-                emptyList,
-                Collections.singletonList("MOUNTAIN")
+                new SpawnFilter(
+                        new BiomeFilter(emptyList, Collections.singletonList("MOUNTAIN")),
+                        new DimensionFilter(emptyList, emptyList)
+                ),
+                true
         ));
     }
 

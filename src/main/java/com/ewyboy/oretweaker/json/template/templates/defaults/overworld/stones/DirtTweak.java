@@ -1,10 +1,14 @@
 package com.ewyboy.oretweaker.json.template.templates.defaults.overworld.stones;
 
 import com.ewyboy.oretweaker.json.objects.OreEntry;
+import com.ewyboy.oretweaker.json.objects.spawn.BiomeFilter;
+import com.ewyboy.oretweaker.json.objects.spawn.DimensionFilter;
+import com.ewyboy.oretweaker.json.objects.spawn.SpawnFilter;
 import com.ewyboy.oretweaker.json.template.ITemplate;
 import com.ewyboy.oretweaker.json.template.Templates;
 
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,13 +30,16 @@ public class DirtTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:dirt",
-                "minecraft:stone",
+                Collections.singletonList("minecraft:stone"),
                 1,
                 256,
                 32,
                 10,
-                emptyList,
-                emptyList
+                new SpawnFilter(
+                        new BiomeFilter(emptyList, emptyList),
+                        new DimensionFilter(emptyList, emptyList)
+                ),
+                true
         ));
     }
 

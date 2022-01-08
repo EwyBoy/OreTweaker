@@ -1,6 +1,7 @@
 package com.ewyboy.oretweaker.json.template.templates.collectives;
 
 import com.ewyboy.oretweaker.json.objects.OreEntry;
+import com.ewyboy.oretweaker.json.objects.spawn.SpawnFilter;
 import com.ewyboy.oretweaker.json.template.ITemplate;
 import com.ewyboy.oretweaker.json.template.Templates;
 
@@ -25,16 +26,16 @@ public class DefaultTemplate implements ITemplate {
 
     @Override
     public void buildTemplateEntries() {
-        entries.add(new OreEntry(
+        /*entries.add(new OreEntry(
                 "minecraft:dirt",
                 "minecraft:stone",
                 1,
                 256,
                 32,
                 10,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:gravel",
                 "minecraft:stone",
@@ -42,9 +43,9 @@ public class DefaultTemplate implements ITemplate {
                 256,
                 32,
                 8,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:granite",
                 "minecraft:stone",
@@ -52,9 +53,9 @@ public class DefaultTemplate implements ITemplate {
                 80,
                 32,
                 10,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:diorite",
                 "minecraft:stone",
@@ -62,9 +63,9 @@ public class DefaultTemplate implements ITemplate {
                 80,
                 32,
                 10,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:andesite",
                 "minecraft:stone",
@@ -72,9 +73,9 @@ public class DefaultTemplate implements ITemplate {
                 80,
                 32,
                 10,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:tuff",
                 "minecraft:stone",
@@ -82,9 +83,9 @@ public class DefaultTemplate implements ITemplate {
                 16,
                 32,
                 1,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:deepslate",
                 "minecraft:stone",
@@ -92,9 +93,9 @@ public class DefaultTemplate implements ITemplate {
                 16,
                 64,
                 2,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:infested_stone",
                 "minecraft:stone",
@@ -102,9 +103,9 @@ public class DefaultTemplate implements ITemplate {
                 64,
                 8,
                 7,
-                emptyList,
-                Collections.singletonList("MOUNTAIN")
+                new SpawnFilter(emptyList, Collections.singletonList("MOUNTAIN"), emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:coal_ore",
                 "minecraft:stone",
@@ -112,9 +113,9 @@ public class DefaultTemplate implements ITemplate {
                 128,
                 16,
                 20,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:iron_ore",
                 "minecraft:stone",
@@ -122,9 +123,9 @@ public class DefaultTemplate implements ITemplate {
                 64,
                 8,
                 20,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:copper_ore",
                 "minecraft:stone",
@@ -132,9 +133,9 @@ public class DefaultTemplate implements ITemplate {
                 96,
                 9,
                 6,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:gold_ore",
                 "minecraft:stone",
@@ -142,9 +143,9 @@ public class DefaultTemplate implements ITemplate {
                 32,
                 8,
                 2,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:redstone_ore",
                 "minecraft:stone",
@@ -152,9 +153,9 @@ public class DefaultTemplate implements ITemplate {
                 16,
                 7,
                 8,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:lapis_ore",
                 "minecraft:stone",
@@ -162,9 +163,9 @@ public class DefaultTemplate implements ITemplate {
                 30,
                 6,
                 3,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:diamond_ore",
                 "minecraft:stone",
@@ -172,9 +173,9 @@ public class DefaultTemplate implements ITemplate {
                 16,
                 7,
                 1,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:emerald_ore",
                 "minecraft:stone",
@@ -182,9 +183,9 @@ public class DefaultTemplate implements ITemplate {
                 32,
                 1,
                 5,
-                emptyList,
-                Collections.singletonList("MOUNTAIN")
+                new SpawnFilter(emptyList, Collections.singletonList("MOUNTAIN"), emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:soul_sand",
                 "minecraft:netherrack",
@@ -192,9 +193,9 @@ public class DefaultTemplate implements ITemplate {
                 32,
                 12,
                 12,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:gravel",
                 "minecraft:netherrack",
@@ -202,9 +203,9 @@ public class DefaultTemplate implements ITemplate {
                 37,
                 32,
                 2,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:nether_quartz_ore",
                 "minecraft:netherrack",
@@ -212,9 +213,9 @@ public class DefaultTemplate implements ITemplate {
                 246,
                 14,
                 10,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:nether_quartz_ore",
                 "minecraft:netherrack",
@@ -222,9 +223,9 @@ public class DefaultTemplate implements ITemplate {
                 246,
                 14,
                 32,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:nether_gold_ore",
                 "minecraft:netherrack",
@@ -232,9 +233,9 @@ public class DefaultTemplate implements ITemplate {
                 118,
                 10,
                 10,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:nether_gold_ore",
                 "minecraft:netherrack",
@@ -242,9 +243,9 @@ public class DefaultTemplate implements ITemplate {
                 118,
                 10,
                 20,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:blackstone",
                 "minecraft:netherrack",
@@ -252,9 +253,9 @@ public class DefaultTemplate implements ITemplate {
                 31,
                 10,
                 2,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:magma_block",
                 "minecraft:netherrack",
@@ -262,9 +263,9 @@ public class DefaultTemplate implements ITemplate {
                 36,
                 10,
                 15,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:ancient_debris",
                 "minecraft:netherrack",
@@ -272,9 +273,9 @@ public class DefaultTemplate implements ITemplate {
                 120,
                 1,
                 1,
-                emptyList,
-                emptyList
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
         ));
+
         entries.add(new OreEntry(
                 "minecraft:ancient_debris",
                 "minecraft:netherrack",
@@ -282,9 +283,8 @@ public class DefaultTemplate implements ITemplate {
                 24,
                 2,
                 1,
-                emptyList,
-                emptyList
-        ));
+                new SpawnFilter(emptyList, emptyList, emptyList, emptyList)
+        ));*/
     }
 
     @Override

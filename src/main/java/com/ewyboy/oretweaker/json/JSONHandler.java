@@ -92,7 +92,7 @@ public class JSONHandler {
 
     public static boolean containsEntry(OreEntry entry) {
         for (OreEntry ore : oreConfig.getOreConfig()) {
-            if (ore.getOre().equals(entry.getOre())) {
+            if (ore.getOre().equals(entry.getOre()) && ore.isReplace()) {
                 return true;
             }
         }
