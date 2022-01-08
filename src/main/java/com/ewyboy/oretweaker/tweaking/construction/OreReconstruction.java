@@ -2,6 +2,7 @@ package com.ewyboy.oretweaker.tweaking.construction;
 
 import com.ewyboy.oretweaker.OreTweaker;
 import com.ewyboy.oretweaker.json.JSONHandler;
+import com.ewyboy.oretweaker.json.objects.spawn.SpawnFilter;
 import com.ewyboy.oretweaker.json.objects.spawn.SpawnFiltering;
 import com.ewyboy.oretweaker.json.objects.OreEntry;
 import com.ewyboy.oretweaker.util.ModLogger;
@@ -37,6 +38,8 @@ public class OreReconstruction {
         forgeBus.addListener(EventPriority.LOWEST, OreReconstruction :: BiomeLoadingEvent);
     }
 
+    private static final Map<PlacedFeature, SpawnFilter> spawnFilterMap = new HashMap<>();
+
     private static final Map<PlacedFeature, List<String>> biomeBlackListMap = new HashMap<>();
     private static final Map<PlacedFeature, List<String>> biomeWhiteListMap = new HashMap<>();
 
@@ -64,12 +67,14 @@ public class OreReconstruction {
                                 false
                         );
 
+                        // TODO Rework to use a single map
+                        spawnFilterMap.put(placedFeature, ore.getSpawnFilter());
+
                         biomeBlackListMap.put(placedFeature, ore.getSpawnFilter().getBiomeFilter().getBiomeBlacklist());
                         biomeWhiteListMap.put(placedFeature, ore.getSpawnFilter().getBiomeFilter().getBiomeWhitelist());
 
                         reconstructedOres.add(placedFeature);
                     }
-
                 } catch (Exception ignored) {
                     ModLogger.error(ore.getOre() + " can't be reconstructed from JSON..");
                 }
