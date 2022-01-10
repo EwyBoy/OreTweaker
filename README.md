@@ -25,6 +25,7 @@
 
 |    Version   |      Supported     |
 | ------------ | ------------------ |
+| 1.18.x-3.x.x | Working on it..    |
 | 1.17.x-2.x.x | :heavy_check_mark: |
 | 1.16.5-2.x.x | :heavy_check_mark: |
 | 1.12.x-1.x.x | :x:                |
