@@ -15,7 +15,6 @@ import com.ewyboy.oretweaker.json.template.templates.defaults.nether.stone.Black
 import com.ewyboy.oretweaker.json.template.templates.defaults.nether.stone.MagmaBlockTweak;
 import com.ewyboy.oretweaker.json.template.templates.defaults.nether.stone.SoulSandTweak;
 import com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.*;
-import com.ewyboy.oretweaker.json.template.templates.defaults.overworld.stones.*;
 import com.ewyboy.oretweaker.json.template.templates.other.FuckSilverfishTemplate;
 import com.ewyboy.oretweaker.json.template.templates.collectives.DefaultNetherTemplate;
 import com.ewyboy.oretweaker.json.template.templates.remove.RemoveEverything;

@@ -1,5 +1,6 @@
 package com.ewyboy.oretweaker.json.objects;
 
+import com.ewyboy.oretweaker.json.objects.ore.Distribution;
 import com.ewyboy.oretweaker.json.objects.spawn.SpawnFilter;
 
 import java.util.Collections;
@@ -9,10 +10,12 @@ public class OreEntry {
 
     private String ore;
     private List<String> fillers;
+    private Distribution distribution;
     private int minY;
     private int maxY;
     private int maxVeinSize;
     private float spawnRate;
+    private float discardChanceOnAirExposure;
     private SpawnFilter spawnFilter;
     private boolean replace;
 
@@ -21,21 +24,25 @@ public class OreEntry {
     public OreEntry(String ore) {
         this.ore = ore;
         this.fillers = Collections.emptyList();
+        this.distribution = null;
         this.minY = -1;
         this.maxY = -1;
         this.maxVeinSize = -1;
         this.spawnRate = -1;
+        this.discardChanceOnAirExposure = -1;
         this.spawnFilter = null;
         this.replace = true;
     }
 
-    public OreEntry(String ore, List<String> fillers, int minY, int maxY, int maxVeinSize, float spawnRate, SpawnFilter spawnFilter, boolean replace) {
+    public OreEntry(String ore, List<String> fillers, Distribution distribution, int minY, int maxY, int maxVeinSize, float spawnRate, float discardChanceOnAirExposure, SpawnFilter spawnFilter, boolean replace) {
         this.ore = ore;
         this.fillers = fillers;
+        this.distribution = distribution;
         this.minY = minY;
         this.maxY = maxY;
         this.maxVeinSize = maxVeinSize;
         this.spawnRate = spawnRate;
+        this.discardChanceOnAirExposure = discardChanceOnAirExposure;
         this.spawnFilter = spawnFilter;
         this.replace = replace;
     }
@@ -54,6 +61,14 @@ public class OreEntry {
 
     public void setFillers(List<String> fillers) {
         this.fillers = fillers;
+    }
+
+    public Distribution getDistribution() {
+        return distribution;
+    }
+
+    public void setDistribution(Distribution distribution) {
+        this.distribution = distribution;
     }
 
     public int getMinY() {
@@ -86,6 +101,14 @@ public class OreEntry {
 
     public void setSpawnRate(float spawnRate) {
         this.spawnRate = spawnRate;
+    }
+
+    public float getDiscardChanceOnAirExposure() {
+        return discardChanceOnAirExposure;
+    }
+
+    public void setDiscardChanceOnAirExposure(float discardChanceOnAirExposure) {
+        this.discardChanceOnAirExposure = discardChanceOnAirExposure;
     }
 
     public void setSpawnFilter(SpawnFilter spawnFilter) {

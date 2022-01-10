@@ -1,8 +1,9 @@
-package com.ewyboy.oretweaker.json.template.templates.defaults.overworld.stones;
+package com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones;
 
 import com.ewyboy.oretweaker.json.objects.OreEntry;
 import com.ewyboy.oretweaker.json.objects.spawn.BiomeFilter;
 import com.ewyboy.oretweaker.json.objects.spawn.DimensionFilter;
+import com.ewyboy.oretweaker.json.objects.ore.Distribution;
 import com.ewyboy.oretweaker.json.objects.spawn.SpawnFilter;
 import com.ewyboy.oretweaker.json.template.ITemplate;
 import com.ewyboy.oretweaker.json.template.Templates;
@@ -31,10 +32,12 @@ public class DeepslateTweak implements ITemplate {
         entries.add(new OreEntry(
                 "minecraft:deepslate",
                 Collections.singletonList("minecraft:stone"),
+                Distribution.UNIFORM,
                 1,
                 16,
                 64,
                 2,
+                0,
                 new SpawnFilter(
                         new BiomeFilter(emptyList, emptyList),
                         new DimensionFilter(emptyList, emptyList)

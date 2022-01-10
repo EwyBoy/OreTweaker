@@ -3,6 +3,7 @@ package com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores;
 import com.ewyboy.oretweaker.json.objects.OreEntry;
 import com.ewyboy.oretweaker.json.objects.spawn.BiomeFilter;
 import com.ewyboy.oretweaker.json.objects.spawn.DimensionFilter;
+import com.ewyboy.oretweaker.json.objects.ore.Distribution;
 import com.ewyboy.oretweaker.json.objects.spawn.SpawnFilter;
 import com.ewyboy.oretweaker.json.template.ITemplate;
 import com.ewyboy.oretweaker.json.template.Templates;
@@ -31,10 +32,27 @@ public class CoalOreTweak implements ITemplate {
         entries.add(new OreEntry(
                 "minecraft:coal_ore",
                 Collections.singletonList("minecraft:stone"),
-                1,
-                128,
-                16,
+                Distribution.UNIFORM,
+                136,
+                256,
+                17,
+                30,
+                0,
+                new SpawnFilter(
+                        new BiomeFilter(emptyList, emptyList),
+                        new DimensionFilter(emptyList, emptyList)
+                ),
+                true
+        ));
+        entries.add(new OreEntry(
+                "minecraft:coal_ore",
+                Collections.singletonList("minecraft:stone"),
+                Distribution.TRIANGLE,
+                0,
+                192,
+                17,
                 20,
+                0.5f,
                 new SpawnFilter(
                         new BiomeFilter(emptyList, emptyList),
                         new DimensionFilter(emptyList, emptyList)

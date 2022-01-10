@@ -1,14 +1,7 @@
-# 2.4.0 Update
-    [X] - Standard template files for each default ore
-    [X] - Collect entires for same ore under same file
-    [X] - Look into using registry name for biome filtering
-    [ ] - Look into turning filler into an array
-    [ ] - Clean up output log / Debugging
-    [ ] - Make sure auto deepslating works
-    [ ] - Auto populate data folder with default settings
-    [ ] - Fix requiring biome black/white lists
-    [ ] - Config to not disable ore
-
-    [ ] - Test auto updater outside dev enviroment
-    [ ] - Test auto updater on server
-    [ ] - Test auto updater on selected users
+# 3.0.0 Update
+    [ ] - Create Rarity standard
+    [ ] - Recreate all vanilla features in 1.18 format
+    [ ] - Dimension Filter
+    [ ] - Clean up Reconstructor
+    [ ] - Reimplement Deepslater
+    [ ] - Filler Tag system

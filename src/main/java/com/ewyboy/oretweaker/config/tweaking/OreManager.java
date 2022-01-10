@@ -1,7 +1,7 @@
-package com.ewyboy.oretweaker.tweaking;
+package com.ewyboy.oretweaker.config.tweaking;
 
-import com.ewyboy.oretweaker.tweaking.construction.OreDeconstruction;
-import com.ewyboy.oretweaker.tweaking.construction.OreReconstruction;
+import com.ewyboy.oretweaker.config.tweaking.construction.OreDeconstruction;
+import com.ewyboy.oretweaker.config.tweaking.construction.OreReconstruction;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 

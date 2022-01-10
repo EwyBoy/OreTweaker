@@ -5,7 +5,7 @@ import com.ewyboy.oretweaker.json.DirectoryHandler;
 import com.ewyboy.oretweaker.json.InfoHandler;
 import com.ewyboy.oretweaker.json.JSONHandler;
 import com.ewyboy.oretweaker.json.template.Templates;
-import com.ewyboy.oretweaker.tweaking.OreManager;
+import com.ewyboy.oretweaker.config.tweaking.OreManager;
 import com.ewyboy.oretweaker.util.ModLogger;
 import net.minecraftforge.fml.IExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -52,4 +52,5 @@ public class OreTweaker {
                 new IExtensionPoint.DisplayTest(() -> "You can write whatever the fuck you want here", (addMeOnRunescape, jamFlx) -> jamFlx)
         );
     }
+
 }
