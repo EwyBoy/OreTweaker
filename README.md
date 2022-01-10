@@ -19,7 +19,7 @@
 ### Add, remove, tweak and configure ore and underground generation features for Minecraft Forge 1.16.5 and 1.17+
 
 ## Learn how to use at the wiki:
-### https://github.com/EwyBoy/Quick-Harvest/wiki
+### https://github.com/EwyBoy/OreTweaker/wiki
 
 ## Supported Versions
 
