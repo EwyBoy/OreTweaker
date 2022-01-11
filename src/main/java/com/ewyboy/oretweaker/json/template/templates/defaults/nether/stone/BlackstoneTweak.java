@@ -2,7 +2,6 @@ package com.ewyboy.oretweaker.json.template.templates.defaults.nether.stone;
 
 import com.ewyboy.oretweaker.json.objects.OreEntry;
 import com.ewyboy.oretweaker.json.objects.spawn.BiomeFilter;
-import com.ewyboy.oretweaker.json.objects.spawn.DimensionFilter;
 import com.ewyboy.oretweaker.json.objects.ore.Distribution;
 import com.ewyboy.oretweaker.json.objects.spawn.SpawnFilter;
 import com.ewyboy.oretweaker.json.template.ITemplate;

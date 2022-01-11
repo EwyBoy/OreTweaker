@@ -1,7 +1,8 @@
 # 3.0.0 Update
-    [ ] - Create Rarity standard
+    [x] - Create Rarity system
     [ ] - Recreate all vanilla features in 1.18 format
     [ ] - Dimension Filter
+    [x] - Reimplement Deepslater
+    [x] - Filler Tag system
     [ ] - Clean up Reconstructor
-    [ ] - Reimplement Deepslater
-    [ ] - Filler Tag system
+    [ ] - Unfuck Mojang's fucked up ore veins

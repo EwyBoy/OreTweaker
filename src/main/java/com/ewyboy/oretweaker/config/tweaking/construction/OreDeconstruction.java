@@ -4,10 +4,13 @@ import com.ewyboy.oretweaker.json.JSONHandler;
 import com.ewyboy.oretweaker.json.objects.OreEntry;
 import com.ewyboy.oretweaker.util.FeatureUtils;
 import com.ewyboy.oretweaker.util.ModLogger;
+import net.minecraft.world.level.LevelSettings;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.OreFeature;
+import net.minecraft.world.level.levelgen.feature.ScatteredOreFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
@@ -59,7 +62,7 @@ public class OreDeconstruction {
             PlacedFeature targetFeature = FeatureUtils.getFeature(feature.get());
 
             for (ConfiguredFeature<?, ?> configuredFeature : targetFeature.getFeatures().toList()) {
-                if (configuredFeature.feature instanceof OreFeature) {
+                if (configuredFeature.feature instanceof OreFeature || configuredFeature.feature instanceof ScatteredOreFeature) {
                     OreConfiguration config = (OreConfiguration) configuredFeature.config;
                     for (OreConfiguration.TargetBlockState state : config.targetStates) {
                         targetBlock = state.state.getBlock();

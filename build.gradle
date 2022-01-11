@@ -29,7 +29,7 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
-            property 'fml.earlyprogresswindow', 'false'
+            property 'forge.logging.console.level', 'debug'
             mods {
                 oretweaker {
                     source sourceSets.main
@@ -70,8 +70,6 @@ repositories {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.0'
     minecraft "net.minecraftforge:forge:${MC_VERSION}-${FORGE_VERSION}"
     implementation fg.deobf("curse.maven:worldstripper-250603:${WORLD_STRIPPER}")
 }

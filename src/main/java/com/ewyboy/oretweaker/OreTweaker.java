@@ -12,6 +12,8 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.nio.file.Files;
 
@@ -49,7 +51,7 @@ public class OreTweaker {
     // Make sure the mod being absent on the other network side does not cause the client to display the server as incompatible
     private void ignoreServerOnly() {
         ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () ->
-                new IExtensionPoint.DisplayTest(() -> "You can write whatever the fuck you want here", (addMeOnRunescape, jamFlx) -> jamFlx)
+                new IExtensionPoint.DisplayTest(() -> "You can write whatever the fuck you want here", (addMeOnRunescape, jamflx) -> jamflx)
         );
     }
 
