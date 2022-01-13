@@ -1,12 +1,10 @@
 package com.ewyboy.oretweaker.json.template.templates.collectives;
 
 import com.ewyboy.oretweaker.json.objects.OreEntry;
-import com.ewyboy.oretweaker.json.objects.spawn.SpawnFilter;
 import com.ewyboy.oretweaker.json.template.ITemplate;
 import com.ewyboy.oretweaker.json.template.Templates;
 
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 

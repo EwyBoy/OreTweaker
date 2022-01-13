@@ -1,19 +1,19 @@
-package com.ewyboy.oretweaker.json.objects.spawn;
+package com.ewyboy.oretweaker.json.objects.biome;
 
 import java.util.Collections;
 import java.util.List;
 
-public class BiomeFilter {
+public class BiomeFilters {
 
     private List<String> biomeBlacklist;
     private List<String> biomeWhitelist;
 
-    public BiomeFilter() {
+    public BiomeFilters() {
         this.biomeBlacklist = Collections.emptyList();
         this.biomeWhitelist = Collections.emptyList();
     }
 
-    public BiomeFilter(List<String> biomeBlacklist, List<String> biomeWhitelist) {
+    public BiomeFilters(List<String> biomeBlacklist, List<String> biomeWhitelist) {
         this.biomeBlacklist = biomeBlacklist;
         this.biomeWhitelist = biomeWhitelist;
     }

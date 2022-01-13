@@ -16,6 +16,7 @@ import com.ewyboy.oretweaker.json.template.templates.defaults.nether.stone.Black
 import com.ewyboy.oretweaker.json.template.templates.defaults.nether.stone.MagmaBlockTweak;
 import com.ewyboy.oretweaker.json.template.templates.defaults.nether.stone.SoulSandTweak;
 import com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.*;
+import com.ewyboy.oretweaker.json.template.templates.defaults.overworld.stones.*;
 import com.ewyboy.oretweaker.json.template.templates.other.FuckSilverfishTemplate;
 import com.ewyboy.oretweaker.json.template.templates.remove.RemoveEverything;
 import com.ewyboy.oretweaker.json.template.templates.remove.RemoveEverythingNether;
@@ -66,13 +67,13 @@ public class Templates {
         public static final LapisOreTweak LAPIS_ORE_TWEAK = new LapisOreTweak();
         public static final RedstoneOreTweak REDSTONE_ORE_TWEAK = new RedstoneOreTweak();
 
-        public static final com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.AndesiteTweak ANDESITE_TWEAK = new com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.AndesiteTweak();
-        public static final com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.DeepslateTweak DEEPSLATE_TWEAK = new com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.DeepslateTweak();
-        public static final com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.DioriteTweak DIORITE_TWEAK = new com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.DioriteTweak();
-        public static final com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.DirtTweak DIRT_TWEAK = new com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.DirtTweak();
-        public static final com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.GraniteTweak GRANITE_TWEAK = new com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.GraniteTweak();
-        public static final com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.InfestedStoneTweak INFESTED_STONE_TWEAK = new com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.InfestedStoneTweak();
-        public static final com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.TuffTweak TUFF_TWEAK = new com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.TuffTweak();
+        public static final AndesiteTweak ANDESITE_TWEAK = new AndesiteTweak();
+        public static final DeepslateTweak DEEPSLATE_TWEAK = new DeepslateTweak();
+        public static final DioriteTweak DIORITE_TWEAK = new DioriteTweak();
+        public static final DirtTweak DIRT_TWEAK = new DirtTweak();
+        public static final GraniteTweak GRANITE_TWEAK = new GraniteTweak();
+        public static final InfestedStoneTweak INFESTED_STONE_TWEAK = new InfestedStoneTweak();
+        public static final TuffTweak TUFF_TWEAK = new TuffTweak();
 
         public static final AncientDebrisTweak ANCIENT_DEBRIS_TWEAK = new AncientDebrisTweak();
         public static final NetherGoldOreTweak NETHER_GOLD_ORE_TWEAK = new NetherGoldOreTweak();
@@ -95,13 +96,13 @@ public class Templates {
         public static final LapisOreTweak LAPIS_ORE_TWEAK = new LapisOreTweak();
         public static final RedstoneOreTweak REDSTONE_ORE_TWEAK = new RedstoneOreTweak();
 
-        public static final com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.AndesiteTweak ANDESITE_TWEAK = new com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.AndesiteTweak();
-        public static final com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.DeepslateTweak DEEPSLATE_TWEAK = new com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.DeepslateTweak();
-        public static final com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.DioriteTweak DIORITE_TWEAK = new com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.DioriteTweak();
-        public static final com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.DirtTweak DIRT_TWEAK = new com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.DirtTweak();
-        public static final com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.GraniteTweak GRANITE_TWEAK = new com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.GraniteTweak();
-        public static final com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.InfestedStoneTweak INFESTED_STONE_TWEAK = new com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.InfestedStoneTweak();
-        public static final com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.TuffTweak TUFF_TWEAK = new com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones.TuffTweak();
+        public static final AndesiteTweak ANDESITE_TWEAK = new AndesiteTweak();
+        public static final DeepslateTweak DEEPSLATE_TWEAK = new DeepslateTweak();
+        public static final DioriteTweak DIORITE_TWEAK = new DioriteTweak();
+        public static final DirtTweak DIRT_TWEAK = new DirtTweak();
+        public static final GraniteTweak GRANITE_TWEAK = new GraniteTweak();
+        public static final InfestedStoneTweak INFESTED_STONE_TWEAK = new InfestedStoneTweak();
+        public static final TuffTweak TUFF_TWEAK = new TuffTweak();
 
         public static final AncientDebrisTweak ANCIENT_DEBRIS_TWEAK = new AncientDebrisTweak();
         public static final NetherGoldOreTweak NETHER_GOLD_ORE_TWEAK = new NetherGoldOreTweak();

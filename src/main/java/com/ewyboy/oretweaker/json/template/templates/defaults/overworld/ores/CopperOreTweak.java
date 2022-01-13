@@ -1,9 +1,8 @@
 package com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores;
 
 import com.ewyboy.oretweaker.json.objects.OreEntry;
-import com.ewyboy.oretweaker.json.objects.spawn.BiomeFilter;
+import com.ewyboy.oretweaker.json.objects.biome.BiomeFilters;
 import com.ewyboy.oretweaker.json.objects.ore.Distribution;
-import com.ewyboy.oretweaker.json.objects.spawn.SpawnFilter;
 import com.ewyboy.oretweaker.json.template.ITemplate;
 import com.ewyboy.oretweaker.json.template.Templates;
 
@@ -30,17 +29,26 @@ public class CopperOreTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:copper_ore",
-                Collections.singletonList("minecraft:stone"),
-                Distribution.UNIFORM,
-                1,
-                96,
-                9,
-                6,
+                Collections.singletonList("stone_ore_replaceables"),
+                Distribution.TRIANGLE,
+                -16,
+                112,
+                10,
+                16,
                 0,
-                new SpawnFilter(
-                        new BiomeFilter(emptyList, emptyList),
-                        new DimensionFilter(emptyList, emptyList)
-                ),
+                new BiomeFilters(emptyList, emptyList),
+                true
+        ));
+        entries.add(new OreEntry(
+                "minecraft:copper_ore",
+                Collections.singletonList("stone_ore_replaceables"),
+                Distribution.TRIANGLE,
+                -16,
+                112,
+                20,
+                16,
+                0,
+                new BiomeFilters(emptyList, emptyList),
                 true
         ));
     }

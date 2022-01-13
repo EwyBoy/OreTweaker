@@ -1,9 +1,8 @@
-package com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.stones;
+package com.ewyboy.oretweaker.json.template.templates.defaults.overworld.stones;
 
 import com.ewyboy.oretweaker.json.objects.OreEntry;
-import com.ewyboy.oretweaker.json.objects.spawn.BiomeFilter;
+import com.ewyboy.oretweaker.json.objects.biome.BiomeFilters;
 import com.ewyboy.oretweaker.json.objects.ore.Distribution;
-import com.ewyboy.oretweaker.json.objects.spawn.SpawnFilter;
 import com.ewyboy.oretweaker.json.template.ITemplate;
 import com.ewyboy.oretweaker.json.template.Templates;
 
@@ -37,10 +36,7 @@ public class TuffTweak implements ITemplate {
                 32,
                 1,
                 0,
-                new SpawnFilter(
-                        new BiomeFilter(emptyList, emptyList),
-                        new DimensionFilter(emptyList, emptyList)
-                ),
+                new BiomeFilters(emptyList, emptyList),
                 true
         ));
     }

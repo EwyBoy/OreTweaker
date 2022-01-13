@@ -17,8 +17,4 @@ public class FeatureUtils {
         }
     }
 
-    /*public static Decoratable<ConfiguredFeature<?, ?>> getVerticalRange(Decoratable<ConfiguredFeature<?, ?>> feature, int minY, int maxY) {
-        return feature.decorated(FeatureDecorator.RANGE.configured(new RangeDecoratorConfiguration(UniformHeight.of(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)))));
-    }*/
-
 }

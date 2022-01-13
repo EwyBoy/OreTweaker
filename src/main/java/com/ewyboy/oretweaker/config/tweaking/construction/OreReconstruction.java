@@ -2,9 +2,9 @@ package com.ewyboy.oretweaker.config.tweaking.construction;
 
 import com.ewyboy.oretweaker.OreTweaker;
 import com.ewyboy.oretweaker.json.JSONHandler;
+import com.ewyboy.oretweaker.json.objects.biome.BiomeFilters;
 import com.ewyboy.oretweaker.json.objects.ore.Distribution;
-import com.ewyboy.oretweaker.json.objects.spawn.SpawnFilter;
-import com.ewyboy.oretweaker.json.objects.spawn.SpawnFiltering;
+import com.ewyboy.oretweaker.json.objects.biome.BiomeFiltering;
 import com.ewyboy.oretweaker.json.objects.OreEntry;
 import com.ewyboy.oretweaker.util.ModLogger;
 import net.minecraft.core.Registry;
@@ -13,11 +13,9 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.Tag;
-import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -46,7 +44,7 @@ public class OreReconstruction {
         forgeBus.addListener(EventPriority.LOWEST, OreReconstruction :: BiomeLoadingEvent);
     }
 
-    private static final Map<PlacedFeature, SpawnFilter> spawnFilterMap = new HashMap<>();
+    private static final Map<PlacedFeature, BiomeFilters> biomeFilterMap = new HashMap<>();
 
     private static void reconstructFeatureFromJSON() {
         List<OreEntry> ores = JSONHandler.oreConfig.getOreConfig();
@@ -75,7 +73,7 @@ public class OreReconstruction {
                                 false
                         );
 
-                        spawnFilterMap.put(placedFeature, ore.getSpawnFilter());
+                        biomeFilterMap.put(placedFeature, ore.getBiomeFilter());
                         reconstructedOres.add(placedFeature);
                     }
                 } catch (Exception ignored) {
@@ -97,9 +95,9 @@ public class OreReconstruction {
         if (filler.contains(":")) {
             fillerBlock = Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(filler)));
             fillerName = Objects.requireNonNull(fillerBlock.getRegistryName()).getPath();
-        } else if (!filler.isEmpty() && !filler.isBlank()) {
+        } else if (!filler.isEmpty()) {
             fillerTag = BlockTags.bind(filler.toLowerCase(Locale.ROOT));
-            fillerName = fillerTag.toString();
+            fillerName = filler;
         } else {
             return null;
         }
@@ -242,15 +240,15 @@ public class OreReconstruction {
     }
 
     private static boolean isReconstructableObject(OreEntry entry) {
-        return entry.getFillers() != null && entry.getMinY() != -1 && entry.getMaxY() != -1 && entry.getSpawnRate() != -1 && entry.getMaxVeinSize() != -1 && entry.getSpawnFilter().getBiomeFilter().getBiomeBlacklist() != null && entry.getSpawnFilter().getBiomeFilter().getBiomeWhitelist() != null;
+        return entry.getFillers() != null && entry.getMinY() != -1 && entry.getMaxY() != -1 && entry.getSpawnRate() != -1 && entry.getMaxVeinSize() != -1 && entry.getBiomeFilter().getBiomeBlacklist() != null && entry.getBiomeFilter().getBiomeWhitelist() != null;
     }
 
     private static List<String> setBiomeFiltering(List<String> blackList, List<String> whiteList) {
         return whiteList.isEmpty() ? blackList.isEmpty() ? Collections.emptyList() : blackList : whiteList;
     }
 
-    private static SpawnFiltering getBiomeFilteringOption(List<String> blackList, List<String> whiteList) {
-        return whiteList.isEmpty() ? blackList.isEmpty() ? SpawnFiltering.NONE : SpawnFiltering.BLACKLIST : SpawnFiltering.WHITELIST;
+    private static BiomeFiltering getBiomeFilteringOption(List<String> blackList, List<String> whiteList) {
+        return whiteList.isEmpty() ? blackList.isEmpty() ? BiomeFiltering.NONE : BiomeFiltering.BLACKLIST : BiomeFiltering.WHITELIST;
     }
 
     private static List<String> applyBiomeDictionaryFiltering(List<String> biomeEntries) {
@@ -268,19 +266,19 @@ public class OreReconstruction {
     }
 
     private static final Map<PlacedFeature, List<String>> biomeFilteringMap = new HashMap<>();
-    private static final Map<PlacedFeature, SpawnFiltering> biomeFilteringOptionMap = new HashMap<>();
+    private static final Map<PlacedFeature, BiomeFiltering> biomeFilteringOptionMap = new HashMap<>();
 
     private static void filterBiomes() {
         for (PlacedFeature reconstructedOre : reconstructedOres) {
             biomeFilteringMap.put(reconstructedOre, applyBiomeDictionaryFiltering(
                     setBiomeFiltering(
-                            spawnFilterMap.get(reconstructedOre).getBiomeFilter().getBiomeBlacklist(),
-                            spawnFilterMap.get(reconstructedOre).getBiomeFilter().getBiomeWhitelist()
+                            biomeFilterMap.get(reconstructedOre).getBiomeBlacklist(),
+                            biomeFilterMap.get(reconstructedOre).getBiomeWhitelist()
                     )
             ));
             biomeFilteringOptionMap.put(reconstructedOre, getBiomeFilteringOption(
-                    spawnFilterMap.get(reconstructedOre).getBiomeFilter().getBiomeBlacklist(),
-                    spawnFilterMap.get(reconstructedOre).getBiomeFilter().getBiomeWhitelist()
+                    biomeFilterMap.get(reconstructedOre).getBiomeBlacklist(),
+                    biomeFilterMap.get(reconstructedOre).getBiomeWhitelist()
             ));
         }
     }
@@ -314,7 +312,7 @@ public class OreReconstruction {
         buildBiomes(Objects.requireNonNull(event.getName()).toString(), event.getGeneration());
     }
 
-    private static void filterGeneration(String currentBiome, List<String> biomeFilter, SpawnFiltering filteringOption, BiomeGenerationSettingsBuilder generation, PlacedFeature reconstructedOre) {
+    private static void filterGeneration(String currentBiome, List<String> biomeFilter, BiomeFiltering filteringOption, BiomeGenerationSettingsBuilder generation, PlacedFeature reconstructedOre) {
         switch (filteringOption) {
             case WHITELIST:
                 if (biomeFilter.contains(currentBiome)) generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, reconstructedOre); break;

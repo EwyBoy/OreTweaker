@@ -1,9 +1,8 @@
 package com.ewyboy.oretweaker.json.template.templates.defaults.nether.stone;
 
 import com.ewyboy.oretweaker.json.objects.OreEntry;
-import com.ewyboy.oretweaker.json.objects.spawn.BiomeFilter;
+import com.ewyboy.oretweaker.json.objects.biome.BiomeFilters;
 import com.ewyboy.oretweaker.json.objects.ore.Distribution;
-import com.ewyboy.oretweaker.json.objects.spawn.SpawnFilter;
 import com.ewyboy.oretweaker.json.template.ITemplate;
 import com.ewyboy.oretweaker.json.template.Templates;
 
@@ -37,10 +36,7 @@ public class BlackstoneTweak implements ITemplate {
                 10,
                 2,
                 0,
-                new SpawnFilter(
-                        new BiomeFilter(emptyList, emptyList),
-                        new DimensionFilter(emptyList, emptyList)
-                ),
+                new BiomeFilters(emptyList, emptyList),
                 true
         ));
     }

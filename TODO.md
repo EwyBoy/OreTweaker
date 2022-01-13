@@ -6,3 +6,4 @@
     [x] - Filler Tag system
     [ ] - Clean up Reconstructor
     [ ] - Unfuck Mojang's fucked up ore veins
+    [ ] - Clean up legacy stuff

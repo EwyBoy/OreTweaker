@@ -1,7 +1,7 @@
 package com.ewyboy.oretweaker.json.objects;
 
+import com.ewyboy.oretweaker.json.objects.biome.BiomeFilters;
 import com.ewyboy.oretweaker.json.objects.ore.Distribution;
-import com.ewyboy.oretweaker.json.objects.spawn.SpawnFilter;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +16,7 @@ public class OreEntry {
     private int maxVeinSize;
     private float spawnRate;
     private float discardChanceOnAirExposure;
-    private SpawnFilter spawnFilter;
+    private BiomeFilters biomeFilters;
     private boolean replace;
 
     public OreEntry() {}
@@ -30,11 +30,11 @@ public class OreEntry {
         this.maxVeinSize = -1;
         this.spawnRate = -1;
         this.discardChanceOnAirExposure = -1;
-        this.spawnFilter = null;
+        this.biomeFilters = null;
         this.replace = true;
     }
 
-    public OreEntry(String ore, List<String> fillers, Distribution distribution, int minY, int maxY, int maxVeinSize, float spawnRate, float discardChanceOnAirExposure, SpawnFilter spawnFilter, boolean replace) {
+    public OreEntry(String ore, List<String> fillers, Distribution distribution, int minY, int maxY, int maxVeinSize, float spawnRate, float discardChanceOnAirExposure, BiomeFilters biomeFilters, boolean replace) {
         this.ore = ore;
         this.fillers = fillers;
         this.distribution = distribution;
@@ -43,7 +43,7 @@ public class OreEntry {
         this.maxVeinSize = maxVeinSize;
         this.spawnRate = spawnRate;
         this.discardChanceOnAirExposure = discardChanceOnAirExposure;
-        this.spawnFilter = spawnFilter;
+        this.biomeFilters = biomeFilters;
         this.replace = replace;
     }
 
@@ -111,12 +111,12 @@ public class OreEntry {
         this.discardChanceOnAirExposure = discardChanceOnAirExposure;
     }
 
-    public void setSpawnFilter(SpawnFilter spawnFilter) {
-        this.spawnFilter = spawnFilter;
+    public BiomeFilters getBiomeFilter() {
+        return biomeFilters;
     }
 
-    public SpawnFilter getSpawnFilter() {
-        return spawnFilter;
+    public void setBiomeFilter(BiomeFilters biomeFilters) {
+        this.biomeFilters = biomeFilters;
     }
 
     public boolean isReplace() {
