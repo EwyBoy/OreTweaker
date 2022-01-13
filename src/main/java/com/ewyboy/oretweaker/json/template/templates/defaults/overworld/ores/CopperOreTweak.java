@@ -48,7 +48,7 @@ public class CopperOreTweak implements ITemplate {
                 20,
                 16,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Collections.singletonList("minecraft:dripstone_caves")),
                 true
         ));
     }

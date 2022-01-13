@@ -11,13 +11,13 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class InfestedStoneTweak implements ITemplate {
+public class ClayTweak implements ITemplate {
 
     private final List<OreEntry> entries = new LinkedList<>();
 
     @Override
     public String templateName() {
-        return "infested_stone";
+        return "dirt";
     }
 
     @Override
@@ -28,15 +28,15 @@ public class InfestedStoneTweak implements ITemplate {
     @Override
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
-                "minecraft:infested_stone",
-                Collections.singletonList("minecraft:stone"),
+                "minecraft:clay",
+                Collections.singletonList("base_stone_overworld"),
                 Distribution.UNIFORM,
-                1,
-                64,
-                8,
-                7,
                 0,
-                new BiomeFilters(emptyList, Collections.singletonList("MOUNTAIN")),
+                256,
+                33,
+                46,
+                0,
+                new BiomeFilters(emptyList, Collections.singletonList("RIVER")),
                 true
         ));
     }

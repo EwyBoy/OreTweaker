@@ -29,12 +29,12 @@ public class TuffTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:tuff",
-                Collections.singletonList("minecraft:stone"),
+                Collections.singletonList("base_stone_overworld"),
                 Distribution.UNIFORM,
-                1,
-                16,
+                -64,
+                0,
                 32,
-                1,
+                2,
                 0,
                 new BiomeFilters(emptyList, emptyList),
                 true

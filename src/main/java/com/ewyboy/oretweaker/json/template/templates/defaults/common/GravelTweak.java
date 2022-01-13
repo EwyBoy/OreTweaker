@@ -29,23 +29,24 @@ public class GravelTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:gravel",
-                Collections.singletonList("minecraft:stone"),
+                Collections.singletonList("base_stone_overworld"),
                 Distribution.UNIFORM,
-                1,
+                -64,
                 256,
-                32,
-                8,
+                33,
+                14,
                 0,
                 new BiomeFilters(emptyList, emptyList),
                 true
         ));
+
         entries.add(new OreEntry(
                 "minecraft:gravel",
                 Collections.singletonList("minecraft:netherrack"),
                 Distribution.UNIFORM,
                 5,
-                37,
-                32,
+                41,
+                33,
                 2,
                 0,
                 new BiomeFilters(emptyList, emptyList),

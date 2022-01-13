@@ -29,12 +29,25 @@ public class DioriteTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:diorite",
-                Collections.singletonList("minecraft:stone"),
+                Collections.singletonList("base_stone_overworld"),
                 Distribution.UNIFORM,
-                1,
-                80,
-                32,
-                10,
+                64,
+                128,
+                64,
+                0.1666666666666f,
+                0,
+                new BiomeFilters(emptyList, emptyList),
+                true
+        ));
+
+        entries.add(new OreEntry(
+                "minecraft:diorite",
+                Collections.singletonList("base_stone_overworld"),
+                Distribution.UNIFORM,
+                0,
+                60,
+                64,
+                2,
                 0,
                 new BiomeFilters(emptyList, emptyList),
                 true

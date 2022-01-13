@@ -11,13 +11,13 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class DeepslateTweak implements ITemplate {
+public class InfestedTweak implements ITemplate {
 
     private final List<OreEntry> entries = new LinkedList<>();
 
     @Override
     public String templateName() {
-        return "deepslate";
+        return "infested_stone";
     }
 
     @Override
@@ -28,15 +28,27 @@ public class DeepslateTweak implements ITemplate {
     @Override
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
-                "minecraft:deepslate",
-                Collections.singletonList("minecraft:stone"),
+                "minecraft:infested_stone",
+                Collections.singletonList("stone_ore_replaceables"),
                 Distribution.UNIFORM,
-                1,
-                16,
-                64,
-                2,
+                -64,
+                63,
+                9,
+                7,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.BADLANDS),
+                true
+        ));
+        entries.add(new OreEntry(
+                "minecraft:infested_deepslate",
+                Collections.singletonList("deepslate_ore_replaceables"),
+                Distribution.UNIFORM,
+                -64,
+                63,
+                9,
+                7,
+                0,
+                new BiomeFilters(emptyList, Templates.BADLANDS),
                 true
         ));
     }

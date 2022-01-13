@@ -31,9 +31,22 @@ public class RedstoneOreTweak implements ITemplate {
                 "minecraft:redstone_ore",
                 Collections.singletonList("stone_ore_replaceables"),
                 Distribution.UNIFORM,
-                1,
-                16,
-                7,
+                -64,
+                15,
+                4,
+                8,
+                0,
+                new BiomeFilters(emptyList, emptyList),
+                true
+        ));
+
+        entries.add(new OreEntry(
+                "minecraft:redstone_ore",
+                Collections.singletonList("stone_ore_replaceables"),
+                Distribution.TRIANGLE,
+                -96,
+                -32,
+                8,
                 8,
                 0,
                 new BiomeFilters(emptyList, emptyList),

@@ -33,7 +33,7 @@ public class BlackstoneTweak implements ITemplate {
                 Distribution.UNIFORM,
                 5,
                 31,
-                10,
+                33,
                 2,
                 0,
                 new BiomeFilters(emptyList, emptyList),

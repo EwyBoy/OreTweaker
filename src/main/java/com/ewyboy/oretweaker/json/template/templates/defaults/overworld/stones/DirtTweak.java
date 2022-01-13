@@ -29,12 +29,12 @@ public class DirtTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:dirt",
-                Collections.singletonList("minecraft:stone"),
+                Collections.singletonList("base_stone_overworld"),
                 Distribution.UNIFORM,
-                1,
-                256,
-                32,
-                10,
+                0,
+                160,
+                33,
+                7,
                 0,
                 new BiomeFilters(emptyList, emptyList),
                 true

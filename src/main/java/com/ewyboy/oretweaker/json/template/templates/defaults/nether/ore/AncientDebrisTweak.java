@@ -29,25 +29,25 @@ public class AncientDebrisTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:ancient_debris",
-                Collections.singletonList("minecraft:netherrack"),
-                Distribution.UNIFORM,
+                Collections.singletonList("base_stone_nether"),
+                Distribution.TRIANGLE,
                 8,
-                120,
+                24,
+                3,
                 1,
-                1,
-                0,
+                1.0F,
                 new BiomeFilters(emptyList, emptyList),
                 true
         ));
         entries.add(new OreEntry(
                 "minecraft:ancient_debris",
-                Collections.singletonList("minecraft:netherrack"),
+                Collections.singletonList("base_stone_nether"),
                 Distribution.UNIFORM,
                 8,
-                24,
+                118,
                 2,
                 1,
-                0,
+                1.0F,
                 new BiomeFilters(emptyList, emptyList),
                 true
         ));

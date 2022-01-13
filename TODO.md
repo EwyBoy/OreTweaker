@@ -1,7 +1,7 @@
 # 3.0.0 Update
     [x] - Create Rarity system
     [ ] - Recreate all vanilla features in 1.18 format
-    [ ] - Dimension Filter
+    [x] - Dimension Filter
     [x] - Reimplement Deepslater
     [x] - Filler Tag system
     [ ] - Clean up Reconstructor

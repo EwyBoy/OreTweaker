@@ -31,11 +31,24 @@ public class GoldOreTweak implements ITemplate {
                 "minecraft:gold_ore",
                 Collections.singletonList("stone_ore_replaceables"),
                 Distribution.UNIFORM,
-                1,
+                32,
+                256,
+                9,
+                50,
+                0,
+                new BiomeFilters(emptyList, Templates.BADLANDS),
+                true
+        ));
+
+        entries.add(new OreEntry(
+                "minecraft:gold_ore",
+                Collections.singletonList("stone_ore_replaceables"),
+                Distribution.TRIANGLE,
+                -64,
                 32,
                 9,
-                2,
-                0,
+                4,
+                0.5f,
                 new BiomeFilters(emptyList, emptyList),
                 true
         ));
@@ -44,10 +57,10 @@ public class GoldOreTweak implements ITemplate {
                 "minecraft:gold_ore",
                 Collections.singletonList("stone_ore_replaceables"),
                 Distribution.UNIFORM,
-                1,
-                32,
+                -64,
+                -48,
                 9,
-                2,
+                0.5f,
                 0.5f,
                 new BiomeFilters(emptyList, emptyList),
                 true

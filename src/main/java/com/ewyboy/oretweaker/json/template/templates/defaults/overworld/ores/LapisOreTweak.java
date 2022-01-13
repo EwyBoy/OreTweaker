@@ -30,12 +30,25 @@ public class LapisOreTweak implements ITemplate {
         entries.add(new OreEntry(
                 "minecraft:lapis_ore",
                 Collections.singletonList("stone_ore_replaceables"),
-                Distribution.UNIFORM,
-                1,
-                30,
-                6,
-                3,
+                Distribution.TRIANGLE,
+                -32,
+                32,
+                7,
+                4,
                 0,
+                new BiomeFilters(emptyList, emptyList),
+                true
+        ));
+
+        entries.add(new OreEntry(
+                "minecraft:lapis_ore",
+                Collections.singletonList("stone_ore_replaceables"),
+                Distribution.UNIFORM,
+                -64,
+                64,
+                7,
+                2,
+                1.0f,
                 new BiomeFilters(emptyList, emptyList),
                 true
         ));

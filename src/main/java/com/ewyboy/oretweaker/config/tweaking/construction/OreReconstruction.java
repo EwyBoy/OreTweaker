@@ -222,8 +222,8 @@ public class OreReconstruction {
         placementBuilder.add(InSquarePlacement.spread());
 
         switch (distribution) {
-            case TRIANGLE -> placementBuilder.add(HeightRangePlacement.uniform(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)));
-            case UNIFORM -> placementBuilder.add(HeightRangePlacement.triangle(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)));
+            case TRIANGLE -> placementBuilder.add(HeightRangePlacement.triangle(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)));
+            case UNIFORM -> placementBuilder.add(HeightRangePlacement.uniform(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)));
             case NONE -> {}
         }
 

@@ -35,8 +35,14 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Templates {
+
+    public static final List<String> MOUNTAIN = Collections.singletonList("MOUNTAIN");
+    public static final List<String> BADLANDS = Arrays.asList("minecraft:badlands", "minecraft:eroded_badlands", "minecraft:wooded_badlands");
 
     public static final class GeneratedTemplates {
         public static final DefaultTemplate DEFAULT_TEMPLATE = new DefaultTemplate();
@@ -68,11 +74,11 @@ public class Templates {
         public static final RedstoneOreTweak REDSTONE_ORE_TWEAK = new RedstoneOreTweak();
 
         public static final AndesiteTweak ANDESITE_TWEAK = new AndesiteTweak();
-        public static final DeepslateTweak DEEPSLATE_TWEAK = new DeepslateTweak();
         public static final DioriteTweak DIORITE_TWEAK = new DioriteTweak();
         public static final DirtTweak DIRT_TWEAK = new DirtTweak();
+        public static final ClayTweak CLAY_TWEAK = new ClayTweak();
         public static final GraniteTweak GRANITE_TWEAK = new GraniteTweak();
-        public static final InfestedStoneTweak INFESTED_STONE_TWEAK = new InfestedStoneTweak();
+        public static final InfestedTweak INFESTED_STONE_TWEAK = new InfestedTweak();
         public static final TuffTweak TUFF_TWEAK = new TuffTweak();
 
         public static final AncientDebrisTweak ANCIENT_DEBRIS_TWEAK = new AncientDebrisTweak();
@@ -97,11 +103,11 @@ public class Templates {
         public static final RedstoneOreTweak REDSTONE_ORE_TWEAK = new RedstoneOreTweak();
 
         public static final AndesiteTweak ANDESITE_TWEAK = new AndesiteTweak();
-        public static final DeepslateTweak DEEPSLATE_TWEAK = new DeepslateTweak();
         public static final DioriteTweak DIORITE_TWEAK = new DioriteTweak();
         public static final DirtTweak DIRT_TWEAK = new DirtTweak();
+        public static final ClayTweak CLAY_TWEAK = new ClayTweak();
         public static final GraniteTweak GRANITE_TWEAK = new GraniteTweak();
-        public static final InfestedStoneTweak INFESTED_STONE_TWEAK = new InfestedStoneTweak();
+        public static final InfestedTweak INFESTED_STONE_TWEAK = new InfestedTweak();
         public static final TuffTweak TUFF_TWEAK = new TuffTweak();
 
         public static final AncientDebrisTweak ANCIENT_DEBRIS_TWEAK = new AncientDebrisTweak();

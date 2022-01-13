@@ -31,10 +31,10 @@ public class MagmaBlockTweak implements ITemplate {
                 "minecraft:magma_block",
                 Collections.singletonList("minecraft:netherrack"),
                 Distribution.UNIFORM,
-                26,
+                27,
                 36,
-                10,
-                15,
+                33,
+                4,
                 0,
                 new BiomeFilters(emptyList, emptyList),
                 true
