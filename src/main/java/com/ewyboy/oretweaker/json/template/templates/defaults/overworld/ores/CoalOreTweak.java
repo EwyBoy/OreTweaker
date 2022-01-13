@@ -29,7 +29,7 @@ public class CoalOreTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:coal_ore",
-                Collections.singletonList("stone_ore_replaceables"),
+                Collections.singletonList("STONE_ORE_REPLACEABLES"),
                 Distribution.UNIFORM,
                 136,
                 256,
@@ -41,7 +41,7 @@ public class CoalOreTweak implements ITemplate {
         ));
         entries.add(new OreEntry(
                 "minecraft:coal_ore",
-                Collections.singletonList("stone_ore_replaceables"),
+                Collections.singletonList("STONE_ORE_REPLACEABLES"),
                 Distribution.TRIANGLE,
                 0,
                 192,

@@ -29,7 +29,7 @@ public class GravelTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:gravel",
-                Collections.singletonList("base_stone_overworld"),
+                Collections.singletonList("BASE_STONE_OVERWORLD"),
                 Distribution.UNIFORM,
                 -64,
                 256,

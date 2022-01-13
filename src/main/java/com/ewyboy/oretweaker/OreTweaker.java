@@ -5,15 +5,13 @@ import com.ewyboy.oretweaker.json.DirectoryHandler;
 import com.ewyboy.oretweaker.json.InfoHandler;
 import com.ewyboy.oretweaker.json.JSONHandler;
 import com.ewyboy.oretweaker.json.template.Templates;
-import com.ewyboy.oretweaker.config.tweaking.OreManager;
+import com.ewyboy.oretweaker.tweaking.OreManager;
 import com.ewyboy.oretweaker.util.ModLogger;
 import net.minecraftforge.fml.IExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.nio.file.Files;
 
@@ -31,7 +29,6 @@ public class OreTweaker {
         DirectoryHandler.setup();
         Settings.setup();
         Templates.setup();
-        JSONHandler.setup();
         InfoHandler.setup();
         OreManager.setup();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this :: loadComplete);
@@ -39,8 +36,8 @@ public class OreTweaker {
 
     private static void isFirstTimeSetup() {
         if (!Files.exists(DirectoryHandler.ORE_TWEAKER_PATH)) {
-            initSetup = true;
             ModLogger.info("Ore Tweaker detected time setup!");
+            initSetup = true;
         }
     }
 

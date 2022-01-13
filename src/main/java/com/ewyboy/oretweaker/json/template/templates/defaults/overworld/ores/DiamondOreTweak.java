@@ -29,7 +29,7 @@ public class DiamondOreTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:diamond_ore",
-                Collections.singletonList("stone_ore_replaceables"),
+                Collections.singletonList("STONE_ORE_REPLACEABLES"),
                 Distribution.TRIANGLE,
                 -144,
                 16,
@@ -41,7 +41,7 @@ public class DiamondOreTweak implements ITemplate {
         ));
         entries.add(new OreEntry(
                 "minecraft:diamond_ore",
-                Collections.singletonList("stone_ore_replaceables"),
+                Collections.singletonList("STONE_ORE_REPLACEABLES"),
                 Distribution.TRIANGLE,
                 -144,
                 16,
@@ -53,7 +53,7 @@ public class DiamondOreTweak implements ITemplate {
         ));
         entries.add(new OreEntry(
                 "minecraft:diamond_ore",
-                Collections.singletonList("stone_ore_replaceables"),
+                Collections.singletonList("STONE_ORE_REPLACEABLES"),
                 Distribution.TRIANGLE,
                 -144,
                 16,

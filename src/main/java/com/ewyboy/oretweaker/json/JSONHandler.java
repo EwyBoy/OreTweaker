@@ -22,15 +22,12 @@ import java.util.stream.Stream;
 
 public class JSONHandler {
 
-    public static boolean isAutoUpdating = false;
-
     private static final Gson gson = new Gson();
-    public static final File OLD_JSON = new File(FMLPaths.CONFIGDIR.get() + "/oretweaker/OreTweaker.json");
 
     public static OreConfig oreConfig = new OreConfig(new ArrayList<>());
 
     public static void loadComplete() {
-        if (Settings.SETTINGS.regenerateDefaultSettings.get() && !isAutoUpdating) {
+        if (Settings.SETTINGS.regenerateDefaultSettings.get()) {
             Templates.regenerateDefaultDataFromTemplate();
         }
 
@@ -50,44 +47,6 @@ public class JSONHandler {
             e.printStackTrace();
         }
         ModLogger.info(oreConfig.toString());
-    }
-
-    private static void autoUpdater() {
-        if (OLD_JSON.exists()) {
-            isAutoUpdating = true;
-            ModLogger.info("Auto updating OreTweaker to v2 data structure!");
-            try (Reader reader = new FileReader(OLD_JSON)) {
-                OreConfig oldConfig = gson.fromJson(reader, OreConfig.class);
-                oldConfig.getOreConfig().forEach(JSONHandler :: generateJSON);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            DirectoryHandler.createDirectories(DirectoryHandler.BACKUP_PATH);
-            OLD_JSON.renameTo(new File(FMLPaths.CONFIGDIR.get() + "/oretweaker/backup/OreTweaker.json"));
-        }
-    }
-
-    public static void generateJSON(OreEntry entry) {
-        String fileName = entry.getOre().split(":")[1].toLowerCase(Locale.ROOT);
-        File file = new File(FMLPaths.CONFIGDIR.get() + "/oretweaker/data/" + fileName + ".json");
-        List<OreEntry> oreList = new ArrayList<>();
-
-        if (file.exists()) {
-            try (Reader reader = new FileReader(file)) {
-                OreConfig config = gson.fromJson(reader, OreConfig.class);
-                oreList.addAll(config.getOreConfig());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        ModLogger.info("Creating Ore Tweaker Data File: " + fileName);
-        oreList.add(entry);
-        JSONHandler.writeJson(file, new OreConfig(oreList));
-    }
-
-    public static void setup() {
-        autoUpdater();
     }
 
     public static boolean containsEntry(OreEntry entry) {

@@ -29,7 +29,7 @@ public class AncientDebrisTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:ancient_debris",
-                Collections.singletonList("base_stone_nether"),
+                Collections.singletonList("BASE_STONE_NETHER"),
                 Distribution.TRIANGLE,
                 8,
                 24,
@@ -41,7 +41,7 @@ public class AncientDebrisTweak implements ITemplate {
         ));
         entries.add(new OreEntry(
                 "minecraft:ancient_debris",
-                Collections.singletonList("base_stone_nether"),
+                Collections.singletonList("BASE_STONE_NETHER"),
                 Distribution.UNIFORM,
                 8,
                 118,

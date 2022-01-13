@@ -17,7 +17,7 @@ public class ClayTweak implements ITemplate {
 
     @Override
     public String templateName() {
-        return "dirt";
+        return "clay";
     }
 
     @Override
@@ -29,14 +29,14 @@ public class ClayTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:clay",
-                Collections.singletonList("base_stone_overworld"),
+                Collections.singletonList("BASE_STONE_OVERWORLD"),
                 Distribution.UNIFORM,
                 0,
                 256,
                 33,
                 46,
                 0,
-                new BiomeFilters(emptyList, Collections.singletonList("RIVER")),
+                new BiomeFilters(emptyList, Collections.singletonList("minecraft:lush_caves")),
                 true
         ));
     }

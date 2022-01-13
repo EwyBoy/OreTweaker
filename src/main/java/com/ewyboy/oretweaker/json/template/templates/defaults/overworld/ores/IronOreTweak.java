@@ -29,7 +29,7 @@ public class IronOreTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:iron_ore",
-                Collections.singletonList("stone_ore_replaceables"),
+                Collections.singletonList("STONE_ORE_REPLACEABLES"),
                 Distribution.TRIANGLE,
                 80,
                 384,
@@ -41,7 +41,7 @@ public class IronOreTweak implements ITemplate {
         ));
         entries.add(new OreEntry(
                 "minecraft:iron_ore",
-                Collections.singletonList("stone_ore_replaceables"),
+                Collections.singletonList("STONE_ORE_REPLACEABLES"),
                 Distribution.TRIANGLE,
                 -24,
                 56,
@@ -53,7 +53,7 @@ public class IronOreTweak implements ITemplate {
         ));
         entries.add(new OreEntry(
                 "minecraft:iron_ore",
-                Collections.singletonList("stone_ore_replaceables"),
+                Collections.singletonList("STONE_ORE_REPLACEABLES"),
                 Distribution.UNIFORM,
                 -64,
                 72,

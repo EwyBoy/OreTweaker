@@ -29,7 +29,7 @@ public class GraniteTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:granite",
-                Collections.singletonList("base_stone_overworld"),
+                Collections.singletonList("STONE_ORE_REPLACEABLES"),
                 Distribution.UNIFORM,
                 64,
                 128,
@@ -42,7 +42,7 @@ public class GraniteTweak implements ITemplate {
 
         entries.add(new OreEntry(
                 "minecraft:granite",
-                Collections.singletonList("base_stone_overworld"),
+                Collections.singletonList("BASE_STONE_OVERWORLD"),
                 Distribution.UNIFORM,
                 0,
                 60,

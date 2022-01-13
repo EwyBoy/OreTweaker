@@ -29,7 +29,7 @@ public class TuffTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:tuff",
-                Collections.singletonList("base_stone_overworld"),
+                Collections.singletonList("BASE_STONE_OVERWORLD"),
                 Distribution.UNIFORM,
                 -64,
                 0,

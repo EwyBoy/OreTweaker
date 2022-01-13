@@ -29,7 +29,7 @@ public class GoldOreTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:gold_ore",
-                Collections.singletonList("stone_ore_replaceables"),
+                Collections.singletonList("STONE_ORE_REPLACEABLES"),
                 Distribution.UNIFORM,
                 32,
                 256,
@@ -42,7 +42,7 @@ public class GoldOreTweak implements ITemplate {
 
         entries.add(new OreEntry(
                 "minecraft:gold_ore",
-                Collections.singletonList("stone_ore_replaceables"),
+                Collections.singletonList("STONE_ORE_REPLACEABLES"),
                 Distribution.TRIANGLE,
                 -64,
                 32,
@@ -55,7 +55,7 @@ public class GoldOreTweak implements ITemplate {
 
         entries.add(new OreEntry(
                 "minecraft:gold_ore",
-                Collections.singletonList("stone_ore_replaceables"),
+                Collections.singletonList("STONE_ORE_REPLACEABLES"),
                 Distribution.UNIFORM,
                 -64,
                 -48,

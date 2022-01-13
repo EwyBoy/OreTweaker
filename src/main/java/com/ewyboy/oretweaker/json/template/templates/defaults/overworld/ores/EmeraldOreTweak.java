@@ -29,14 +29,14 @@ public class EmeraldOreTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:emerald_ore",
-                Collections.singletonList("stone_ore_replaceables"),
+                Collections.singletonList("STONE_ORE_REPLACEABLES"),
                 Distribution.TRIANGLE,
                 -16,
                 480,
                 3,
                 100,
                 0,
-                new BiomeFilters(emptyList, Templates.BADLANDS),
+                new BiomeFilters(emptyList, Templates.MOUNTAIN),
                 true
         ));
     }

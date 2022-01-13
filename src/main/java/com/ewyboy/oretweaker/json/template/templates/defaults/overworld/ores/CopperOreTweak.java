@@ -29,7 +29,7 @@ public class CopperOreTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:copper_ore",
-                Collections.singletonList("stone_ore_replaceables"),
+                Collections.singletonList("STONE_ORE_REPLACEABLES"),
                 Distribution.TRIANGLE,
                 -16,
                 112,
@@ -41,7 +41,7 @@ public class CopperOreTweak implements ITemplate {
         ));
         entries.add(new OreEntry(
                 "minecraft:copper_ore",
-                Collections.singletonList("stone_ore_replaceables"),
+                Collections.singletonList("STONE_ORE_REPLACEABLES"),
                 Distribution.TRIANGLE,
                 -16,
                 112,

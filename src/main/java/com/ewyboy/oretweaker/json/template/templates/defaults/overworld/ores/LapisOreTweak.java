@@ -29,7 +29,7 @@ public class LapisOreTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:lapis_ore",
-                Collections.singletonList("stone_ore_replaceables"),
+                Collections.singletonList("STONE_ORE_REPLACEABLES"),
                 Distribution.TRIANGLE,
                 -32,
                 32,
@@ -42,7 +42,7 @@ public class LapisOreTweak implements ITemplate {
 
         entries.add(new OreEntry(
                 "minecraft:lapis_ore",
-                Collections.singletonList("stone_ore_replaceables"),
+                Collections.singletonList("STONE_ORE_REPLACEABLES"),
                 Distribution.UNIFORM,
                 -64,
                 64,

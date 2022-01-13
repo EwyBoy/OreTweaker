@@ -5,9 +5,6 @@ import com.ewyboy.oretweaker.config.Settings;
 import com.ewyboy.oretweaker.json.DirectoryHandler;
 import com.ewyboy.oretweaker.json.JSONHandler;
 import com.ewyboy.oretweaker.json.objects.OreConfig;
-import com.ewyboy.oretweaker.json.template.templates.collectives.DefaultNetherTemplate;
-import com.ewyboy.oretweaker.json.template.templates.collectives.DefaultOverworldTemplate;
-import com.ewyboy.oretweaker.json.template.templates.collectives.DefaultTemplate;
 import com.ewyboy.oretweaker.json.template.templates.defaults.common.GravelTweak;
 import com.ewyboy.oretweaker.json.template.templates.defaults.nether.ore.AncientDebrisTweak;
 import com.ewyboy.oretweaker.json.template.templates.defaults.nether.ore.NetherGoldOreTweak;
@@ -45,9 +42,6 @@ public class Templates {
     public static final List<String> BADLANDS = Arrays.asList("minecraft:badlands", "minecraft:eroded_badlands", "minecraft:wooded_badlands");
 
     public static final class GeneratedTemplates {
-        public static final DefaultTemplate DEFAULT_TEMPLATE = new DefaultTemplate();
-        public static final DefaultNetherTemplate DEFAULT_NETHER_TEMPLATE = new DefaultNetherTemplate();
-        public static final DefaultOverworldTemplate DEFAULT_OVERWORLD_TEMPLATE = new DefaultOverworldTemplate();
 
         public static final RemoveAllOres REMOVE_ALL_ORES = new RemoveAllOres();
         public static final RemoveAllOresNether REMOVE_ALL_ORES_NETHER = new RemoveAllOresNether();
@@ -121,15 +115,15 @@ public class Templates {
         public static final GravelTweak GRAVEL_TWEAK = new GravelTweak();
     }
 
+    private static final String Templates = FMLPaths.CONFIGDIR.get().toAbsolutePath() + "/" + OreTweaker.MOD_ID + "/templates";
+
     public static final class Directories {
-        public static final Path COLLECTIVES_PATH = Paths.get(FMLPaths.CONFIGDIR.get().toAbsolutePath() + "/" + OreTweaker.MOD_ID + "/templates", "collectives");
-        public static final Path DEFAULTS_PATH = Paths.get(FMLPaths.CONFIGDIR.get().toAbsolutePath() + "/" + OreTweaker.MOD_ID + "/templates", "defaults");
-        public static final Path REMOVE_PATH = Paths.get(FMLPaths.CONFIGDIR.get().toAbsolutePath() + "/" + OreTweaker.MOD_ID + "/templates", "remove");
-        public static final Path OTHER_PATH = Paths.get(FMLPaths.CONFIGDIR.get().toAbsolutePath() + "/" + OreTweaker.MOD_ID + "/templates", "other");
+        public static final Path DEFAULTS_PATH = Paths.get(Templates, "defaults");
+        public static final Path REMOVE_PATH = Paths.get(Templates, "remove");
+        public static final Path OTHER_PATH = Paths.get(Templates, "other");
     }
 
     public static void setupDirectories() {
-        DirectoryHandler.createDirectories(Directories.COLLECTIVES_PATH);
         DirectoryHandler.createDirectories(Directories.DEFAULTS_PATH);
         DirectoryHandler.createDirectories(Directories.REMOVE_PATH);
         DirectoryHandler.createDirectories(Directories.OTHER_PATH);

@@ -17,7 +17,7 @@ public class InfestedTweak implements ITemplate {
 
     @Override
     public String templateName() {
-        return "infested_stone";
+        return "infested";
     }
 
     @Override
@@ -29,26 +29,26 @@ public class InfestedTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:infested_stone",
-                Collections.singletonList("stone_ore_replaceables"),
+                Collections.singletonList("BASE_STONE_OVERWORLD"),
                 Distribution.UNIFORM,
                 -64,
                 63,
                 9,
                 7,
                 0,
-                new BiomeFilters(emptyList, Templates.BADLANDS),
+                new BiomeFilters(emptyList, Templates.MOUNTAIN),
                 true
         ));
         entries.add(new OreEntry(
                 "minecraft:infested_deepslate",
-                Collections.singletonList("deepslate_ore_replaceables"),
+                Collections.singletonList("DEEPSLATE_ORE_REPLACEABLES"),
                 Distribution.UNIFORM,
                 -64,
                 63,
                 9,
                 7,
                 0,
-                new BiomeFilters(emptyList, Templates.BADLANDS),
+                new BiomeFilters(emptyList, Templates.MOUNTAIN),
                 true
         ));
     }

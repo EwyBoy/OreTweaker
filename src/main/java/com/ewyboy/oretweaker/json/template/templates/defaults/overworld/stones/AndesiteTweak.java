@@ -29,7 +29,7 @@ public class AndesiteTweak implements ITemplate {
     public void buildTemplateEntries() {
         entries.add(new OreEntry(
                 "minecraft:andesite",
-                Collections.singletonList("base_stone_overworld"),
+                Collections.singletonList("BASE_STONE_OVERWORLD"),
                 Distribution.UNIFORM,
                 64,
                 128,
@@ -42,7 +42,7 @@ public class AndesiteTweak implements ITemplate {
 
         entries.add(new OreEntry(
                 "minecraft:andesite",
-                Collections.singletonList("base_stone_overworld"),
+                Collections.singletonList("BASE_STONE_OVERWORLD"),
                 Distribution.UNIFORM,
                 0,
                 60,
