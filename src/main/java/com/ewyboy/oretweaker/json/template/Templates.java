@@ -14,7 +14,6 @@ import com.ewyboy.oretweaker.json.template.templates.defaults.nether.stone.Magma
 import com.ewyboy.oretweaker.json.template.templates.defaults.nether.stone.SoulSandTweak;
 import com.ewyboy.oretweaker.json.template.templates.defaults.overworld.ores.*;
 import com.ewyboy.oretweaker.json.template.templates.defaults.overworld.stones.*;
-import com.ewyboy.oretweaker.json.template.templates.other.FuckSilverfishTemplate;
 import com.ewyboy.oretweaker.json.template.templates.remove.RemoveEverything;
 import com.ewyboy.oretweaker.json.template.templates.remove.RemoveEverythingNether;
 import com.ewyboy.oretweaker.json.template.templates.remove.RemoveEverythingOverworld;
@@ -33,13 +32,25 @@ import java.lang.reflect.Field;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class Templates {
 
-    public static final List<String> MOUNTAIN = Collections.singletonList("MOUNTAIN");
-    public static final List<String> BADLANDS = Arrays.asList("minecraft:badlands", "minecraft:eroded_badlands", "minecraft:wooded_badlands");
+    public static final List<String> MOUNTAIN = Arrays.asList(
+            "minecraft:windswept_hills",
+            "minecraft:grove",
+            "minecraft:meadow",
+            "minecraft:snowy_slopes",
+            "minecraft:frozen_peaks",
+            "minecraft:jagged_peaks",
+            "minecraft:stony_peaks"
+    );
+
+    public static final List<String> BADLANDS = Arrays.asList(
+            "minecraft:badlands",
+            "minecraft:eroded_badlands",
+            "minecraft:wooded_badlands"
+    );
 
     public static final class GeneratedTemplates {
 
@@ -56,7 +67,6 @@ public class Templates {
         public static final RemoveEverythingOverworld REMOVE_EVERYTHING_OVERWORLD = new RemoveEverythingOverworld();
 
         public static final RemoveIgneousRocks REMOVE_IGNEOUS_ROCKS = new RemoveIgneousRocks();
-        public static final FuckSilverfishTemplate FUCK_SILVERFISH_TEMPLATE = new FuckSilverfishTemplate();
 
         public static final CoalOreTweak COAL_ORE_TWEAK = new CoalOreTweak();
         public static final CopperOreTweak COPPER_ORE_TWEAK = new CopperOreTweak();
@@ -120,13 +130,11 @@ public class Templates {
     public static final class Directories {
         public static final Path DEFAULTS_PATH = Paths.get(Templates, "defaults");
         public static final Path REMOVE_PATH = Paths.get(Templates, "remove");
-        public static final Path OTHER_PATH = Paths.get(Templates, "other");
     }
 
     public static void setupDirectories() {
         DirectoryHandler.createDirectories(Directories.DEFAULTS_PATH);
         DirectoryHandler.createDirectories(Directories.REMOVE_PATH);
-        DirectoryHandler.createDirectories(Directories.OTHER_PATH);
     }
 
 
