@@ -18,7 +18,7 @@
 [![Curseforge](http://cf.way2muchnoise.eu/full_242436_downloads.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/ore-tweaker)
 
 
-### Add, remove, tweak and configure ore and underground generation features for Minecraft Forge 1.16.5
+### Add, remove, tweak and configure ore and underground generation features for Minecraft Forge
 
 ## Learn how to use at the wiki:
 ### https://github.com/EwyBoy/Quick-Harvest/wiki
