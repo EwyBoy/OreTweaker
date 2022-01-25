@@ -36,7 +36,7 @@ public class NetherQuartzOreTweak implements ITemplate {
                 14,
                 16,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.NETHER),
                 true
         ));
         entries.add(new OreEntry(
@@ -48,7 +48,7 @@ public class NetherQuartzOreTweak implements ITemplate {
                 14,
                 32,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.NETHER),
                 true
         ));
     }

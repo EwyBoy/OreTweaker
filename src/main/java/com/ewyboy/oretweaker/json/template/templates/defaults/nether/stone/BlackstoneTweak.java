@@ -36,7 +36,7 @@ public class BlackstoneTweak implements ITemplate {
                 33,
                 2,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.NETHER),
                 true
         ));
     }

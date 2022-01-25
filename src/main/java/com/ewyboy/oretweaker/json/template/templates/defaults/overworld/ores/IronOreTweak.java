@@ -36,7 +36,7 @@ public class IronOreTweak implements ITemplate {
                 9,
                 90,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
         entries.add(new OreEntry(
@@ -48,7 +48,7 @@ public class IronOreTweak implements ITemplate {
                 9,
                 10,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
         entries.add(new OreEntry(
@@ -60,7 +60,7 @@ public class IronOreTweak implements ITemplate {
                 4,
                 10,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
     }

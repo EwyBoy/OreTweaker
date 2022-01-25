@@ -36,7 +36,7 @@ public class MagmaBlockTweak implements ITemplate {
                 33,
                 4,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.NETHER),
                 true
         ));
     }

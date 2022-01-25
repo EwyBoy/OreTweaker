@@ -36,7 +36,7 @@ public class CoalOreTweak implements ITemplate {
                 17,
                 30,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
         entries.add(new OreEntry(
@@ -48,7 +48,7 @@ public class CoalOreTweak implements ITemplate {
                 17,
                 20,
                 0.5f,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
     }

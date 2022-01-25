@@ -36,7 +36,7 @@ public class DirtTweak implements ITemplate {
                 33,
                 7,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
     }

@@ -36,7 +36,7 @@ public class GravelTweak implements ITemplate {
                 33,
                 14,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
 
@@ -49,7 +49,7 @@ public class GravelTweak implements ITemplate {
                 33,
                 2,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.NETHER),
                 true
         ));
     }

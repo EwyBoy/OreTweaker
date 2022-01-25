@@ -36,7 +36,7 @@ public class TuffTweak implements ITemplate {
                 32,
                 2,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
     }

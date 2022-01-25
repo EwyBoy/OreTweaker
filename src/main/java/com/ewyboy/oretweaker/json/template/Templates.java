@@ -32,11 +32,17 @@ import java.lang.reflect.Field;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Templates {
 
-    public static final List<String> MOUNTAIN = Arrays.asList(
+    public static final List<String> MOUNTAIN_TAG = Collections.singletonList("MOUNTAIN");
+
+    public static final List<String> OVERWORLD = Collections.singletonList("OVERWORLD");
+    public static final List<String> NETHER = Collections.singletonList("NETHER");
+
+    public static final List<String> MOUNTAIN_LIST = Arrays.asList(
             "minecraft:windswept_hills",
             "minecraft:grove",
             "minecraft:meadow",
@@ -45,6 +51,7 @@ public class Templates {
             "minecraft:jagged_peaks",
             "minecraft:stony_peaks"
     );
+
 
     public static final List<String> BADLANDS = Arrays.asList(
             "minecraft:badlands",

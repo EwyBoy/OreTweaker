@@ -36,7 +36,7 @@ public class EmeraldOreTweak implements ITemplate {
                 3,
                 100,
                 0,
-                new BiomeFilters(emptyList, Templates.MOUNTAIN),
+                new BiomeFilters(emptyList, Templates.MOUNTAIN_TAG),
                 true
         ));
     }

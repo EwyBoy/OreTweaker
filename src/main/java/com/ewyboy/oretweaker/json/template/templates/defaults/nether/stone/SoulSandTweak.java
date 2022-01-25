@@ -36,7 +36,7 @@ public class SoulSandTweak implements ITemplate {
                 12,
                 12,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.NETHER),
                 true
         ));
     }

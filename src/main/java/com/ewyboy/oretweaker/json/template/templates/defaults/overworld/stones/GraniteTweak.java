@@ -36,7 +36,7 @@ public class GraniteTweak implements ITemplate {
                 64,
                 0.1666666666666f,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
 
@@ -49,7 +49,7 @@ public class GraniteTweak implements ITemplate {
                 64,
                 2,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
 

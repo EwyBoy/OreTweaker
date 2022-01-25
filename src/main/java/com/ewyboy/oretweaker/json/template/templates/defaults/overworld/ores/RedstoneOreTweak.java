@@ -36,7 +36,7 @@ public class RedstoneOreTweak implements ITemplate {
                 4,
                 8,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
 
@@ -49,7 +49,7 @@ public class RedstoneOreTweak implements ITemplate {
                 8,
                 8,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
     }

@@ -36,7 +36,7 @@ public class LapisOreTweak implements ITemplate {
                 7,
                 4,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
 
@@ -49,7 +49,7 @@ public class LapisOreTweak implements ITemplate {
                 7,
                 2,
                 1.0f,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
     }

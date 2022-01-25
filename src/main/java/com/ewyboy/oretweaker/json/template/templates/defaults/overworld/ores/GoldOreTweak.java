@@ -49,7 +49,7 @@ public class GoldOreTweak implements ITemplate {
                 9,
                 4,
                 0.5f,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
 
@@ -62,7 +62,7 @@ public class GoldOreTweak implements ITemplate {
                 9,
                 0.5f,
                 0.5f,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
     }

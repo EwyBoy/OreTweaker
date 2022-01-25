@@ -36,7 +36,7 @@ public class CopperOreTweak implements ITemplate {
                 10,
                 16,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
         entries.add(new OreEntry(

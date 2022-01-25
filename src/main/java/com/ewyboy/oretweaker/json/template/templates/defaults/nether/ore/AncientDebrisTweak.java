@@ -36,7 +36,7 @@ public class AncientDebrisTweak implements ITemplate {
                 3,
                 1,
                 1.0F,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.NETHER),
                 true
         ));
         entries.add(new OreEntry(
@@ -48,7 +48,7 @@ public class AncientDebrisTweak implements ITemplate {
                 2,
                 1,
                 1.0F,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.NETHER),
                 true
         ));
     }

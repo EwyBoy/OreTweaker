@@ -36,7 +36,7 @@ public class DiamondOreTweak implements ITemplate {
                 4,
                 7,
                 0.5f,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
         entries.add(new OreEntry(
@@ -48,7 +48,7 @@ public class DiamondOreTweak implements ITemplate {
                 12,
                 0.1111111111111f,
                 0.7f,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
         entries.add(new OreEntry(
@@ -60,7 +60,7 @@ public class DiamondOreTweak implements ITemplate {
                 8,
                 4,
                 1.0f,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.OVERWORLD),
                 true
         ));
     }

@@ -36,7 +36,7 @@ public class NetherGoldOreTweak implements ITemplate {
                 10,
                 10,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.NETHER),
                 true
         ));
         entries.add(new OreEntry(
@@ -48,7 +48,7 @@ public class NetherGoldOreTweak implements ITemplate {
                 10,
                 20,
                 0,
-                new BiomeFilters(emptyList, emptyList),
+                new BiomeFilters(emptyList, Templates.NETHER),
                 true
         ));
     }

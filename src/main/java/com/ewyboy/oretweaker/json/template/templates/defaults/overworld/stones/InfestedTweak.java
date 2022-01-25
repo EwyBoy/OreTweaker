@@ -36,7 +36,7 @@ public class InfestedTweak implements ITemplate {
                 9,
                 7,
                 0,
-                new BiomeFilters(emptyList, Templates.MOUNTAIN),
+                new BiomeFilters(emptyList, Templates.MOUNTAIN_TAG),
                 true
         ));
         entries.add(new OreEntry(
@@ -48,7 +48,7 @@ public class InfestedTweak implements ITemplate {
                 9,
                 7,
                 0,
-                new BiomeFilters(emptyList, Templates.MOUNTAIN),
+                new BiomeFilters(emptyList, Templates.MOUNTAIN_TAG),
                 true
         ));
     }
