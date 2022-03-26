@@ -1,6 +1,5 @@
 package com.ewyboy.oretweaker.tweaking.construction;
 
-import com.ewyboy.oretweaker.OreTweaker;
 import com.ewyboy.oretweaker.config.Settings;
 import com.ewyboy.oretweaker.json.JSONHandler;
 import com.ewyboy.oretweaker.json.objects.biome.BiomeFilters;
@@ -8,12 +7,13 @@ import com.ewyboy.oretweaker.json.objects.ore.Distribution;
 import com.ewyboy.oretweaker.json.objects.biome.BiomeFiltering;
 import com.ewyboy.oretweaker.json.objects.OreEntry;
 import com.ewyboy.oretweaker.util.ModLogger;
-import net.minecraft.core.Registry;
-import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.core.Holder;
+import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -21,7 +21,6 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
@@ -39,13 +38,13 @@ import static net.minecraft.data.worldgen.features.OreFeatures.DEEPSLATE_ORE_REP
 
 public class OreReconstruction {
 
-    public static final List<PlacedFeature> reconstructedOres = new LinkedList<>();
+    public static final List<Holder<PlacedFeature>> reconstructedOres = new LinkedList<>();
 
     public static void reconstruct(IEventBus forgeBus) {
         forgeBus.addListener(EventPriority.LOWEST, OreReconstruction :: BiomeLoadingEvent);
     }
 
-    private static final Map<PlacedFeature, BiomeFilters> biomeFilterMap = new HashMap<>();
+    private static final Map<Holder<PlacedFeature>, BiomeFilters> biomeFilterMap = new HashMap<>();
 
     private static void reconstructFeatureFromJSON() {
         List<OreEntry> ores = JSONHandler.oreConfig.getOreConfig();
@@ -53,7 +52,8 @@ public class OreReconstruction {
             if (isReconstructableObject(ore)) {
                 try {
                     for (String replace : ore.getFillers()) {
-                        ConfiguredFeature<?, ?> reconstructedOre = reconstructFeature(
+
+                        Holder<ConfiguredFeature<OreConfiguration, ?>> configuredFeature = reconstructConfigured(
                                 ore,
                                 Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getOre()))),
                                 replace.toLowerCase(),
@@ -64,7 +64,8 @@ public class OreReconstruction {
                                 ore.getDiscardChanceOnAirExposure(),
                                 false
                         );
-                        PlacedFeature placedFeature = reconstructPlaced(reconstructedOre, Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getOre()))),
+
+                        Holder<PlacedFeature> placedFeature = reconstructPlaced(configuredFeature, Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getOre()))),
                                 Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(replace.toLowerCase()))),
                                 ore.getMinY(),
                                 ore.getMaxY(),
@@ -86,18 +87,18 @@ public class OreReconstruction {
         }
     }
 
-    private static ConfiguredFeature<?, ?> reconstructFeature(OreEntry entry, Block ore, String filler, int minY, int maxY, float spawnRate, int maxVeinSize, float discardChanceOnAirExposure, boolean isDeepslate) {
+    private static Holder<ConfiguredFeature<OreConfiguration, ?>> reconstructConfigured(OreEntry entry, Block ore, String filler, int minY, int maxY, float spawnRate, int maxVeinSize, float discardChanceOnAirExposure, boolean isDeepslate) {
         ModLogger.debug("Reconstructing ore: " + ore);
 
         String fillerName;
         Block fillerBlock = null;
-        Tag<Block> fillerTag = null;
+        TagKey<Block> fillerTag = null;
 
         if (filler.contains(":")) {
             fillerBlock = Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(filler)));
             fillerName = Objects.requireNonNull(fillerBlock.getRegistryName()).getPath();
         } else if (!filler.isEmpty()) {
-            fillerTag = BlockTags.bind(filler);
+            fillerTag = BlockTags.create(new ResourceLocation(filler));
             fillerName = filler;
         } else {
             return null;
@@ -113,49 +114,79 @@ public class OreReconstruction {
         );
 
         ModLogger.debug("Registry Name: " + registryName);
+        ModLogger.debug("Filler Block :: " + fillerBlock);
+        ModLogger.debug("Filler Tag :: " + fillerTag);
 
         if (fillerBlock != null) {
             if (hasDeepslateVariant(entry)) {
-                return register(registryName, reconstructConfiguredFeature(
-                        ore,
-                        getDeepslateVariant(entry),
-                        fillerBlock,
-                        maxVeinSize,
-                        discardChanceOnAirExposure
-                ));
+                return FeatureUtils.register(
+                        registryName, Feature.ORE, configureFeature(
+                                ore,
+                                getDeepslateVariant(entry),
+                                fillerBlock,
+                                maxVeinSize,
+                                discardChanceOnAirExposure
+                        )
+                );
             } else {
-                return register(registryName, reconstructConfiguredFeature(
-                        ore,
-                        fillerBlock,
-                        maxVeinSize,
-                        discardChanceOnAirExposure
-                ));
+                return FeatureUtils.register(
+                        registryName, Feature.ORE, configureFeature(
+                                ore,
+                                fillerBlock,
+                                maxVeinSize,
+                                discardChanceOnAirExposure
+                        )
+                );
             }
         }
 
-        if (fillerTag != null) {
+        if (!fillerTag.toString().isEmpty()) {
             if (hasDeepslateVariant(entry)) {
-                return register(registryName, reconstructConfiguredFeature(
-                        ore,
-                        getDeepslateVariant(entry),
-                        fillerTag,
-                        maxVeinSize,
-                        discardChanceOnAirExposure
-                ));
+                return FeatureUtils.register(
+                        registryName, Feature.ORE, configureFeature(
+                                ore,
+                                getDeepslateVariant(entry),
+                                fillerTag,
+                                maxVeinSize,
+                                discardChanceOnAirExposure
+                        )
+                );
             } else {
-                return register(registryName, reconstructConfiguredFeature(
-                        ore,
-                        fillerTag,
-                        maxVeinSize,
-                        discardChanceOnAirExposure
-                ));
+                return FeatureUtils.register(
+                        registryName, Feature.ORE, configureFeature(
+                                ore,
+                                fillerTag,
+                                maxVeinSize,
+                                discardChanceOnAirExposure
+                        )
+                );
             }
         }
 
         return null;
     }
 
-    private static PlacedFeature reconstructPlaced(ConfiguredFeature<?,?> feature, Block ore, Block filler, int minY, int maxY, float spawnRate, int maxVeinSize, Distribution distribution, boolean isDeepslate) {
+
+    private static OreConfiguration configureFeature(Block ore, Block deepslate_ore, Block fillerTag, int maxVeinSize, float discardChanceOnAirExposure) {
+        List<OreConfiguration.TargetBlockState> target = List.of(OreConfiguration.target(new BlockMatchTest(fillerTag), ore.defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, deepslate_ore.defaultBlockState()));
+        return new OreConfiguration(target, maxVeinSize, discardChanceOnAirExposure);
+    }
+
+    private static OreConfiguration configureFeature(Block ore, Block deepslate_ore, TagKey<Block> fillerTag, int maxVeinSize, float discardChanceOnAirExposure) {
+        List<OreConfiguration.TargetBlockState> target = List.of(OreConfiguration.target(new TagMatchTest(fillerTag), ore.defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, deepslate_ore.defaultBlockState()));
+        return new OreConfiguration(target, maxVeinSize, discardChanceOnAirExposure);
+    }
+
+    private static OreConfiguration configureFeature(Block ore, Block filler, int maxVeinSize, float discardChanceOnAirExposure) {
+        return new OreConfiguration(new BlockMatchTest(filler), ore.defaultBlockState(), maxVeinSize, discardChanceOnAirExposure);
+    }
+
+    private static OreConfiguration configureFeature(Block ore, TagKey<Block> filler, int maxVeinSize, float discardChanceOnAirExposure) {
+        return new OreConfiguration(new TagMatchTest(filler), ore.defaultBlockState(), maxVeinSize, discardChanceOnAirExposure);
+    }
+
+
+    private static Holder<PlacedFeature> reconstructPlaced(Holder<ConfiguredFeature<OreConfiguration, ?>> configuredFeature, Block ore, Block filler, int minY, int maxY, float spawnRate, int maxVeinSize, Distribution distribution, boolean isDeepslate) {
         ModLogger.debug("Reconstructing ore: " + ore);
         String registryName = String.format("%s_%s_%s_%s_%s_%s_placed",
                 Objects.requireNonNull(ore.getRegistryName()).getPath(),
@@ -168,8 +199,7 @@ public class OreReconstruction {
 
         ModLogger.debug("Registry Name: " + registryName);
 
-        return register(registryName, reconstructPlacedFeature(
-                feature,
+        return PlacementUtils.register(registryName, configuredFeature, buildPlacementModifiers(
                 spawnRate,
                 minY, maxY,
                 distribution
@@ -201,25 +231,8 @@ public class OreReconstruction {
         return deepslate_ore;
     }
 
-    private static ConfiguredFeature<?, ?> reconstructConfiguredFeature(Block ore, Block deepslate_ore, Block fillerTag, int maxVeinSize, float discardChanceOnAirExposure) {
-        List<OreConfiguration.TargetBlockState> target = List.of(OreConfiguration.target(new BlockMatchTest(fillerTag), ore.defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, deepslate_ore.defaultBlockState()));
-        return Feature.ORE.configured(new OreConfiguration(target, maxVeinSize, discardChanceOnAirExposure));
-    }
 
-    private static ConfiguredFeature<?, ?> reconstructConfiguredFeature(Block ore, Block deepslate_ore, Tag<Block> fillerTag, int maxVeinSize, float discardChanceOnAirExposure) {
-        List<OreConfiguration.TargetBlockState> target = List.of(OreConfiguration.target(new TagMatchTest(fillerTag), ore.defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, deepslate_ore.defaultBlockState()));
-        return Feature.ORE.configured(new OreConfiguration(target, maxVeinSize, discardChanceOnAirExposure));
-    }
-
-    private static ConfiguredFeature<?, ?> reconstructConfiguredFeature(Block ore, Block filler, int maxVeinSize, float discardChanceOnAirExposure) {
-        return Feature.ORE.configured(new OreConfiguration(new BlockMatchTest(filler), ore.defaultBlockState(), maxVeinSize, discardChanceOnAirExposure));
-    }
-
-    private static ConfiguredFeature<?, ?> reconstructConfiguredFeature(Block ore, Tag<Block> filler, int maxVeinSize, float discardChanceOnAirExposure) {
-        return Feature.ORE.configured(new OreConfiguration(new TagMatchTest(filler), ore.defaultBlockState(), maxVeinSize, discardChanceOnAirExposure));
-    }
-
-    private static PlacedFeature reconstructPlacedFeature(ConfiguredFeature<?, ?> configuredFeature, float spawnRate, int minY, int maxY, Distribution distribution) {
+    private static List<PlacementModifier> buildPlacementModifiers(float spawnRate, int minY, int maxY, Distribution distribution) {
         List<PlacementModifier> placementBuilder = new LinkedList<>();
 
         placementBuilder.add(spawnRate < 1 ? RarityFilter.onAverageOnceEvery((int) (1 / spawnRate)) : CountPlacement.of((int) spawnRate));
@@ -233,18 +246,11 @@ public class OreReconstruction {
 
         placementBuilder.add(BiomeFilter.biome());
 
-        return configuredFeature.placed(placementBuilder);
-    }
-
-    private static <FeatureConfig extends FeatureConfiguration> ConfiguredFeature<FeatureConfig, ?> register(String name, ConfiguredFeature<FeatureConfig, ?> configuredFeature) {
-        return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation(OreTweaker.MOD_ID, name), configuredFeature);
-    }
-    private static PlacedFeature register(String name, PlacedFeature placedFeature) {
-        return Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(OreTweaker.MOD_ID, name), placedFeature);
+        return placementBuilder;
     }
 
     private static boolean isReconstructableObject(OreEntry entry) {
-        return entry.getFillers() != null && entry.getMinY() != -1 && entry.getMaxY() != -1 && entry.getSpawnRate() != -1 && entry.getMaxVeinSize() != -1 && entry.getBiomeFilter().getBiomeBlacklist() != null && entry.getBiomeFilter().getBiomeWhitelist() != null;
+        return entry.getFillers() != null && entry.getMinY() != - 1 && entry.getMaxY() != - 1 && entry.getSpawnRate() != - 1 && entry.getMaxVeinSize() != - 1 && entry.getBiomeFilter().getBiomeBlacklist() != null && entry.getBiomeFilter().getBiomeWhitelist() != null;
     }
 
     private static List<String> setBiomeFiltering(List<String> blackList, List<String> whiteList) {
@@ -269,11 +275,11 @@ public class OreReconstruction {
         return biomeFilter;
     }
 
-    private static final Map<PlacedFeature, List<String>> biomeFilteringMap = new HashMap<>();
-    private static final Map<PlacedFeature, BiomeFiltering> biomeFilteringOptionMap = new HashMap<>();
+    private static final Map<Holder<PlacedFeature>, List<String>> biomeFilteringMap = new HashMap<>();
+    private static final Map<Holder<PlacedFeature>, BiomeFiltering> biomeFilteringOptionMap = new HashMap<>();
 
     private static void filterBiomes() {
-        for (PlacedFeature reconstructedOre : reconstructedOres) {
+        for (Holder<PlacedFeature> reconstructedOre : reconstructedOres) {
             biomeFilteringMap.put(reconstructedOre, applyBiomeDictionaryFiltering(
                     setBiomeFiltering(
                             biomeFilterMap.get(reconstructedOre).getBiomeBlacklist(),
@@ -288,7 +294,7 @@ public class OreReconstruction {
     }
 
     private static void buildBiomes(String biomeName, BiomeGenerationSettingsBuilder biomeBuilder) {
-        for (PlacedFeature reconstructedOre : reconstructedOres) {
+        for (Holder<PlacedFeature> reconstructedOre : reconstructedOres) {
             filterGeneration(
                     biomeName,
                     biomeFilteringMap.get(reconstructedOre),
@@ -308,20 +314,24 @@ public class OreReconstruction {
             reconstructed = true;
         }
 
-        if(!filteredBiomes) {
+        if (!filteredBiomes) {
             filterBiomes();
             filteredBiomes = true;
         }
-        
+
         buildBiomes(Objects.requireNonNull(event.getName()).toString(), event.getGeneration());
     }
 
-    private static void filterGeneration(String currentBiome, List<String> biomeFilter, BiomeFiltering filteringOption, BiomeGenerationSettingsBuilder generation, PlacedFeature reconstructedOre) {
+    private static void filterGeneration(String currentBiome, List<String> biomeFilter, BiomeFiltering filteringOption, BiomeGenerationSettingsBuilder generation, Holder<PlacedFeature> reconstructedOre) {
         switch (filteringOption) {
             case WHITELIST:
-                if (biomeFilter.contains(currentBiome)) generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, reconstructedOre); break;
+                if (biomeFilter.contains(currentBiome))
+                    generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, reconstructedOre);
+                break;
             case BLACKLIST:
-                if (!biomeFilter.contains(currentBiome)) generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, reconstructedOre); break;
+                if (! biomeFilter.contains(currentBiome))
+                    generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, reconstructedOre);
+                break;
             case NONE:
                 generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, reconstructedOre);
                 break;

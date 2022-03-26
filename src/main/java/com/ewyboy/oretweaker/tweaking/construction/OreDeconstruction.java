@@ -3,6 +3,7 @@ package com.ewyboy.oretweaker.tweaking.construction;
 import com.ewyboy.oretweaker.json.JSONHandler;
 import com.ewyboy.oretweaker.json.objects.OreEntry;
 import com.ewyboy.oretweaker.util.ModLogger;
+import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -18,11 +19,10 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Supplier;
 
 public class OreDeconstruction {
 
-    public static List<Supplier<PlacedFeature>> destroy = new LinkedList<>();
+    public static List<Holder<PlacedFeature>> destroy = new LinkedList<>();
 
     public static void deconstruct(IEventBus forgeBus) {
         forgeBus.addListener(EventPriority.LOWEST, OreDeconstruction :: BiomeLoadingEvent);
@@ -46,13 +46,13 @@ public class OreDeconstruction {
         return feature;
     }
 
-    public static void destroyFeature(List<Supplier<PlacedFeature>> features, List<Supplier<PlacedFeature>> destroy) {
-        for (Supplier<PlacedFeature> feature : destroy) {
+    public static void destroyFeature(List<Holder<PlacedFeature>> features, List<Holder<PlacedFeature>> destroy) {
+        for (Holder<PlacedFeature> feature : destroy) {
             features.remove(feature);
         }
     }
 
-    private static void incinerator(Block targetBlock, Supplier<PlacedFeature> targetFeature) {
+    private static void incinerator(Block targetBlock, Holder<PlacedFeature> targetFeature) {
         if (targetBlock != null) {
             ModLogger.debug("Deconstructed ore generation for " + targetBlock.getRegistryName());
             OreEntry oreEntry = new OreEntry(Objects.requireNonNull(targetBlock.getRegistryName()).toString());
@@ -62,15 +62,15 @@ public class OreDeconstruction {
         }
     }
 
-    private static List<Supplier<PlacedFeature>> filterFeatures(List<Supplier<PlacedFeature>> features) {
-        for (Supplier<PlacedFeature> feature : features) {
+    private static List<Holder<PlacedFeature>> filterFeatures(List<Holder<PlacedFeature>> features) {
+        for (Holder<PlacedFeature> feature : features) {
 
             Block targetBlock;
-            PlacedFeature targetFeature = getFeature(feature.get());
+            PlacedFeature targetFeature = getFeature(feature.value());
 
             for (ConfiguredFeature<?, ?> configuredFeature : targetFeature.getFeatures().toList()) {
-                if (configuredFeature.feature instanceof OreFeature || configuredFeature.feature instanceof ScatteredOreFeature) {
-                    OreConfiguration config = (OreConfiguration) configuredFeature.config;
+                if (configuredFeature.feature() instanceof OreFeature || configuredFeature.feature() instanceof ScatteredOreFeature) {
+                    OreConfiguration config = (OreConfiguration) configuredFeature.config();
                     for (OreConfiguration.TargetBlockState state : config.targetStates) {
                         targetBlock = state.state.getBlock();
                         ModLogger.debug(Objects.requireNonNull(targetBlock.getRegistryName()).toString());
