@@ -65,12 +65,14 @@ public class OreReconstruction {
                                 false
                         );
 
-                        Holder<PlacedFeature> placedFeature = reconstructPlaced(configuredFeature, Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getOre()))),
-                                Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(replace.toLowerCase()))),
+                        Holder<PlacedFeature> placedFeature = reconstructPlaced(configuredFeature,
+                                Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ore.getOre()))),
+                                replace.toLowerCase(),
                                 ore.getMinY(),
                                 ore.getMaxY(),
                                 ore.getSpawnRate(),
                                 ore.getMaxVeinSize(),
+                                ore.getDiscardChanceOnAirExposure(),
                                 ore.getDistribution(),
                                 false
                         );
@@ -87,12 +89,64 @@ public class OreReconstruction {
         }
     }
 
+    private static String makeRegistryNameUnique(String name) {
+        if (registryNames.contains(name)) {
+            int i = 1;
+            while (registryNames.contains(name + "_" +  i)) {
+                i++;
+            }
+            return name + "_" +  i;
+        }
+        return name;
+    }
+
+    private static final List<String> registryNames = new ArrayList<>();
+
+    private static String createUniqueRegistryName(Block block, String filler, int minY, int maxY, float spawnRate, int maxVeinSize, float discardChanceOnAirExposure, String distribution, boolean isDeepSlate, String featureType) {
+
+        String registryName;
+
+        if (isDeepSlate) {
+            registryName = String.format("deepslate_%s_%s_%s_%s_%s_%s_%s_%s_%s_feature",
+                    Objects.requireNonNull(block.getRegistryName()).getPath(),
+                    filler,
+                    minY,
+                    maxY,
+                    spawnRate,
+                    maxVeinSize,
+                    discardChanceOnAirExposure,
+                    distribution,
+                    featureType
+            );
+        } else {
+            registryName = String.format("ore_%s_%s_%s_%s_%s_%s_%s_%s_%s_feature",
+                    Objects.requireNonNull(block.getRegistryName()).getPath(),
+                    filler,
+                    minY,
+                    maxY,
+                    spawnRate,
+                    maxVeinSize,
+                    discardChanceOnAirExposure,
+                    distribution,
+                    featureType
+            );
+        }
+
+        registryName = makeRegistryNameUnique(registryName);
+        ModLogger.debug("Registry Name: " + registryName);
+        registryNames.add(registryName);
+
+        return registryName;
+    }
+
     private static Holder<ConfiguredFeature<OreConfiguration, ?>> reconstructConfigured(OreEntry entry, Block ore, String filler, int minY, int maxY, float spawnRate, int maxVeinSize, float discardChanceOnAirExposure, boolean isDeepslate) {
-        ModLogger.debug("Reconstructing ore: " + ore);
+        ModLogger.debug("Reconstructing configured feature: " + ore);
 
         String fillerName;
         Block fillerBlock = null;
         TagKey<Block> fillerTag = null;
+
+        ModLogger.info("Filler :: " + filler);
 
         if (filler.contains(":")) {
             fillerBlock = Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(filler)));
@@ -104,16 +158,10 @@ public class OreReconstruction {
             return null;
         }
 
-        String registryName = String.format("%s_%s_%s_%s_%s_%s_feature",
-                Objects.requireNonNull(ore.getRegistryName()).getPath(),
-                fillerName,
-                minY,
-                maxY,
-                spawnRate,
-                maxVeinSize
-        );
+        ModLogger.info("Filler Name :: " + fillerName);
 
-        ModLogger.debug("Registry Name: " + registryName);
+        String registryName = createUniqueRegistryName(ore, fillerName, minY, maxY, spawnRate, maxVeinSize, discardChanceOnAirExposure, entry.getDistribution().name().toLowerCase(), isDeepslate, "configured");
+
         ModLogger.debug("Filler Block :: " + fillerBlock);
         ModLogger.debug("Filler Tag :: " + fillerTag);
 
@@ -185,25 +233,20 @@ public class OreReconstruction {
         return new OreConfiguration(new TagMatchTest(filler), ore.defaultBlockState(), maxVeinSize, discardChanceOnAirExposure);
     }
 
+    private static Holder<PlacedFeature> reconstructPlaced(Holder<ConfiguredFeature<OreConfiguration, ?>> configuredFeature, Block ore, String fillerName, int minY, int maxY, float spawnRate, int maxVeinSize, float discardChanceOnAirExposure, Distribution distribution, boolean isDeepslate) {
+        ModLogger.debug("Reconstructing placed feature: " + ore);
 
-    private static Holder<PlacedFeature> reconstructPlaced(Holder<ConfiguredFeature<OreConfiguration, ?>> configuredFeature, Block ore, Block filler, int minY, int maxY, float spawnRate, int maxVeinSize, Distribution distribution, boolean isDeepslate) {
-        ModLogger.debug("Reconstructing ore: " + ore);
-        String registryName = String.format("%s_%s_%s_%s_%s_%s_placed",
-                Objects.requireNonNull(ore.getRegistryName()).getPath(),
-                Objects.requireNonNull(filler.getRegistryName()).getPath(),
-                minY,
-                maxY,
-                spawnRate,
-                maxVeinSize
+        String registryName = createUniqueRegistryName(ore, fillerName, minY, maxY, spawnRate, maxVeinSize, discardChanceOnAirExposure, distribution.name().toLowerCase(), isDeepslate, "placed");
+
+        return PlacementUtils.register(
+                registryName,
+                configuredFeature,
+                buildPlacementModifiers(
+                    spawnRate,
+                    minY, maxY,
+                    distribution
+                )
         );
-
-        ModLogger.debug("Registry Name: " + registryName);
-
-        return PlacementUtils.register(registryName, configuredFeature, buildPlacementModifiers(
-                spawnRate,
-                minY, maxY,
-                distribution
-        ));
     }
 
     private static boolean hasDeepslateVariant(OreEntry entry) {
@@ -219,7 +262,7 @@ public class OreReconstruction {
         String name = ore_split[1];
         name = "deepslate_" + name;
         String newResourceLocation = domain + ":" + name;
-        ModLogger.debug("Deepslate :: " + newResourceLocation);
+        ModLogger.debug("Format Deepslate :: " + newResourceLocation);
 
         return new ResourceLocation(newResourceLocation);
     }
