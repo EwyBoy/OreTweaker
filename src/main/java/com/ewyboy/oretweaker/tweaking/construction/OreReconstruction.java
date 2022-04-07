@@ -69,13 +69,28 @@ public class OreReconstruction {
         }
     }
 
+    private static String makeRegistryNameUnique(String name) {
+        if (registryNames.contains(name)) {
+            int i = 1;
+            while (registryNames.contains(name + "_" +  i)) {
+                i++;
+            }
+            return name + "_" +  i;
+        }
+        return name;
+    }
+
+    private static final List<String> registryNames = new ArrayList<>();
+
     private static ConfiguredFeature<?, ?> reconstructOre(Block ore, Block filler, int minY, int maxY, float spawnRate, int maxVeinSize) {
         ModLogger.debug("Reconstructing ore: " + ore);
-        String registryName = String.format("%s_%s_%s_%s_%s_%s",
+        String registryName = String.format("ore_feature_%s_%s_%s_%s_%s_%s",
                 Objects.requireNonNull(ore.getRegistryName()).getPath(),
                 Objects.requireNonNull(filler.getRegistryName()).getPath(),
                 minY, maxY, spawnRate, maxVeinSize
         );
+        registryName = makeRegistryNameUnique(registryName);
+        registryNames.add(registryName);
         return register(
                 registryName, reconstructFeature(
                         ore,

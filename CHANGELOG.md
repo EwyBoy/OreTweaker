@@ -1,11 +1,15 @@
-**v1.16.5 - 2.6.0 **  
+**v1.16.5 - 2.7.0**  
+* Fixed a game breaking bug where ores with the same properties causes the game to crash.  
+* Updated to the latest forge version.  
+  
+**v1.16.5 - 2.6.0**  
 **IMPORTANT UPDATE**  
 * I hope this patch fixes a bug causing all vanilla ores to not generate for some people.  
   * The bug only occurred for some users probably due to their Java VM and some differences in how they cast values.  
   * Some Java VMs fail to format and cast String.format("%s_%s_%d_%d_%f_%d") properly and ends up creating an illegal ResourceLocation for each ore entry.  
   * **Update to this version to fix!**  
 
-v1.16.5 - 2.5.1
+**v1.16.5 - 2.5.1**
 * Changed template to use new BiomeDictionary Type MOUNTAIN for Emerald Ore and Infested Stone.
 * Started working on enhancing performance when generating new chunks and biomes.
 * Ore reconstruction from JSON now cashes a lot of stuff to reduce stress on biome loading.
