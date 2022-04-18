@@ -1,3 +1,6 @@
+**v1.16.5 - 2.7.1**  
+* Ore Tweaker now only reads files from the data folder ending in `.json`  
+  
 **v1.16.5 - 2.7.0**  
 * Fixed a game breaking bug where ores with the same properties causes the game to crash.  
 * Updated to the latest forge version.  

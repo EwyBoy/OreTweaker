@@ -42,8 +42,10 @@ public class JSONHandler {
     public static void readAllFiles() {
         try (Stream<Path> paths = Files.walk(Paths.get(FMLPaths.CONFIGDIR.get() + "/oretweaker/data"))) {
             paths.filter(Files :: isRegularFile).forEach(path -> {
-                ModLogger.info("Reading data: " + path.getFileName());
-                readJson(path.toFile());
+                if (path.toString().endsWith(".json")) {
+                    ModLogger.info("Reading data: " + path.getFileName());
+                    readJson(path.toFile());
+                }
             });
         } catch (IOException e) {
             e.printStackTrace();
