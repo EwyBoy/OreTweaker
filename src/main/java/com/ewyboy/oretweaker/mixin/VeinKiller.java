@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(NoiseGeneratorSettings.class)
 public class VeinKiller {
 
-    @Inject(method = "oreVeinsEnabled", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "oreVeinsEnabled()Z", at = @At("RETURN"), cancellable = true)
     private void oreVeinsEnabled(CallbackInfoReturnable<Boolean> callbackReturnable) {
         if (Settings.SETTINGS.disbaleLargeVeins.get()) {
             callbackReturnable.setReturnValue(false);
