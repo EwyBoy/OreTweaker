@@ -7,7 +7,6 @@ import com.ewyboy.oretweaker.json.template.Templates;
 import com.ewyboy.oretweaker.util.ModLogger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.mojang.authlib.minecraft.client.ObjectMapper;
 import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.*;
@@ -16,7 +15,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -40,8 +38,10 @@ public class JSONHandler {
     public static void readAllFiles() {
         try (Stream<Path> paths = Files.walk(Paths.get(FMLPaths.CONFIGDIR.get() + "/oretweaker/data"))) {
             paths.filter(Files :: isRegularFile).forEach(path -> {
-                ModLogger.info("Reading data: " + path.getFileName());
-                readJson(path.toFile());
+                if (path.toString().endsWith(".json")) {
+                    ModLogger.info("Reading data: " + path.getFileName());
+                    readJson(path.toFile());
+                }
             });
         } catch (IOException e) {
             e.printStackTrace();

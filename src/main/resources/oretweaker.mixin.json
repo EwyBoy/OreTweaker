@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.ewyboy.oretweaker.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+    "VeinKiller"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

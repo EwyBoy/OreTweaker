@@ -103,34 +103,19 @@ public class OreReconstruction {
     private static final List<String> registryNames = new ArrayList<>();
 
     private static String createUniqueRegistryName(Block block, String filler, int minY, int maxY, float spawnRate, int maxVeinSize, float discardChanceOnAirExposure, String distribution, boolean isDeepSlate, String featureType) {
+        String registryName = isDeepSlate ? "deepslate_" : "ore_";
 
-        String registryName;
-
-        if (isDeepSlate) {
-            registryName = String.format("deepslate_%s_%s_%s_%s_%s_%s_%s_%s_%s_feature",
-                    Objects.requireNonNull(block.getRegistryName()).getPath(),
-                    filler,
-                    minY,
-                    maxY,
-                    spawnRate,
-                    maxVeinSize,
-                    discardChanceOnAirExposure,
-                    distribution,
-                    featureType
-            );
-        } else {
-            registryName = String.format("ore_%s_%s_%s_%s_%s_%s_%s_%s_%s_feature",
-                    Objects.requireNonNull(block.getRegistryName()).getPath(),
-                    filler,
-                    minY,
-                    maxY,
-                    spawnRate,
-                    maxVeinSize,
-                    discardChanceOnAirExposure,
-                    distribution,
-                    featureType
-            );
-        }
+        registryName = registryName + String.format("%s_%s_%s_%s_%s_%s_%s_%s_%s_feature",
+                Objects.requireNonNull(block.getRegistryName()).getPath(),
+                filler,
+                minY,
+                maxY,
+                spawnRate,
+                maxVeinSize,
+                discardChanceOnAirExposure,
+                distribution,
+                featureType
+        );
 
         registryName = makeRegistryNameUnique(registryName);
         ModLogger.debug("Registry Name: " + registryName);
