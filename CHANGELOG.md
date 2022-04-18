@@ -1,3 +1,6 @@
+**v1.17.1 - 2.6.1**  
+* Ore Tweaker now only read files in the data folder ending with `.json`  
+  
 **v1.17.1 - 2.6.0**  
 * Bump, patch and fixes  
   
