@@ -79,9 +79,8 @@ dependencies {
 }
 
 mixin {
-    // MixinGradle Settings
-    add sourceSets.main, 'oretweaker.mixin.refmap.json'
-    config 'oretweaker.mixin.json'
+    add sourceSets.main, 'mixins.oretweaker.refmap.json'
+    config 'mixins.oretweaker.json'
 }
 
 jar {
