@@ -1,5 +1,6 @@
 package com.ewyboy.oretweaker.mixin;
 
+import com.ewyboy.oretweaker.config.Settings;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -11,7 +12,9 @@ public class VeinKiller {
 
     @Inject(method = "oreVeinsEnabled", at = @At("RETURN"), cancellable = true)
     private void oreVeinsEnabled(CallbackInfoReturnable<Boolean> callbackReturnable) {
-        callbackReturnable.setReturnValue(false);
+        if (Settings.SETTINGS.disbaleLargeVeins.get()) {
+            callbackReturnable.setReturnValue(false);
+        }
     }
 
 }
