@@ -1,5 +1,3 @@
-![637780239462504606](https://user-images.githubusercontent.com/5883716/167231337-4d87c78d-0b83-4f4b-9456-e20303423844.png)
-
 <h1 align="center">Ore Tweaker
 	<br>
 		<a href="https://www.curseforge.com/minecraft/mc-mods/ore-tweaker/files">
