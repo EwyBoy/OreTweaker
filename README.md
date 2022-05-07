@@ -1,4 +1,4 @@
-<p align="center"><img src="https://media.forgecdn.net/avatars/481/67/637780239462504606.png" alt="Logo" width="100" height="100"></p>
+![637780239462504606](https://user-images.githubusercontent.com/5883716/167231337-4d87c78d-0b83-4f4b-9456-e20303423844.png)
 
 <h1 align="center">Ore Tweaker
 	<br>
