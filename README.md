@@ -15,6 +15,7 @@
 
 [![Curseforge](http://cf.way2muchnoise.eu/full_242436_downloads.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/ore-tweaker)
 
+<iframe src="https://github.com/sponsors/EwyBoy/button" title="Sponsor EwyBoy" height="35" width="116" style="border: 0;"></iframe>
 
 ### Add, remove, tweak and configure ore and underground generation features for Minecraft Forge
 
