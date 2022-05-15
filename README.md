@@ -12,7 +12,6 @@
 		    <img src="https://img.shields.io/discord/305535757441826817?color=5261f8&label=Discord&logoColor=1d3367&style=for-the-badge" alt="Discord"></a>
     	<br>
 
-	<iframe src="https://github.com/sponsors/EwyBoy/button" title="Sponsor EwyBoy" height="35" width="116" style="border: 0;"></iframe>
 </h1>
 
 [![Curseforge](http://cf.way2muchnoise.eu/full_242436_downloads.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/ore-tweaker)
