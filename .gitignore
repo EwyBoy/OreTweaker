@@ -12,10 +12,21 @@ out
 *.iws
 *.iml
 .idea
+.idea_modules
+.idea/workspace.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/misc.xml
+.idea/scopes.xml
+.idea/compiler.xml
+.idea/compiler.xml.default
+.idea/compiler.xml.template
+*.xml
 
 # gradle
 build
 .gradle
+build/*
 
 # other
 eclipse

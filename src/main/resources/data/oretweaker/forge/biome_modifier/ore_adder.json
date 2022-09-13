@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "minecraft:ore_redstone_ore_stone_ore_replaceables_-64_15_8.0_4_0.0_uniform_placed_feature",
+  "step": "underground_ores"
+}
