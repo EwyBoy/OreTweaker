@@ -1,3 +1,6 @@
+**v3.4.0**
+* Now validates the json files and gives better error messages when malformed.
+
 **v3.3.0**  
 * You can now disable the large ore veins from spawning in the config.  
 * Fixed a bug where the game would try to read all files in the data folder.  
