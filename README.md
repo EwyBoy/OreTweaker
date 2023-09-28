@@ -16,6 +16,9 @@
 
 [![Curseforge](http://cf.way2muchnoise.eu/full_242436_downloads.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/ore-tweaker)
 
+### Help Wanted 🚩  
+I am struggling to port this mod beyond 1.18.2, if you can help in any way feel free to look at this [issue #96](https://github.com/EwyBoy/OreTweaker/issues/96)
+
 ### Add, remove, tweak and configure ore and underground generation features for Minecraft Forge
 
 ## Learn how to use at the wiki:
