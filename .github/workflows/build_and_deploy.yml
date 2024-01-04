@@ -34,7 +34,7 @@ jobs:
 
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
+          name: ""
           loaders: forge
           game-versions: 1.18.2
           version-type: release
-
