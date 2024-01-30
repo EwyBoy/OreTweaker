@@ -22,7 +22,7 @@ I am struggling to port this mod beyond 1.18.2, if you can help in any way feel 
 ### Add, remove, tweak and configure ore and underground generation features for Minecraft Forge
 
 ## Learn how to use at the wiki:
-### https://github.com/EwyBoy/Quick-Harvest/wiki
+### https://github.com/EwyBoy/OreTweaker/wiki
 
 ## Supported Versions
 
